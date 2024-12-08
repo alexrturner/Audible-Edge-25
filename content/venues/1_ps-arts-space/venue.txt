@@ -1,0 +1,54 @@
+Title: PS Arts Space
+
+----
+
+Location: 22 Pakenham St, Fremantle WA 6160
+
+----
+
+Land: Whadjuk Noongar boodja
+
+----
+
+Location-features: 
+
+----
+
+Location-text: 
+
+----
+
+Accessibility: wheelchair accessible, accessible bathrooms
+
+----
+
+Accessibility-text: Additional accessibility details about PS Arts Space.
+
+----
+
+Map: <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3381.552316148232!2d115.74225247563308!3d-32.054307073973945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a32a16ffcb831b5%3A0x4f2383e8999e6e27!2sPS!5e0!3m2!1sen!2sau!4v1706679056619!5m2!1sen!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+----
+
+Contacts:
+
+- 
+  contactname: General
+  contactemail: ""
+  contactphone: 9430 8145
+
+----
+
+Website: https://www.psas.com.au/
+
+----
+
+Uuid: iCzTirTUV8bjHns6
+
+----
+
+Map-embed: 
+
+----
+
+Contact: 

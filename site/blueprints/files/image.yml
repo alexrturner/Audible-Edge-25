@@ -1,0 +1,11 @@
+title: Artist Image
+accept:
+  mime: image/*
+  type: image
+  maxsize: 20000000 # 20mb in bytes
+template: image
+cover: true
+fields:
+  alt:
+    label: Alt Text
+    type: text

@@ -1,0 +1,15 @@
+title: Nightschool Event
+image:
+  back: "yellow-400"
+  icon: ☽
+sortBy: start_date desc
+
+status:
+  draft:
+    label: Draft
+    text: The event is invisible.
+  listed:
+    label: Published
+    text: The event is shared.
+
+extends: pages/event

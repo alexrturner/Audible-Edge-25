@@ -1,0 +1,9 @@
+type: pages
+label: Venues
+parent: kirby.page('venues')
+layout: table
+columns:
+  title: true
+
+template: venue
+empty: No venues

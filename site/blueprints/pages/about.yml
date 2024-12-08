@@ -1,0 +1,14 @@
+title: About
+image:
+  back: "blue-200"
+  icon: ℹ︎
+
+fields:
+  description:
+    label: {{ page.title }} Description
+    type: textarea
+
+  link_email:
+    label: Email Newsletter Sign-up Link
+    type: url
+    width: 1/2

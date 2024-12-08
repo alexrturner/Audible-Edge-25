@@ -1,0 +1,14 @@
+type: structure
+label: {{ page.title }} Links
+fields:
+  url:
+    type: url
+    label: URL
+    placeholder: https://
+  text:
+    type: text
+    label: Link Text
+  popup:
+    type: toggle
+    label: Open in new tab
+    default: true

@@ -1,0 +1,10 @@
+title: AE Logo (combined version)
+accept:
+  mime: image/*
+  type: image
+  maxsize: 20000000 # 20mb in bytes
+cover: true
+fields:
+  alt:
+    label: Alt Text
+    type: text

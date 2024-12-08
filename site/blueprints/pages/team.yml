@@ -1,0 +1,11 @@
+title: Team
+extends: layouts/team
+
+image:
+  back: "blue-200"
+  icon: ☸︎
+
+options:
+  url: false
+  status: false
+  delete: false

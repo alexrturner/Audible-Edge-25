@@ -1,0 +1,11 @@
+type: pages
+label: Festival Program
+parent: kirby.page('program')
+layout: table
+columns:
+  title: false
+  start_date: true
+
+sortBy: start_date asc
+template: event
+empty: No events yet

@@ -1,0 +1,37 @@
+Title: Online (Jitsi)
+
+----
+
+Accessibility: 
+
+----
+
+Accessibility-text: 
+
+----
+
+Location: 
+
+----
+
+Land: 
+
+----
+
+Location-features: 
+
+----
+
+Map: 
+
+----
+
+Contacts: 
+
+----
+
+Website: https://meet.jit.si/
+
+----
+
+Uuid: hXiZZ1iIeosH9m05

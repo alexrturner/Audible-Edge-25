@@ -1,0 +1,21 @@
+title: Accessibility
+image:
+  back: "blue-200"
+  icon: ♿︎
+
+fields:
+
+  intro:
+    label: {{ page.title }} Introduction
+    type: writer
+    
+
+  description:
+    label: {{ page.title }} Description
+    type: writer
+    size: medium
+
+  form:
+    label: {{ page.title }} Form Introduction
+    type: writer
+    

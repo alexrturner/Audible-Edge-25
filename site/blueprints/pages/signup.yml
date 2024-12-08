@@ -1,0 +1,25 @@
+title: Signup
+image:
+  back: "pink-200"
+  icon: ✎
+
+fields:
+  title:
+    type: text
+    placeholder: "{{ page.title }}"
+
+  description:
+    type: writer
+    label: {{ page.title }} Description
+
+  privacy_title:
+    label: Privacy Policy Title
+    type: writer
+
+  privacy_text:
+    label: Privacy Policy
+    type: writer
+
+  dbSuccessMessage:
+    label: Welcome Message
+    type: writer

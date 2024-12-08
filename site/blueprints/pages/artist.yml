@@ -1,0 +1,118 @@
+title: Artist
+
+icon: 🦑
+
+status:
+  draft:
+    label: Draft
+    text: The project is still in draft.
+  listed:
+    label: Published
+    text: The artist is online.
+
+columns:
+  main:
+    width: 2/3
+    sections:
+      content:
+        type: fields
+        fields:
+          title:
+            label: Title
+            type: text
+            placeholder: "{{ page.title }}"
+
+          display_title:
+            label: Artist display title
+            type: structure
+            help: "The title to display on the website, if style is different from the artist's name."
+            fields:
+              name:
+                label: Artist Name
+                type: text
+              place:
+                label: Place
+                type: text
+                placeholder: "City, Country"
+              context:
+                label: Artist Context
+                type: text
+                help: "i.e. 'with [artist-name]', 'plays [work-title]'"
+
+          bio_short:
+            label: Short Bio
+            type: writer
+
+          bio_long:
+            label: Long Bio
+            type: writer
+
+          links:
+            extends: fields/links
+            fields:
+              type:
+                type: select
+                label: Link Type
+                default: link
+                options:
+                  link: Website
+                  video: Video
+                  audio: Audio
+                  image: Image
+                  pdf: PDF
+                  other: Other
+
+          events:
+            label: Events with this Artist
+            type: pages
+            query: site.index.filterBy("template", "in", ["event", "nightschool-event", "satellite-event"])
+            text: "{{ page.title }}"
+
+          credits:
+            label: Credits
+            type: structure
+            fields:
+              other_name:
+                label: Given name/s
+                type: text
+              sort_name:
+                label: Surname / Mononym
+                type: text
+              group:
+                label: Affiliated Groups
+                type: tags
+              group_page:
+                label: Group Page URL
+                type: pages
+                query: site.index.filterBy('intendedTemplate', 'artist')
+              url:
+                type: url
+                label: Individual Member URL
+                placeholder: https://
+
+            help: Members of the group, or other acknowledgements involved in the project.
+
+          support:
+            label: Supported By
+            type: text
+  sidebar:
+    width: 1/3
+    sections:
+      media:
+        type: fields
+        fields:
+          images:
+            label: Images
+            type: files
+            layout: cards
+            size: small
+            accepts:
+              - image/*
+            image:
+              ratio: 5/4
+              cover: true
+          sounds:
+            label: Sounds
+            type: files
+            template: audio
+            layout: list

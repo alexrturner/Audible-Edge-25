@@ -1,0 +1,101 @@
+title: Supporters
+image:
+  back: "pink-200"
+  icon: ⚓︎
+
+columns:
+  - width: 2/3
+    fields:
+      title:
+        type: text
+        placeholder: "{{ page.title }}"
+        label: Title
+
+      description:
+        label: {{ page.title }} Description
+        type: writer
+    
+  
+      # fundingSupport:
+      #   label: Funding Support
+      #   type: files
+      #   query: page.images
+      #   multiple: true
+      #   uploads: false
+
+      # commissioningPartners:
+      #   label: Commissioning Partners
+      #   type: files
+      #   query: page.images
+      #   multiple: true
+      #   uploads: false
+
+      # presentingPartners:
+      #   label: Presenting Partners
+      #   type: files
+      #   query: page.images
+      #   multiple: true
+      #   uploads: false
+      partialLogos:
+        label: Pre-Program Launch Logos
+        type: headline
+        
+      smallLogos_partial:
+        label: Small Screen Logos (partial)
+        type: files
+        query: page.images
+        multiple: true
+        uploads: false
+      
+      mediumLogos_partial:
+        label: Medium Screen Logos (partial)
+        type: files
+        query: page.images
+        multiple: true
+        uploads: false
+      
+      largeLogos_partial:
+        label: Large Screen Logos (partial)
+        type: files
+        query: page.images
+        multiple: true
+        uploads: false
+
+
+      fullLogos:
+        type: headline
+        label: Full Supporter Logos
+        numbered: false
+
+      smallLogos:
+        label: Small Screen Logos
+        type: files
+        query: page.images
+        multiple: true
+        uploads: false
+      
+      mediumLogos:
+        label: Medium Screen Logos
+        type: files
+        query: page.images
+        multiple: true
+        uploads: false
+      
+      largeLogos:
+        label: Large Screen Logos
+        type: files
+        query: page.images
+        multiple: true
+        uploads: false
+        
+
+  - width: 1/3
+    sections:
+      logos:
+        label: All Logos
+        template: supporter_logo
+        type: files
+        layout: list
+        image:
+          ratio: 5/4
+          cover: true

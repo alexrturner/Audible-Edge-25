@@ -1,0 +1,87 @@
+# System files
+# ------------
+
+Icon
+.DS_Store
+
+# Temporary files
+# ---------------
+
+/media/*
+!/media/index.html
+
+# Lock files
+# ---------------
+
+.lock
+
+# Editors
+# (sensitive workspace files)
+# ---------------------------
+*.sublime-workspace
+/.vscode
+/.idea
+/.editorconfig
+
+# -------------SECURITY-------------
+# NEVER publish these files via Git!
+# -------------SECURITY-------------
+
+# Cache Files
+# ---------------
+
+/site/cache/*
+!/site/cache/index.html
+
+# Accounts
+# ---------------
+
+/site/accounts/*
+!/site/accounts/index.html
+
+# Sessions
+# ---------------
+
+/site/sessions/*
+!/site/sessions/index.html
+
+# License
+# ---------------
+
+/site/config/.license
+/site/config/config.localhost.php
+
+# ================================================
+# ================================================
+
+# Local
+# ---------------
+
+/update.sh # update kirby
+/l # local development server
+/zzz/* 
+/assets/font/
+/site/config/db.php
+.editorconfig
+.htaccess
+error_log
+/__MACOSX/*
+
+# Favicon
+# ---------------
+/favicon-16x16.png
+/favicon-32x32.png
+/android-chrome-192x192.png
+/android-chrome-512x512.png
+/apple-touch-icon.png
+/site.webmanifest
+
+# Install
+# -----------
+/kirby
+/vendor
+
+# Sensitive
+# ---------------
+.env
+/.well-known

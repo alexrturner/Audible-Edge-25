@@ -1,0 +1,220 @@
+title: Event
+image:
+  back: "yellow-400"
+  icon: ☼
+sortBy: start_date desc
+
+status:
+  draft:
+    label: Draft
+    text: The {{ page.title }} is invisible.
+  listed:
+    label: Published
+    text: The {{ page.title }} is shared.
+columns:
+  - width: 1
+    fields:
+      title:
+        type: text
+        placeholder: "{{ page.title }}"
+        label: Title
+
+      artist_link:
+        label: Lineup
+        width: 1/2
+        type: pages
+        query: site.index.filterBy('intendedTemplate', 'artist')
+        text: "{{ page.title }}"
+
+      subtitle:
+        label: Optional Additional Subtitle
+        type: writer
+        width: 1/2
+
+      description:
+        type: writer
+        label: {{ page.title }} Description  
+
+      ticketed:
+        type: toggle
+        label: Ticketed
+        text: Is this a ticketed event?
+        width: 1/2
+        default: false
+
+      ticket_link:
+        icon: ticket
+        label: Tickets
+        type: url
+        width: 1/2
+        placeholder: "https://"
+        when:
+          ticketed: true
+
+      ticket_price:
+        label: Ticket Price
+        width: 1/4
+        type: number
+        before: $
+        step: 0.01
+        min: 0 
+        placeholder: 0.00
+        when:
+          ticketed: true
+
+      ticket_price_text:
+        label: Ticket Price Text
+        width: 1/4
+        type: text
+        placeholder: "Free, $10, etc."
+        when:
+          ticketed: true
+
+      venues:
+        label: Venue
+        icon: pin
+        width: 1/2
+        type: pages
+        query: site.index.filterBy('intendedTemplate', 'venue')
+        text: "{{ page.title }}"
+
+      location:
+        icon: pin
+        label: Location
+        type: writer
+        width: 1/2
+        placeholder: "Online"
+        help: Alternate location of the event, if venue isn't applicable.
+
+      venue_text:
+        icon: pin
+        label: Venue / Location Details
+        type: writer
+        width: 1/2
+
+      start_date:
+        icon: calendar
+        label: Start date
+        type: date
+        width: 1/4
+        display: DD/MM/YYYY
+
+      start_time:
+        icon: clock
+        label: Start time
+        type: time
+        width: 1/4
+        display: HH:mm
+        time: true
+
+      end_date:
+        icon: calendar
+        label: End date
+        type: date
+        width: 1/4
+        display: DD/MM/YYYY
+
+      end_time:
+        icon: clock
+        label: End time
+        type: time
+        width: 1/4
+        display: HH:mm
+        time: true
+      
+      eventSchedule:
+        label: Event Schedule
+        type: structure
+        columns:
+          description:
+            width: 3/5
+          scheduleType:
+            width: 1/5
+          
+        fields:
+          description:
+            label: Artist / Schedule Title
+            type: writer
+            width: 1/2
+
+          location:
+            label: Specific Location
+            type: text
+            width: 1/2
+
+          scheduleType:
+            type: toggles
+            label: Event Type
+            options:
+              - "set time"
+              - "multi-day event"
+
+          
+          # eventType:
+          #   label: Event Type
+          #   type: tags
+          #   width: 1/2
+          #   max: 1
+          #   options:
+          #     type: query
+          #     query: site.children.template('event').children.pluck('eventType', ',', true)
+
+          setTime:
+            label: Set Time
+            type: time
+            width: 1/4
+            display: HH:mm
+            time: true
+            width: 1/2
+            when:
+              scheduleType: set time
+
+          startDate:
+            label: Start Date and Time
+            type: date
+            time: true
+            width: 1/2
+            when:
+              scheduleType: multi-day event
+
+          endDate:
+            label: End Date and Time
+            type: date
+            time: true
+            width: 1/2
+            when:
+              scheduleType: multi-day event
+          
+          
+
+      accessibility:
+        label: {{ page.title }} Accessibility
+        type: textarea
+        help: Any accessibility features specific to the event, such as what to expect of the concert, etc.
+
+      # links: 
+      #   extends: fields/links
+
+      # tags:
+      #   width: 1/2
+      #   label: Tags
+      #   type: tags
+      #   options:
+      #     type: query
+      #     query: site.children.template('event').children.pluck('tags', ',', true)
+
+
+  
+  - width: 1
+    sections:
+      images:
+        label: Images
+        type: files
+        layout: cards
+        # template: image
+        # info: "{{ file.dimensions }}"
+        image:
+          ratio: 5/4
+          cover: true
+        size: small
+

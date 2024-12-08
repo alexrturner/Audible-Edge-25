@@ -1,0 +1,81 @@
+title: Venue
+
+options:
+  url: false
+  status: true
+  delete: false
+
+fields:
+  title:
+    label: Venue Name
+    type: text
+
+  location:
+    label: Location
+    width: 1/2
+    type: text
+    help: Address or general location.
+
+  land:
+    label: Land Acknowledgement
+    width: 1/2
+    type: tags
+    icon: none
+    options:
+      type: query
+      query: site.children.template('venues').children.pluck('land', ',', true)
+
+  # location_features:
+  #   label: Location Features
+  #   width: 1/2
+  #   type: tags
+  #   icon: none
+  #   help: Outdoor venue, parking available, etc.
+  #   options:
+  #     type: query
+  #     query: site.children.template('venues').children.pluck('location_features', ',', true)
+
+  # location_text:
+  #   label: Location Details
+  #   width: 1/2
+  #   type: writer
+
+  # accessibility:
+  #   label: Accessibility Features
+  #   width: 1/2
+  #   type: tags
+  #   icon: none
+  #   options:
+  #     type: query
+  #     query: site.children.template('venues').children.pluck('accessibility', ',', true)
+
+  # accessibility_text:
+  #   label: Custom Accessibility Details
+  #   width: 1/2
+  #   type: textarea
+
+  contacts:
+    label: Venue Contacts
+    type: structure
+    fields:
+      contactName:
+        label: Contact Name
+        type: text
+      contactEmail:
+        label: Contact Email
+        type: email
+        placeholder: false
+      contactPhone:
+        label: Contact Phone
+        type: tel
+        placeholder: "08"
+
+  website:
+    label: Venue Website
+    type: url
+
+  map:
+    label: Iframe Map
+    type: text
+    pattern: "^<iframe.*<\/iframe>$"
+    help: Embed code from Google Maps.

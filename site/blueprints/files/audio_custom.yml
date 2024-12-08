@@ -1,0 +1,19 @@
+title: AE Custom Sound
+
+accept:
+  mime: audio/*
+  type: audio
+  maxsize: 20000000 # 20mb in bytes
+
+image: false
+
+fields:
+  audio_category:
+    label: Sound Type
+    type: tags
+    query:
+      fetch: site/blueprints/tags/letter_sounds.yml
+      value: "{{ value }}"
+    options:
+      a: "A"
+      e: "E"

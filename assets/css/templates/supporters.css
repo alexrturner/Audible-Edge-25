@@ -1,0 +1,87 @@
+/* 
+================
+Layout
+================
+ */
+#col1 {
+  grid-column: span 2;
+  overflow-y: auto;
+}
+#col2 {
+  grid-column: span 5;
+  margin-right: 1.5em;
+  /* padding-right: 1.5em; */
+}
+
+.logos {
+  background-color: var(--cc-primary);
+  height: fit-content;
+  /* width: fit-content; */
+  width: auto;
+  padding-right: 0em;
+}
+/* mobile */
+@media (max-width: 768px) {
+  /* single column */
+  main {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  #col2 {
+    margin-right: 0;
+    padding: 0 30px;
+  }
+  .logos img {
+    /* margin: 2em; */
+  }
+  .logos {
+    padding: 2em !important;
+    margin: 0 !important;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    flex-direction: column;
+  }
+}
+
+/*
+================
+Logo responsiveness
+================
+*/
+
+/* 
+small screens
+*/
+.logos-medium,
+.logos-large {
+  display: none;
+}
+
+/* 
+medium screens 
+*/
+@media (min-width: 768px) {
+  .logos-small,
+  .logos-large {
+    display: none;
+  }
+  .logos-medium {
+    display: block;
+  }
+}
+
+/* 
+large screens 
+*/
+@media (min-width: 1024px) {
+  .logos-small,
+  .logos-medium {
+    display: none;
+  }
+  .logos-large {
+    display: block;
+  }
+}

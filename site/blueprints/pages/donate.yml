@@ -1,0 +1,25 @@
+title: Donate
+image:
+  back: "pink-200"
+  icon: ☂︎
+
+columns:
+  - width: 1
+    fields:
+      title:
+        type: text
+        placeholder: "{{ page.title }}"
+
+      description:
+        type: writer
+        label: Description
+
+      link_text:
+        type: text
+        label: Link text
+        width: 1/2
+
+      link:
+        type: url
+        label: Fundraiser Link
+        width: 1/2

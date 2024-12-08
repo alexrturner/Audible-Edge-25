@@ -1,0 +1,137 @@
+title: 🪩
+
+tabs:
+  pages:
+    label: Pages
+    sections:
+      listedPages:
+        type: pages
+        headline: listed
+        status: listed
+        create: default
+        image: icon
+
+      unlistedPages:
+        type: pages
+        headline: unlisted
+        status: unlisted
+        create: default
+        image: icon
+
+  settings:
+    label: Settings
+    sections:
+      appearance:
+        type: fields
+        fields:
+          title:
+            label: Site Title
+            type: text
+            icon: title
+
+          titleDisplay:
+            label: Display Title
+            type: text
+            icon: title
+            width: 1/2
+
+          subtitle:
+            label: Subtitle
+            type: text
+            icon: title
+            width: 1/2
+
+          email:
+            label: Contact Email
+            type: email
+
+          acknowledgement:
+            label: Acknowledgement of Country
+            type: writer
+
+          seo:
+            type: headline
+            label: SEO
+
+          metaDescription:
+            label: Meta Description
+            type: writer
+
+          metaKeywords:
+            label: Meta Keywords
+            type: writer
+
+          dbSuccessMessage:
+            label: Database Connection Success Message
+            type: writer
+            width: 1/2
+
+          dbErrorMessage:
+            label: Database Connection Error Message
+            type: writer
+            width: 1/2
+
+  media:
+    label: files
+    sections:
+      ae_program:
+        label: AE Program
+        type: files
+        template: ae_program
+
+      ae_logo:
+        label: AE logos
+        type: files
+        template: ae_logo
+
+      ae_dot_svg:
+        label: AE homepage dots
+        type: files
+        template: ae_homepage_dot_svg
+        help: SVG file of dots for the homepage.
+
+      ae_logo_menu:
+        label: AE logos (menu version)
+        type: files
+        template: ae_logo_menu
+
+      ae_logo_combined:
+        label: AE logos (combined version)
+        type: files
+        template: ae_logo_combined
+
+      audio_intro:
+        type: files
+        label: Audio Introduction
+        template: audio_intro
+        multiple: true
+        help: Audio introduction to the festival.
+
+      audio_intro_text:
+        type: fields
+        fields:
+          audio_intro_text:
+            label: Audio Introduction Text
+            type: writer
+            help: Text to accompany the audio introduction.
+
+      audio_intro_transcription:
+        type: fields
+        fields:
+          audio_intro_transcription:
+            label: Audio Introduction Transcription
+            type: writer
+            help: Displayed in Plain Text View.
+
+      audio_custom:
+        label: Custom Audio (letter sounds)
+        type: files
+        template: audio_custom
+        layout: table
+        image:
+          icon: audio
+        columns:
+          title: false
+          audio_category:
+            label: letter
+        help: '"A!" "E?"'

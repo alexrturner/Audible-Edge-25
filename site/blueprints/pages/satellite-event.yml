@@ -1,0 +1,15 @@
+title: Satellite Event
+image:
+  back: "yellow-400"
+  icon: "☄"
+sortBy: start_date desc
+
+status:
+  draft:
+    label: Draft
+    text: The satellite event is invisible.
+  listed:
+    label: Published
+    text: The satellite event is shared.
+
+extends: pages/event

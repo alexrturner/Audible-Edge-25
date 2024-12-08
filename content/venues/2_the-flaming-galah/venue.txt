@@ -1,0 +1,42 @@
+Title: The Flaming Galah
+
+----
+
+Accessibility: 
+
+----
+
+Accessibility-text: 
+
+----
+
+Location: 19B Essex St, Fremantle WA 6160
+
+----
+
+Land: Whadjuk Noongar boodja
+
+----
+
+Location-features: 
+
+----
+
+Map: 
+
+----
+
+Contacts:
+
+- 
+  contactname: General
+  contactemail: hello@theflaminggalahfreo.com.au
+  contactphone: ""
+
+----
+
+Website: 
+
+----
+
+Uuid: 8y6RJ18EVbm6U37R

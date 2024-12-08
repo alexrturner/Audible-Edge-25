@@ -1,0 +1,46 @@
+Title: Astral Weeks
+
+----
+
+Location: Shop 12/60/66 Roe St, Northbridge WA 6003
+
+----
+
+Land: Whadjuk Noongar boodja
+
+----
+
+Location-features: 
+
+----
+
+Location-text: <p>located in Chinatown</p>
+
+----
+
+Accessibility: wheelchair accessible, 1 gender-neutral accessible bathroom
+
+----
+
+Accessibility-text: small, crowded space, acoustically treated
+
+----
+
+Map: <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3385.4452898851364!2d115.85470281169383!3d-31.94881437391232!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a32bb12cb736639%3A0x53b5c96f8a01e86d!2sAstral%20Weeks!5e0!3m2!1sen!2sau!4v1706832403181!5m2!1sen!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+----
+
+Contacts:
+
+- 
+  contactname: General
+  contactemail: listen@astral-weeks.com.au
+  contactphone: ""
+
+----
+
+Website: 
+
+----
+
+Uuid: kqypbNIl6mX6BgZv

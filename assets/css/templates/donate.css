@@ -1,0 +1,8 @@
+#col1 {
+  grid-column: span 4;
+  /* max-height: 66vh; */
+  overflow-y: auto; /* enable vertical scrolling */
+}
+#col3 {
+  grid-column: span 3;
+}

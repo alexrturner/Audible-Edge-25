@@ -1,0 +1,42 @@
+:root {
+  --cc-primary: var(--cc-blue-light);
+  --cc-bg: var(--cc-olive);
+  --cc-scrollbar: var(--cc-olive);
+  --cc-squig-colour: var(--cc-olive-light);
+}
+
+/* 
+banner 05
+*/
+
+/* banner text fill and outline */
+.svg-banner svg .cls-1 {
+  /* stroke: lightgrey; */
+  stroke: var(--cc-blue-highlight);
+  fill: var(--cc-purple-highlight) !important;
+}
+
+/* banner lines outline */
+.svg-banner .cls-2 {
+  stroke: var(--cc-blue-highlight);
+  stroke: lightgrey;
+}
+/* numbers */
+.svg-banner .cls-6 {
+  fill: lightgrey;
+  opacity: 0.5;
+}
+
+/* 
+menu 
+*/
+.overlay svg path.cls-2,
+.overlay svg path.cls-3 {
+  fill: var(--cc-primary) !important;
+  stroke: var(--cc-squig-colour) !important;
+}
+
+/* other inverted elements */
+.button__link {
+  background-color: var(--cc-primary-highlight);
+}

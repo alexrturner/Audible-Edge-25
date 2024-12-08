@@ -1,0 +1,23 @@
+title: Events
+preset: pages
+image:
+  back: "yellow-400"
+  icon: ☼
+
+listed:
+  extends: sections/events
+  label: Published Events
+  layout: table
+  columns:
+    title: false
+    start_date:
+      label: Start
+
+drafts:
+  extends: sections/events
+  label: Draft Events
+  layout: table
+  columns:
+    title: false
+    start_date:
+      label: Start

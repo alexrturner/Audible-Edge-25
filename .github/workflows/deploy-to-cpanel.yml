@@ -1,0 +1,25 @@
+# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
+
+name: Deploy to CPanel
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: a-t.com.au
+          username: atcomau1
+          key: ${{ secrets.AE_AT_SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.AE_AT_COM_SSH_PRIVATE_KEY_PASSPHRASE }}
+          port: 22
+          debug: true
+          script: cd public_html/Audible-Edge && git pull https://alexrturner:${{ secrets.AE_AT_COM_GITHUB_ACCESS_TOKEN }}@github.com/alexrturner/Audible-Edge.git

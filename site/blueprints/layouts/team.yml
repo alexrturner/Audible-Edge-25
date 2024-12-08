@@ -1,0 +1,28 @@
+tabs:
+  team:
+    label: Team
+
+    sections:
+      reminder:
+        type: fields
+        fields:
+          reminder:
+            label: *
+            type: info
+            theme: none
+            text: '*"we are actually really boring people"*'
+
+          description:
+            label: Description
+            type: writer
+            help: General introduction about the team.
+      
+      listed:
+        label: AE Team Members
+        layout: cards
+        info: "{{ page.roles }}"
+        template: team-member
+        type: pages
+        image:
+          ratio: 1/1
+          cover: true

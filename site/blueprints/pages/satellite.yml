@@ -1,0 +1,32 @@
+title: Satellite events
+image:
+  back: "yellow-400"
+  icon: "☄"
+
+columns:
+  left:
+    width: 2/3
+    sections:
+      listed:
+        extends: sections/satellite
+        label: Published {{ page.title }} Events
+        layout: table
+        status: listed
+
+      drafts:
+        extends: sections/satellite
+        label: Draft {{ page.title }} Events
+        layout: table
+        status: draft
+
+  right:
+    width: 1/3
+    sections:
+      content:
+        type: fields
+        fields:
+          description:
+            type: writer
+            label: {{ page.title }} Description
+            help: >
+              This description will appear on the {{ page.title }} index page.

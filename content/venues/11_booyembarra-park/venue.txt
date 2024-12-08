@@ -1,0 +1,41 @@
+Title: Booyembarra Park
+
+----
+
+Location: Steven St & Montreal St, Fremantle WA 6160
+
+----
+
+Land: Whadjuk Noongar boodja
+
+----
+
+Location-features: outdoor venue, parking available at Sullivan Hall on Nannine Avenue
+
+----
+
+Location-text: <p>meet at the park entrance closest to Nannine Avenue (see map)</p>
+
+----
+
+Accessibility: 
+
+----
+
+Accessibility-text: 
+
+----
+
+Map: <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1955.6418858784932!2d115.76921705770633!3d-32.05707536174942!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a32a3d207d5eb8f%3A0xf04f0b618f190b0!2sBooyeembara%20Park!5e0!3m2!1sen!2sau!4v1707381539691!5m2!1sen!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+----
+
+Contacts: 
+
+----
+
+Website: 
+
+----
+
+Uuid: nhhK7MPOOcAvE6Xq

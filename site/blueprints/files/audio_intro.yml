@@ -1,0 +1,12 @@
+title: AE Site Introduction audio
+
+accept:
+  mime: audio/*
+  type: audio
+  maxsize: 20000000 # 20mb in bytes
+
+# template: audio_custom
+fields:
+  description:
+    label: Description
+    type: writer

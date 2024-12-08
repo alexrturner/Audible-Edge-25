@@ -1,0 +1,11 @@
+title: Sounds
+accept:
+  mime: audio/*
+  type: audio
+  maxsize: 20000000 # 20mb in bytes
+template: audio
+cover: true
+fields:
+  description:
+    label: Description
+    type: writer

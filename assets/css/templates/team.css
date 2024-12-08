@@ -1,0 +1,58 @@
+/* 
+============
+cards 
+============
+*/
+.pill {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cards {
+  padding: calc(var(--gap) / 2);
+}
+
+.cards:not(.masonry) {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cards:not(.masonry) .card {
+  width: 50%;
+}
+
+@media (max-width: 640px) {
+  .cards:not(.masonry) .card {
+    width: 100%;
+  }
+}
+
+.card {
+  display: block;
+  margin-bottom: var(--gap);
+  padding: calc(var(--gap) / 2);
+}
+
+.card .inner {
+  border-top: var(--hr);
+  padding-top: var(--gap);
+}
+
+.card .pill {
+  margin-bottom: 1rem;
+}
+
+.card h2 {
+  font-size: var(--h2);
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  margin-bottom: var(--gap);
+}
+
+.card figure {
+  margin-bottom: 1.2rem;
+}
+
+#col-team {
+  grid-column: 3 / span 5;
+}

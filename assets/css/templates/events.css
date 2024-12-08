@@ -1,0 +1,77 @@
+ul.menu-container {
+  margin: revert;
+}
+
+/* 
+============
+homepage main content sections
+============
+*/
+
+/* 
+mobile layout
+= menu, events, artists 
+*/
+@media (max-width: 768px) {
+  .all-listings #menu,
+  .all-listings #events,
+  .all-listings #artists {
+    order: 1;
+  }
+
+  .all-listings .events {
+    order: 2;
+  }
+
+  .all-listings .artists {
+    order: 3;
+  }
+}
+
+/* artists - two column layout */
+.artists-content {
+  -webkit-column-count: 2;
+  /* Chrome, Safari, Opera */
+  -moz-column-count: 2;
+  /* Firefox */
+  column-count: 2;
+  /* Standard syntax */
+
+  -webkit-column-gap: 20px;
+  /* Chrome, Safari, Opera */
+  -moz-column-gap: 20px;
+  /* Firefox */
+  column-gap: 20px;
+  /* Standard syntax */
+
+  max-height: 100%;
+  /* Adjust based on your layout */
+}
+
+/* artists - single column layout for mobile */
+@media screen and (max-width: 768px) {
+  .artists-content {
+    -webkit-column-count: 1;
+    /* Chrome, Safari, Opera */
+    -moz-column-count: 1;
+    /* Firefox */
+    column-count: 1;
+    /* Standard syntax */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  ul.items:not(.dates) {
+    padding: 0 0 0 2.3rem;
+  }
+  #artists-items {
+    padding: 0 0 0 2.3rem;
+  }
+
+  .section > :first-child,
+  section > :first-child,
+  .section > div > :first-child,
+  section > div > :first-child {
+    padding: 0;
+  }
+}

@@ -1,0 +1,5 @@
+type: files
+label: image
+max: 1
+layout: cards
+info: "{{ file.dimensions }}"

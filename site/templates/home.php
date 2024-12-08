@@ -4,7 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AE25 STD</title>
-    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <?= css([
+    'assets/css/normalize.v8.0.1.css',
+    // 'assets/css/index.css',
+    '@auto',
+  ]) ?>
+
+  <?= js([
+    // 'assets/js/script.js'
+  ]) ?>
+    <!-- <link rel="stylesheet" href="assets/css/style.css" /> -->
+    <!-- <script src="assets/js/script.js" defer></script> -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -118,7 +129,7 @@
         </div>
 
         <div class="img">
-          <img src="/assets/img/Swamp Icons/Swampy Icons-01.svg" alt="icon1" />
+          <img src="/assets/img/01.svg" alt="Icon 1" />
         </div>
       </section>
 
@@ -167,7 +178,7 @@
           </div>
         </div>
         <div class="img">
-          <img src="/assets/img/Swamp Icons/Swampy Icons-02.svg" alt="icon2" />
+          <img src="/assets/img/02.svg" alt="Icon 2" />
         </div>
       </section>
 
@@ -175,7 +186,7 @@
         <div class="row" id="settings">
           <p>
             <span class="grey">you are sharing this website with</span>
-            <span id="sharing" class="gap">X</span>
+            <span id="sharing" class="gap">2</span>
             <span class="grey">other people,</span>
           </p>
 
@@ -265,10 +276,7 @@
           </div>
 
           <div class="img">
-            <img
-              src="/assets/img/Swamp Icons/Swampy Icons-03.svg"
-              alt="icon3"
-            />
+            <img src="/assets/img/03.svg" alt="Icon 3" />
           </div>
         </div>
 

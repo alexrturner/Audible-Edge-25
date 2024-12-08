@@ -1,0 +1,46 @@
+Title: Local and Aesthetic
+
+----
+
+Location: 769 Beaufort St, Mount Lawley WA 6050
+
+----
+
+Land: Whadjuk Noongar boodja
+
+----
+
+Location-features: 
+
+----
+
+Location-text: 
+
+----
+
+Accessibility: 1 gender-neutral accessible bathroom, wheelchair accessible, spacious venue, food available
+
+----
+
+Accessibility-text: 
+
+----
+
+Map: <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3386.2329319633122!2d115.87594731169314!3d-31.9274327739219!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a32bb5d319ff20d%3A0x79068c75ba947159!2sLocal%20and%20Aesthetic!5e0!3m2!1sen!2sau!4v1706832539721!5m2!1sen!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+----
+
+Contacts:
+
+- 
+  contactname: General
+  contactemail: hello@localandaesthetic.com.au
+  contactphone: 0456 460 792
+
+----
+
+Website: https://www.localandaesthetic.com.au/
+
+----
+
+Uuid: fKLwaA2meaUpVdSp

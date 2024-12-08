@@ -1,0 +1,23 @@
+title: Newsletter
+image:
+  back: "pink-200"
+  icon: ✎
+
+fields:
+  title:
+    type: text
+    placeholder: "{{ page.title }}"
+
+  description:
+    type: writer
+    label: {{ page.title }} Description
+
+  link_email:
+    label: Email {{ page.title }} Sign-up Link
+    type: url
+    width: 1/2
+
+  link_sms:
+    label: SMS {{ page.title }} Sign-up Link
+    type: url
+    width: 1/2

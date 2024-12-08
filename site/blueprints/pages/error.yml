@@ -1,0 +1,11 @@
+title: Error
+image:
+  back: "red-200"
+  icon: ⛔︎
+
+columns:
+  - width: 2/3
+    fields:
+      description:
+        type: writer
+        label: Error message

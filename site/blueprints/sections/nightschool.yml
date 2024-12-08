@@ -1,0 +1,12 @@
+type: pages
+label: Nightschool
+parent: kirby.page('nightschool')
+layout: table
+columns:
+  title: false
+  start_date: true
+    label: Start
+
+sortBy: start_date asc
+template: nightschool-event
+empty: No {{ page.title }} events yet

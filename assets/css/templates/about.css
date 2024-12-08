@@ -1,0 +1,31 @@
+/* main.main {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+} */
+
+#col3.description {
+  grid-column: span 4;
+  /* max-height: 66vh; */
+  overflow-y: auto; /* enable vertical scrolling */
+  scrollbar-color: var(--cc-olive-highlight) var(--cc-primary);
+  scrollbar-color: var(--cc-primary) var(--cc-purple-highlight);
+  scrollbar-color: var(--cc-scrollbar) var(--cc-primary);
+  scrollbar-width: thin;
+}
+#col1.contact {
+  grid-column: span 3;
+}
+#col1.contact div {
+  margin-bottom: 1em;
+}
+ul li p {
+  display: inline;
+}
+@media screen and (max-width: 768px) {
+  main {
+    margin: 0;
+  }
+  section.contact {
+    margin-bottom: 2em;
+  }
+}

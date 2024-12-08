@@ -1,0 +1,12 @@
+type: pages
+label: Festival Program
+parent: kirby.page('satellite')
+layout: table
+columns:
+  title: false
+  start_date:
+    label: Start
+
+sortBy: start_date asc
+template: satellite-event
+empty: No satellite event yet

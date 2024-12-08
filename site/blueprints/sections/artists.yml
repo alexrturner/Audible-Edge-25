@@ -1,0 +1,14 @@
+type: pages
+label: Line Up
+parent: kirby.page('artists')
+layout: cards
+columns:
+  title: true
+
+info: "{{ page.year }}"
+template: artist
+empty: No artists yet
+image:
+  query: page.image
+  cover: true
+  ratio: 3/2

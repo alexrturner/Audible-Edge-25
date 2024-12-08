@@ -1,0 +1,39 @@
+title: Team member
+preset: page
+icon: user
+
+status:
+  draft: true
+  listed: true
+
+fields:
+  roles:
+    label: Roles
+    type: text
+    width: 1/2
+  website:
+    label: Website
+    type: url
+    placeholder: "https://"
+    width: 1/2
+  phone:
+    label: Phone
+    type: tel
+    width: 1/2
+    placeholder: "+61"
+  email:
+    label: Email
+    type: email
+    width: 1/2
+  bio_short:
+    label: Short bio
+    type: writer
+
+sidebar:
+  image:
+    extends: sections/image
+    label: 🪞
+    max: 1
+    image:
+      ratio: 1/1
+      cover: true

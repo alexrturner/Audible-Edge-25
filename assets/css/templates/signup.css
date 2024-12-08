@@ -1,0 +1,123 @@
+.form-container {
+  padding: 2em;
+  margin: auto;
+  background-color: var(--cc-bg);
+
+  margin-top: 1em;
+  position: relative;
+  border: 2px solid var(--cc-primary);
+}
+
+.form-container p {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  max-width: 300px;
+  position: relative;
+  margin: auto;
+
+  width: 100%;
+  margin-bottom: 1em;
+  border: none;
+  outline: none;
+  /* background: rgba(0, 0, 0, 0.3); */
+  /* text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); */
+  /* border: 1px solid rgba(0, 0, 0, 0.3); */
+}
+
+#col1 {
+  grid-column: span 2;
+  overflow-y: auto;
+  margin-bottom: 1em;
+}
+#col2 {
+  grid-column: span 2;
+  margin-bottom: 1em;
+  overflow-y: auto;
+}
+
+#col3 {
+  grid-column: span 3;
+  margin-bottom: 1em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  gap: 1em 0;
+}
+input,
+textarea {
+  color: var(--cc-olive);
+  border: 2px solid var(--cc-olive);
+  outline: none;
+  padding: 0;
+}
+
+button.button__link.button__submit,
+input[type="submit"] {
+  width: auto;
+  align-self: flex-end;
+  border: none;
+  font-weight: 400;
+  font-style: normal;
+  padding: 0 0.5em;
+  cursor: pointer;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--cc-secondary);
+  outline: var(--cc-secondary) 2px;
+}
+
+.field.half {
+  display: flex;
+}
+
+.field.half input {
+  flex: 1;
+  margin-right: 5px;
+}
+
+.field.half:last-child input {
+  margin-right: 0;
+}
+
+.field,
+.field-group {
+  display: flex;
+}
+
+.field {
+  width: 100%;
+}
+
+.field-group {
+  justify-content: space-between;
+}
+
+.field.half input {
+  width: 40%;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .field input,
+  .field textarea {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .field-group {
+    margin-right: 0;
+  }
+
+  main {
+    gap: 0;
+  }
+}

@@ -1,0 +1,30 @@
+Title: Cool Change Contemporary
+
+----
+
+Location: Level 2 (Kings Complex) 533 Hay Street, Boorloo/Perth, Western Australia, 6000
+
+----
+
+Land: Whadjuk Noongar boodja
+
+----
+
+Contacts:
+
+- 
+  contactname: General
+  contactemail: hello@coolchange.net.au
+  contactphone: ""
+
+----
+
+Website: https://coolchange.net.au/
+
+----
+
+Map: <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1126.704822185352!2d115.86191042379478!3d-31.955775854691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a32bb994f7f4db9%3A0x1e90044789119423!2sCool%20Change!5e0!3m2!1sen!2sau!4v1708748058547!5m2!1sen!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+----
+
+Uuid: AUZNOGKuJXBtyn4a

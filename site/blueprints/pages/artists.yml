@@ -1,0 +1,23 @@
+title: Artists
+preset: pages
+image:
+  back: "orange-600"
+  icon: ✦
+
+listed:
+  extends: sections/artists
+  label: Current Artists
+  layout: cardlets
+  limit: 50
+
+unlisted:
+  extends: sections/artists
+  label: Past Artists
+  layout: cardlets
+  limit: 50
+
+drafts:
+  extends: sections/artists
+  label: Inactive Artists
+  layout: cardlets
+  limit: 50

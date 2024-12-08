@@ -1,0 +1,46 @@
+Title: State Library of Western Australia (Theatrette)
+
+----
+
+Location: 25 Francis St, Perth WA 6000
+
+----
+
+Land: Whadjuk Noongar boodja
+
+----
+
+Location-features: 
+
+----
+
+Location-text: <p>located in the Perth Cultural Centre</p>
+
+----
+
+Accessibility: wheelchair accessible, gender-neural accessible bathrooms
+
+----
+
+Accessibility-text: 
+
+----
+
+Map: <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3385.4380344144406!2d115.85792521169384!3d-31.949011273912383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a32bad125a463db%3A0x5a0447da78dd5467!2sState%20Library%20of%20Western%20Australia!5e0!3m2!1sen!2sau!4v1706832653169!5m2!1sen!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+----
+
+Contacts:
+
+- 
+  contactname: General
+  contactemail: ""
+  contactphone: "0894273111"
+
+----
+
+Website: 
+
+----
+
+Uuid: YgU1Cd9MUyKU7xNo
