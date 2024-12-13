@@ -17,6 +17,7 @@
     <!-- <link rel="stylesheet" href="assets/css/style.css" /> -->
     <!-- <script src="assets/js/script.js" defer></script> -->
 
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -25,6 +26,7 @@
     />
   </head>
   <body>
+  
     <div id="container" class="container">
       <section class="column a">
         <div class="row title">
@@ -129,7 +131,8 @@
         </div>
 
         <div class="img">
-          <img src="/assets/img/01.svg" alt="Icon 1" />
+        <?= svg('assets/img/Swamp Icons/Swampy Icons-01.svg') ?>
+
         </div>
       </section>
 
@@ -178,7 +181,7 @@
           </div>
         </div>
         <div class="img">
-          <img src="/assets/img/02.svg" alt="Icon 2" />
+          <img src="/assets/img/Swamp Icons/Swampy Icons-02.svg" alt="Icon 2" />
         </div>
       </section>
 
@@ -237,46 +240,99 @@
         <div class="row audio">
           <div class="actions">
             <div class="action-buttons">
-              <img src="./assets/img/Swamp Icons/Swampy Icons-01.svg" alt="" />
+              <div class="audio-container">
+                <?php 
+                $prompts = site()->files()->filterBy('template', 'ae_swamp_svg')->filterBy('is_prompt', true);
+                if ($prompts->count() > 0): ?>
+                  <?php foreach ($prompts as $prompt): ?>
+                    <?php $promptText = $prompt->prompt()->html();
+                    // replace " character with &quot;
+                    $promptText = str_replace('"', '&quot;', $promptText);
+                    
+                    ?>
+                    <div class="prompt-icon" data-icon="<?= $prompt->filename() ?>" data-prompt='<?= $promptText ?>' style="display: none;">
+                      <?= svg($prompt) ?>
+                      
+                    </div>
+                  <?php endforeach ?>
+                <?php endif ?>
+              </div>
+
               <div class="prompt--container">
                 <button id="prompt--info" class="btn--info">i</button>
                 <button id="prompt--input" onclick="userUpload()">
-                  input?
+                  Prompt Text goes Here
+
                 </button>
               </div>
             </div>
 
-            <form
-              id="audioUploadForm"
-              enctype="multipart/form-data"
-              method="POST"
-              action="/upload"
-            >
-              <div class="action-buttons">
-                <input
-                  type="file"
-                  name="audioFile"
-                  id="audioFile"
-                  accept="audio/"
-                  required
-                  style="display: none"
-                />
-                <button
-                  id="prompt--upload"
-                  type="button"
-                  onclick="document.getElementById('audioFile').click()"
-                >
-                  Upload
-                </button>
-                <button type="submit" id="prompt--next">Next Prompt</button>
+          
+          <form action="" method="post" enctype="multipart/form-data" >
 
-                <!-- <button type="submit" id="prompt--next">Submit</button> -->
+            <!-- Honeypot field -->
+            <div class="honeypot" style="position: absolute; left: -9999px;">
+                <label for="website">Website <abbr title="required">*</abbr></label>
+                <input type="website" id="website" name="website">
+            </div>            
+
+            <div class="action-buttons">
+              
+              <div class="form-field">
+                <label for="fileInput">
+                  <!-- select files -->
+                  <input 
+                  name="file[]" 
+                  type="file" 
+                  accept="audio/*" 
+                  id="fileInput"
+                  style="display: none;"
+                  onchange="handleFileSelect(this)"
+                  >
+                  <button id="prompt--upload" type="button" onclick="document.getElementById('fileInput').click()">
+                    Upload
+                  </button>
+                </label> 
+                <!-- <div class="help">You can upload up to 3 files. Each file may not be larger than 3 MB.</div> -->
+                
+                
+              <input 
+                  type="submit" 
+                  name="submit" 
+                  value="Submit" 
+                  class="button submit-button" 
+                  style="display: none;"
+
+              >
+              
+              <input type="hidden" name="current_prompt" id="current_prompt" value="">
+              <input type="hidden" name="current_prompt_text" id="current_prompt_text" value="">
+              <?php if ($success): ?>
+                <div class="alert success">
+                  <?= $success ?>
+                </div>
+              <?php endif ?>
+
+              <?php if (!empty($alerts)): ?>
+                <div class="alert error">
+                  <?php foreach ($alerts as $alert): ?>
+                    <div><?= $alert ?></div>
+                  <?php endforeach ?>
+                </div>
+              <?php endif ?>
               </div>
-            </form>
+              
+              <!-- <button type="submit" name="submit" id="prompt--submit">Submit</button> -->
+              
+              
+              
+            </div>
+          </form>
+          <button id="prompt--next">Next Prompt</button>
           </div>
 
           <div class="img">
-            <img src="/assets/img/03.svg" alt="Icon 3" />
+            <img src="/assets/img/Swamp Icons/Swampy Icons-03.svg" alt="Icon 3" />
           </div>
         </div>
 
@@ -339,284 +395,21 @@
         </footer>
       </section>
     </div>
-
-    <!-- <div>icons are living</div> -->
-
     <script>
-      // get time in perth
-      const getTime = () => {
-        const date = new Date();
-        return date.toLocaleTimeString("en-US", {
-          hour: "2-digit",
-          minute: "2-digit",
-        });
-      };
-      function updateTime() {
-        const time = getTime();
-        document.querySelector(".hour").textContent = time.split(":")[0];
-        document.querySelector(".minute").textContent = time.split(":")[1];
-      }
-      updateTime();
-
-      // scrolls
-      // default: burrow scroll, no noise floor
-      let isParallaxScroll = false;
-      let isNoiseEnabled = false;
-      let scrollTimeouts = new Map();
-      let currentPositions = new Map();
-
-      function getRandomPosition(maxOffset) {
-        return {
-          x: Math.random() * maxOffset - maxOffset / 2,
-          y: Math.random() * maxOffset - maxOffset / 2,
-        };
-      }
-
-      function handleScroll(column) {
-        const transformWeight =
-          document.getElementById("transformWeight").value;
-        const maxOffset = 1600;
-
-        const img = column.querySelector(".img");
-        if (!img) return;
-
-        // clear current timeout (for this column)
-        if (scrollTimeouts.has(column)) {
-          clearTimeout(scrollTimeouts.get(column));
-        }
-
-        if (isParallaxScroll) {
-          const scrollTop = column.scrollTop / transformWeight;
-          const scrollTopWeighted = column.scrollTop / 80;
-          img.style.transform = `translateY(${scrollTop}px) skew(${scrollTopWeighted}deg)`;
+      function handleFileSelect(input) {
+        const submitButton = input.closest('.form-field').querySelector('.submit-button');
+        if (input.files.length > 0) {
+            submitButton.style.display = 'block';
+            // ? show the filename
+            const fileName = input.files[0].name;
+            input.nextElementSibling.textContent = `${fileName}`;
         } else {
-          const timeout = setTimeout(() => {
-            const newPos = getRandomPosition(maxOffset);
-            currentPositions.set(img, newPos);
-            img.style.transition =
-              "transform 5s ease-in-out, filter 3s ease-in-out";
-            img.style.transform = `translate(${newPos.x}px, ${newPos.y}px)`;
-          }, 150);
-          scrollTimeouts.set(column, timeout);
+            submitButton.style.display = 'none';
+            input.nextElementSibling.textContent = 'Upload';
         }
-
-        // noise floor by distance
-        if (isNoiseEnabled) {
-          const scrollDistance = Math.abs(column.scrollTop);
-          const maxScroll = column.scrollHeight - column.clientHeight;
-          const noiseIntensity = Math.min(scrollDistance / maxScroll, 1); // cap it at 1
-          img.style.filter = `grayscale(${noiseIntensity}) contrast(${
-            1 + noiseIntensity
-          })`;
-        } else {
-          img.style.filter = "none";
-        }
-      }
-
-      // on/off burrow
-      document.getElementById("scrollMode").addEventListener("click", () => {
-        document.querySelectorAll(".column").forEach((column) => {
-          const img = column.querySelector(".img");
-          if (!img) return;
-
-          // current scroll position
-          const transformWeight =
-            document.getElementById("transformWeight").value;
-          const scrollTop = column.scrollTop / transformWeight;
-          const scrollTopWeighted = column.scrollTop / 80;
-
-          // 1. enable transition
-          img.style.transition = "transform 1s ease-out";
-
-          // 2. toggle mode w delay
-          setTimeout(() => {
-            isParallaxScroll = !isParallaxScroll;
-
-            // Apply the transform based on new mode
-            img.style.transform = isParallaxScroll
-              ? `translateY(${scrollTop}px) skew(${scrollTopWeighted}deg)`
-              : "none";
-
-            // 3. reset
-            img.style.filter = "none";
-            currentPositions.delete(img);
-          }, 50);
-        });
-
-        scrollTimeouts.clear();
-        document.getElementById("scrollMode").textContent = isParallaxScroll
-          ? "burrow scroll"
-          : "parallax scroll";
-      });
-
-      // on/off noise
-      document.getElementById("noiseMode").addEventListener("click", () => {
-        isNoiseEnabled = !isNoiseEnabled;
-        document.querySelectorAll(".column .img").forEach((img) => {
-          img.style.filter = "none";
-        });
-        //change text
-        document.getElementById("noiseMode").textContent = isNoiseEnabled
-          ? "++ noise"
-          : "no noise";
-      });
-
-      document.addEventListener("DOMContentLoaded", function () {
-        const columns = document.querySelectorAll(".column");
-        columns.forEach((column) => {
-          column.addEventListener("scroll", () => handleScroll(column));
-        });
-      });
-
-      // scroll content into view
-
-      document.getElementById("content--info").addEventListener("click", () => {
-        const subtitles = [
-          {
-            element: document.getElementById("btn-about"),
-            delay: 0, // immediate
-            duration: 400, // fast scroll
-          },
-          {
-            element: document.getElementById("btn-accessibility"),
-            delay: 100, // wait a bit
-            duration: 400, // medium scroll
-          },
-          {
-            element: document.getElementById("btn-acknowledgements"),
-            delay: 200, // wait longer
-            duration: 400, // slow scroll
-          },
-        ];
-
-        subtitles.forEach(({ element, delay, duration }) => {
-          setTimeout(() => {
-            element.scrollIntoView({
-              behavior: "smooth",
-              block: "start", // or center
-            });
-
-            setTimeout(() => {
-              element.style.transition = "background-color 0.3s";
-              element.style.backgroundColor = "yellow";
-
-              setTimeout(() => {
-                element.style.backgroundColor = "";
-              }, 400);
-            }, duration);
-          }, delay);
-        });
-      });
+    }
     </script>
-
-    <script defer>
-      const prompts = [
-        {
-          text: 'go "Brr".',
-          icon: "Swampy Icons-01.svg",
-        },
-        {
-          text: "hum a tune that makes you smile loud, in your head.",
-          icon: "Swampy Icons-02.svg",
-        },
-        {
-          text: "go 'Go Go Gadget Copter'",
-          icon: "Swampy Icons-03.svg",
-        },
-      ];
-      // track remaining prompts
-      let availablePrompts = [...prompts];
-      let currentPromptIndex = 0;
-
-      const getPrompt = () => {
-        if (availablePrompts.length === 0) {
-          // Optional: Reset the prompts when all are used
-          availablePrompts = [...prompts];
-          currentPromptIndex = 0;
-        }
-        return availablePrompts[currentPromptIndex];
-      };
-
-      const updatePromptDisplay = () => {
-        const prompt = getPrompt();
-        const promptElement = document.getElementById("prompt--input");
-        const iconElement = document.querySelector(".action-buttons img");
-
-        promptElement.textContent = prompt.text;
-        iconElement.src = `/assets/img/Swamp Icons/${prompt.icon}`;
-      };
-
-      const userUpload = () => {
-        if (availablePrompts.length > 0) {
-          // rm current prompt
-          availablePrompts.splice(currentPromptIndex, 1);
-
-          // adjust index
-          if (currentPromptIndex >= availablePrompts.length) {
-            currentPromptIndex = 0;
-          }
-
-          updatePromptDisplay();
-        }
-      };
-
-      const nextPrompt = () => {
-        currentPromptIndex = (currentPromptIndex + 1) % availablePrompts.length;
-        updatePromptDisplay();
-      };
-      // listen for next prompt
-      document
-        .getElementById("prompt--next")
-        .addEventListener("click", nextPrompt);
-
-      // burrowing
-      function changeMode(button) {
-        const modeSpan = document.getElementById("mode");
-        if (modeSpan.textContent === "high contrast") {
-          modeSpan.textContent = "onion skin";
-        } else {
-          modeSpan.textContent = "high contrast";
-        }
-
-        const images = document.querySelectorAll(".img img");
-        images.forEach((img) => {
-          img.style.display = img.style.display === "block" ? "none" : "block";
-        });
-        document.body.classList.toggle("burrowing");
-      }
-      /*
-      function handleScroll() {
-        const columns = document.querySelectorAll(".column");
-
-        // const transformWeight = 80;
-
-        const transformWeight =
-          document.getElementById("transformWeight").value;
-
-        // const logTransformWeight = Math.log(transformWeight);
-        columns.forEach((column) => {
-          const img = column.querySelector(".img");
-          if (!img) return;
-
-          const scrollTop = column.scrollTop / transformWeight;
-          const scrollTopWeighted = column.scrollTop / 80;
-          img.style.transform = `translateY(${scrollTop}px) skew(${scrollTopWeighted}deg)`;
-
-          //img.style.transform = `translateY(${scrollTop}px)`;
-
-          // scale the image
-          //const scale = 1 + scrollTop / 1000;
-          //img.style.transform = `scale(${scale})`;
-        });
-      }
-
-      document.addEventListener("DOMContentLoaded", function () {
-        const columns = document.querySelectorAll(".column");
-        columns.forEach((column) => {
-          column.addEventListener("scroll", handleScroll);
-        });
-      });
-      */
-    </script>
+    <!-- <div>icons are living</div> -->
+    <?= js('assets/js/templates/home.js') ?>
   </body>
 </html>

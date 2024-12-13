@@ -1,0 +1,25 @@
+title: Storage
+
+options:
+  url: false
+  status: false
+  delete: false
+
+image:
+  back: "black-200"
+  icon: 📁
+
+columns:
+  - width: 1
+    sections:
+      uploads:
+        type: files
+        headline: Uploaded Files
+        template: upload
+        layout: list
+        info: "{{ file.date }}"
+        text: |
+          {{file.Promptnumber}}: {{ file.prompt }}
+        sort:
+          by: date
+          direction: desc

@@ -1,0 +1,17 @@
+Date: 2024-12-13 09:12
+
+----
+
+Promptnumber: p-01
+
+----
+
+Prompt: Go "Ick".
+
+----
+
+Uuid: OF7KXbJpQB7ERG4e
+
+----
+
+Template: upload

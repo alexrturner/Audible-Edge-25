@@ -95,12 +95,12 @@ button h2 {
   /* justify-content: center;
   align-items: center; */
 }
-.column *:not(div, img, p, h3, form) {
+.column *:not(div, img, svg, p, h3, form) {
   background-color: var(--cc-light);
 }
 .burrowing {
   background-color: rgb(30, 35, 24);
-  /* background-image: url("/sandbox/assets/img/The-regular-star-like-pattern-created-by-burrow-systems-visible-on-satellite.jpg"); */
+  /* background-image: url("/assets/img/The-regular-star-like-pattern-created-by-burrow-systems-visible-on-satellite.jpg"); */
   /* filter: grayscale(50%); */
   /* filter: brightness(1000%); */
 }
@@ -188,10 +188,11 @@ span.grey::before {
 
 section.column {
   overflow: scroll;
+  scrollbar-color: transparent transparent;
   padding: 0.5em;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 50vh 48vh auto;
+  grid-template-rows: 50vh 50vh auto;
 }
 
 .content {
@@ -240,7 +241,8 @@ span.year {
   grid-template-rows: auto auto;
   gap: 1rem;
 }
-.action-buttons img {
+.action-buttons img,
+.action-buttons svg {
   max-width: 100%;
   background-color: var(--cc-light);
 }
@@ -345,7 +347,8 @@ button:focus {
 
   mix-blend-mode: difference;
 }
-.img img {
+.img img,
+.img svg {
   /* width: 100vw; */
   /* height: 100vh; */
   /* object-fit: cover; */
@@ -354,6 +357,7 @@ button:focus {
   /* transform: translateX(-20%); */
 
   display: none;
+  scale: 1.5;
 }
 
 .column.a .img img {
@@ -500,4 +504,13 @@ footer::before {
 .space {
   height: 1em;
   margin: 1em 0;
+}
+
+/* h--f-sdafdahfga */
+svg {
+  width: auto;
+  height: 100%;
+}
+.ae svg {
+  width: 100%;
 }

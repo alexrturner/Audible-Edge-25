@@ -1,0 +1,18 @@
+title: AE Prompt
+
+accept:
+  mime: audio/*
+
+fields:
+  prompt_text:
+    label: Prompt Text
+    type: text
+    width: 2/3
+    required: true
+
+  prompt_icon:
+    label: Prompt Icon
+    type: files
+    query: site.files.filterBy('template', 'ae_swamp_svg')
+    multiple: false
+    width: 1/3

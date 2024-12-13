@@ -1,0 +1,19 @@
+title: Swamp Icon
+
+accept:
+  mime: image/svg+xml
+
+fields:
+  prompt:
+    label: Prompt Text
+    type: text
+    help: Text to display when this icon is used as a prompt
+    width: 2/3
+
+  is_prompt:
+    label: Use as Prompt?
+    type: toggle
+    text:
+      - "No"
+      - "Yes"
+    width: 1/3

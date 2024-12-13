@@ -1,0 +1,17 @@
+Date: 2024-12-13 09:12
+
+----
+
+Promptnumber: p-00
+
+----
+
+Prompt: Go "Brr."
+
+----
+
+Uuid: untxxtykODgzqF8T
+
+----
+
+Template: upload

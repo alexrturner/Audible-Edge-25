@@ -84,12 +84,25 @@ tabs:
         type: files
         template: ae_logo
 
-      ae_dot_svg:
-        label: AE homepage dots
+      # ae_swamp_svg:
+      #   label: AE Swamp Icons
+      #   type: files
+      #   template: ae_swamp_svg
+      #   help: SVG file of Swamp Icons for the homepage.
+      ae_swamp_svg:
+        label: AE Swamp Icons
         type: files
-        template: ae_homepage_dot_svg
-        help: SVG file of dots for the homepage.
-
+        template: ae_swamp_svg
+        layout: table
+        columns:
+          title: false
+          prompt:
+            label: Prompt Text
+            type: text
+          is_prompt:
+            label: Use as Prompt?
+            type: toggle
+        help: SVG file of Swamp Icons for the homepage. Add prompt text to use icon in prompt rotation.
       ae_logo_menu:
         label: AE logos (menu version)
         type: files
@@ -123,15 +136,19 @@ tabs:
             type: writer
             help: Displayed in Plain Text View.
 
-      audio_custom:
-        label: Custom Audio (letter sounds)
+      ae_prompts:
+        label: AE Prompts
         type: files
-        template: audio_custom
+        template: ae_prompts
         layout: table
-        image:
-          icon: audio
         columns:
           title: false
-          audio_category:
-            label: letter
-        help: '"A!" "E?"'
+          prompt_text:
+            label: Prompt Text
+            type: text
+          prompt_icon:
+            label: Icon
+            type: files
+            query: site.files.filterBy('template', 'ae_swamp_svg')
+            multiple: false
+        help: Select an icon for each prompt.
