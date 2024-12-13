@@ -1,0 +1,21 @@
+Prompt: Go "Ick".
+
+----
+
+Is-prompt: true
+
+----
+
+Sort: 3
+
+----
+
+Caption: 
+
+----
+
+Uuid: IyMvZpYeJfJAa5m5
+
+----
+
+Template: ae_swamp_svg
