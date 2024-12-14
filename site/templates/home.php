@@ -98,13 +98,7 @@
         <div>
           <span class="grey">it is currently</span>
           <div class="time gap">
-            <?php
-            date_default_timezone_set('Australia/Perth');
-            $currentDate = new DateTime();
-            $currentHour = $currentDate->format('H');
-            $currentMinute = $currentDate->format('i');
-            ?>
-            <span class="hour"><?= $currentHour ?></span>:<span class="minute"><?= $currentMinute ?></span>
+            <span class="hour"></span>:<span class="minute"></span>
           </div>
           <span class="grey">in boorloo,</span>
         </div>

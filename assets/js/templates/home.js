@@ -1,19 +1,26 @@
-// get time in perth
-const getTime = () => {
-  const date = new Date();
-  return date.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-};
+// time handling (boorloo)
 function updateTime() {
-  const time = getTime();
-  document.querySelector(".hour").textContent = time.split(":")[0];
-  document.querySelector(".minute").textContent = time.split(":")[1];
+  const now = new Date();
+  const localTime = new Date(
+    now.toLocaleString("en-US", { timeZone: "Australia/Perth" })
+  );
+
+  const hour = localTime.getHours().toString().padStart(2, "0");
+  const minute = localTime.getMinutes().toString().padStart(2, "0");
+
+  document.querySelector(".hour").textContent = hour;
+  document.querySelector(".minute").textContent = minute;
+
+  const msTillNextMinute =
+    60000 - (localTime.getSeconds() * 1000 + localTime.getMilliseconds());
+
+  // schedule next update for start of next minute
+  setTimeout(updateTime, msTillNextMinute);
 }
+
 updateTime();
 
-// scrolls
+// scroll behaviours
 // default: burrow scroll, no noise floor
 let isParallaxScroll = false;
 let isNoiseEnabled = false;
@@ -161,16 +168,6 @@ document.getElementById("content--info").addEventListener("click", () => {
   });
 });
 
-// const prompts = Array.from(document.querySelectorAll(".prompt-icon")).map(
-//   (icon) => ({
-//     text: icon.dataset.prompt,
-//     icon: icon.dataset.icon,
-//   })
-// );
-// // track remaining prompts
-// let availablePrompts = [...prompts];
-// let currentPromptIndex = 0;
-
 const prompts = Array.from(document.querySelectorAll(".prompt-icon"));
 let availablePrompts = [...prompts];
 let currentPromptIndex = 0;
@@ -247,27 +244,3 @@ function changeMode(button) {
 
 // init first prompt
 updatePromptDisplay();
-
-// document
-//   .getElementById("audioUploadForm")
-//   .addEventListener("submit", async (e) => {
-//     // e.preventDefault();
-
-//     const formData = new FormData(e.target);
-//     console.log(formData);
-//     try {
-//       const response = await fetch(e.target.action, {
-//         method: "POST",
-//         body: formData,
-//       });
-
-//       const result = await response.text();
-
-//       // If successful, move to next prompt AND remove current one
-//       if (result.includes("success")) {
-//         userUpload(); // This removes current prompt and shows next available one
-//       }
-//     } catch (error) {
-//       console.error("Upload failed:", error);
-//     }
-//   });
