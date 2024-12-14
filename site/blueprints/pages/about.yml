@@ -7,6 +7,10 @@ fields:
   description:
     label: {{ page.title }} Description
     type: textarea
+  
+  reviews:
+    label: Reviews
+    type: textarea
 
   link_email:
     label: Email Newsletter Sign-up Link

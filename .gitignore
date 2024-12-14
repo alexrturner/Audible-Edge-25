@@ -67,6 +67,7 @@ Icon
 error_log
 /__MACOSX/*
 
+
 # Favicon
 # ---------------
 /favicon-16x16.png
@@ -75,6 +76,7 @@ error_log
 /android-chrome-512x512.png
 /apple-touch-icon.png
 /site.webmanifest
+/content/storage/*
 
 # Install
 # -----------

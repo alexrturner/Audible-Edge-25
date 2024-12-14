@@ -80,15 +80,13 @@ tabs:
         template: ae_program
 
       ae_logo:
-        label: AE logos
+        label: AE logo
         type: files
         template: ae_logo
+        multiple: false
+        max: 1
+        cover: true
 
-      # ae_swamp_svg:
-      #   label: AE Swamp Icons
-      #   type: files
-      #   template: ae_swamp_svg
-      #   help: SVG file of Swamp Icons for the homepage.
       ae_swamp_svg:
         label: AE Swamp Icons
         type: files
@@ -103,15 +101,16 @@ tabs:
             label: Use as Prompt?
             type: toggle
         help: SVG file of Swamp Icons for the homepage. Add prompt text to use icon in prompt rotation.
-      ae_logo_menu:
-        label: AE logos (menu version)
-        type: files
-        template: ae_logo_menu
 
-      ae_logo_combined:
-        label: AE logos (combined version)
-        type: files
-        template: ae_logo_combined
+      # ae_logo_menu:
+      #   label: AE logos (menu version)
+      #   type: files
+      #   template: ae_logo_menu
+
+      # ae_logo_combined:
+      #   label: AE logos (combined version)
+      #   type: files
+      #   template: ae_logo_combined
 
       audio_intro:
         type: files
@@ -136,19 +135,19 @@ tabs:
             type: writer
             help: Displayed in Plain Text View.
 
-      ae_prompts:
-        label: AE Prompts
-        type: files
-        template: ae_prompts
-        layout: table
-        columns:
-          title: false
-          prompt_text:
-            label: Prompt Text
-            type: text
-          prompt_icon:
-            label: Icon
-            type: files
-            query: site.files.filterBy('template', 'ae_swamp_svg')
-            multiple: false
-        help: Select an icon for each prompt.
+      # ae_prompts:
+      #   label: AE Prompts
+      #   type: files
+      #   template: ae_prompts
+      #   layout: table
+      #   columns:
+      #     title: false
+      #     prompt_text:
+      #       label: Prompt Text
+      #       type: text
+      #     prompt_icon:
+      #       label: Icon
+      #       type: files
+      #       query: site.files.filterBy('template', 'ae_swamp_svg')
+      #       multiple: false
+      #   help: Select an icon for each prompt.

@@ -3,6 +3,7 @@ accept:
   mime: image/*
   type: image
   maxsize: 20000000 # 20mb in bytes
+multiple: false
 cover: true
 fields:
   alt:
