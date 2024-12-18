@@ -4,6 +4,7 @@
   --fs-med: 1.5rem;
   --fs-body: 1rem;
   --fs-sml: 0.75rem;
+  --fs-responsive: clamp(1.25rem, 2vw + 1rem, 2rem);
 
   --ff-inter: "Inter", sans-serif;
   --fw-inter: 400;
@@ -13,6 +14,8 @@
   --cc-light: #eaeaea90;
   --cc-grey: #ccccccd7;
   --cc-body: #000000ef;
+  --cc-fill: #0091ff;
+  --cc-burrowing-text: #eaeaea;
 }
 
 body,
@@ -54,17 +57,14 @@ h6 {
 } */
 h1,
 h2,
-h3,
-.actions button {
+h3 {
   font-size: var(--fs-subtitle);
 }
-p,
-span,
-li,
-ul,
-button {
-  /* background-color: rgba(255, 255, 255, 0.9); */
+.actions button,
+button h2 {
+  font-size: var(--fs-responsive);
 }
+
 ul.reviews {
   width: 80%;
   float: right;
@@ -96,13 +96,14 @@ button h2 {
   /* justify-content: center;
   align-items: center; */
 }
-.column *:not(div, img, svg, p, h3, form) {
+/* .column *:not(div, img, svg, p, h3, form) {
   background-color: var(--cc-light);
-}
+} */
 .burrowing {
   background-color: rgb(30, 35, 24);
-  /* background-image: url("/assets/img/The-regular-star-like-pattern-created-by-burrow-systems-visible-on-satellite.jpg"); */
+  color: var(--cc-burrowing-text);
   /* filter: grayscale(50%); */
+
   /* filter: brightness(1000%); */
 }
 #icons-living {
@@ -112,22 +113,13 @@ button h2 {
   top: 0;
   /* transform: scale(0.1) !important; */
 }
-#container .img img {
+#container .img svg {
   /* transform: scale(0.1) translate(100%, 100%); */
   /* transform: scale(1) translate(100%, 100%); */
-  /* transform: scale(1.6); */
-  /* opacity: 0.9 !important; */
+  transform: scale(1.6);
+  opacity: 0.9 !important;
 }
-.t {
-  /* position: absolute; */
-  width: 100%;
-  height: 100%;
-  mix-blend-mode: multiply;
-  /* mix-blend-mode: exclusion; */
-  /* mix-blend-mode: difference; */
-  top: 0;
-  left: 0;
-}
+
 #settings {
   font-size: var(--fs-med);
   letter-spacing: -0.075em; /* reduce by 5% of fs */
@@ -172,6 +164,7 @@ span.grey::before {
   /* mix-blend-mode: difference; */
   /* mix-blend-mode: multiply; */
   /* mix-blend-mode: exclusion; */
+  /* mix-blend-mode: hue; */
   z-index: -1;
 }
 .opacity-75 {
@@ -212,10 +205,7 @@ section.column {
   display: inline-block;
   margin-bottom: 0.25em;
 }
-.row.when {
-  display: flex;
-  align-items: end;
-}
+
 span.year {
   position: absolute;
   bottom: 0;
@@ -245,6 +235,13 @@ span.year {
 .action-buttons img,
 .action-buttons svg {
   max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+
+.prompt-icon {
+  min-height: 200px;
+  align-items: end;
   background-color: var(--cc-light);
 }
 
@@ -253,8 +250,10 @@ span.year {
   flex-direction: column; /* Stack contents vertically */
   justify-content: flex-end;
 }
-.action-buttons button {
+
+.actions button {
   text-align: left;
+  width: 100%;
 }
 .action-buttons {
   grid-column: 1 / -1; /* spans both columns */
@@ -346,28 +345,27 @@ button:focus {
   background-repeat: no-repeat;
   background-position: center;
 
-  mix-blend-mode: difference;
+  /* mix-blend-mode: difference; */
+  filter: blur(3px) !important;
 }
 .img img,
 .img svg {
-  /* width: 100vw; */
-  /* height: 100vh; */
-  /* object-fit: cover; */
-
   position: fixed !important;
-  /* transform: translateX(-20%); */
 
   display: none;
+  fill: var(--cc-fill);
   scale: 1.5;
+  z-index: -1;
 }
 
-.column.a .img img {
+.img#icon-a {
+  mix-blend-mode: hue;
 }
-
-.column.b .img img {
+.img#icon-b {
+  mix-blend-mode: color;
 }
-
-.column.c .img img {
+.img#icon-c {
+  mix-blend-mode: saturation;
 }
 
 #prompt--next {
@@ -510,8 +508,60 @@ footer::before {
 /* h--f-sdafdahfga */
 svg {
   width: auto;
-  height: 100%;
+  /* height: 100%; */
 }
 .ae svg {
   width: 100%;
+}
+.flex-end {
+  height: 100%;
+  display: flex;
+  align-items: end;
+}
+.relative {
+  position: relative;
+}
+.subtitle h3 {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mobile */
+
+#mobile {
+  display: none;
+}
+
+#mobile section {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  gap: 1em;
+  margin-bottom: 1em;
+}
+#mobile .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --fs-subtitle: 2rem;
+  }
+  #mobile {
+    display: block;
+  }
+  .desktop {
+    display: none;
+  }
+  section.column {
+    overflow: initial;
+    grid-template-rows: auto;
+    padding: 0;
+  }
+  section,
+  section.column {
+    padding: 0.5em;
+  }
 }

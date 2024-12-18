@@ -187,20 +187,24 @@ const getPrompt = () => {
 
 const updatePromptDisplay = () => {
   const prompt = getPrompt();
-  const promptElement = document.getElementById("prompt--input");
-
-  document.querySelectorAll(".prompt-icon").forEach((icon) => {
-    icon.style.display = icon.dataset.icon === prompt.icon ? "block" : "none";
+  document.querySelectorAll(".prompt--input").forEach((promptElement) => {
+    promptElement.textContent = prompt.text;
   });
 
-  promptElement.textContent = prompt.text;
-  // set hidden input value
+  document.querySelectorAll(".prompt-icon").forEach((icon) => {
+    icon.style.display = icon.dataset.icon === prompt.icon ? "flex" : "none";
+  });
 
-  // zero-padded index
+  // set hidden input value (zero-padded index)
   const currentPromptTitle =
     "p-" + currentPromptIndex.toString().padStart(2, "0");
-  document.getElementById("current_prompt").value = currentPromptTitle;
-  document.getElementById("current_prompt_text").value = prompt.text;
+
+  document.querySelectorAll(".current_prompt").forEach((input) => {
+    input.value = currentPromptTitle;
+  });
+  document.querySelectorAll(".current_prompt_text").forEach((input) => {
+    input.value = prompt.text;
+  });
 };
 
 const userUpload = () => {
@@ -224,20 +228,23 @@ const nextPrompt = () => {
 };
 
 // listen for next prompt
-document.getElementById("prompt--next").addEventListener("click", nextPrompt);
+// document.getElementById("prompt--next").addEventListener("click", nextPrompt);
+document.querySelectorAll(".prompt--next").forEach((button) => {
+  button.addEventListener("click", nextPrompt);
+});
 
 // burrowing
 function changeMode(button) {
-  const modeSpan = document.getElementById("mode");
-  if (modeSpan.textContent === "high contrast") {
-    modeSpan.textContent = "onion skin";
+  const modeElement = document.querySelector(".mode");
+  if (modeElement.textContent === "high contrast") {
+    modeElement.textContent = "onion skin";
   } else {
-    modeSpan.textContent = "high contrast";
+    modeElement.textContent = "high contrast";
   }
 
-  const images = document.querySelectorAll(".img img");
-  images.forEach((img) => {
-    img.style.display = img.style.display === "block" ? "none" : "block";
+  const icons = document.querySelectorAll(".img svg");
+  icons.forEach((icon) => {
+    icon.style.display = icon.style.display === "block" ? "none" : "block";
   });
   document.body.classList.toggle("burrowing");
 }

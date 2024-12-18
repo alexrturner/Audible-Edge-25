@@ -1,0 +1,17 @@
+Prompt: Go "BANG".
+
+----
+
+Is-prompt: false
+
+----
+
+Sort: 4
+
+----
+
+Uuid: LzuHti9iUY5AdofK
+
+----
+
+Template: ae_swamp_svg
