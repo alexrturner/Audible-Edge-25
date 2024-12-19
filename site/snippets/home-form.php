@@ -1,4 +1,12 @@
 <div class="actions <?= $device ?>">
+    <div class="prompt--info-text" style="display: none;">
+
+        <?php $prompt_info = $site->prompt_info(); ?>
+        <?php if ($prompt_info): ?>
+            <?= $prompt_info->kt() ?>
+        <?php endif ?>
+
+    </div>
     <div class="action-buttons">
         <div class="audio-container">
             <?php
@@ -19,7 +27,8 @@
         </div>
 
         <div class="prompt--container">
-            <button id="prompt--info-<?= $device ?>" class="btn--info">i</button>
+            <button id="prompt--info-<?= $device ?>" class="btn--info"
+                onclick="toggleInfo(this)">i</button>
             <button class="prompt--input" id="prompt--input-<?= $device ?>" onclick="userUpload()">
                 <!-- Prompt Me -->
             </button>

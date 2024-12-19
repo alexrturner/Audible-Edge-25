@@ -108,9 +108,9 @@
       </div>
 
       <div class="row">
-        <button id="btn-about">
-          <h2>About</h2>
-        </button>
+
+        <h2 class="title" id="btn-about">About</h2>
+
         <div class="info content" id="about">
           <?= kirby()->page('about')->description()->kirbytext() ?>
         </div>
@@ -130,9 +130,7 @@
       </div>
       <div class="row space"></div>
       <div class="row">
-        <button id="btn-accessibility">
-          <h2>Accessibility</h2>
-        </button>
+        <h2 id="btn-accessibility" class="title">Accessibility</h2>
         <div class="content" id="accessibility">
           <?= kirby()->page('accessibility')->description()->kirbytext() ?>
         </div>
@@ -174,7 +172,7 @@
 
         <div
           class="temp"
-          style="position: relative; background-color: yellow">
+          style="position: relative; background-color: yellow; display: none;">
           <div
             class="control"
             style="display: flex; flex-direction: row; flex-wrap: wrap">
@@ -199,9 +197,9 @@
       </div>
 
       <div class="row">
-        <button id="btn-acknowledgements">
-          <h2>Acknowledgements</h2>
-        </button>
+
+        <h2 id="btn-acknowledgements" class="title">Acknowledgements</h2>
+
         <div class="content" id="acknowledgements">
           <?= kirby()->page('supporters')->description()->kirbytext() ?>
         </div>
@@ -216,31 +214,11 @@
         </div>
       </div>
       <footer>
-        <ul class="footer-links">
-          <li>
-            <a href="#" class="footer-link">Instagram</a>
-          </li>
-          <li>
-            <a href="#" class="footer-link">Facebook</a>
-          </li>
-          <li>
-            <a href="#" class="footer-link">eMail Newsletter</a>
-          </li>
-          <li>
-            <a href="#" class="footer-link">SMS Newsletter</a>
-          </li>
-          <li>
-            <a href="#" class="footer-link">eMail</a>
-          </li>
-        </ul>
         <div class="space"></div>
         <div class="legal">
-          <p>© Audible Edge 2025 brought to you by Tone List.</p>
-          <p>
-            Read the event
-            <a href="#">Privacy Statement and Terms & Conditions</a>.
-          </p>
-          <p>Site by Alex Turner and Oliva Rawlings.</p>
+          <p>Audible Edge 2025 brought to you by Tone List.</p>
+
+          <p>Site by Oliva Rawlings and Alex Turner.</p>
         </div>
       </footer>
     </section>
@@ -250,12 +228,31 @@
       const submitButton = input.closest('.form-field').querySelector('.submit-button');
       if (input.files.length > 0) {
         submitButton.style.display = 'block';
-        // ? show the filename
+        // show the filename
         const fileName = input.files[0].name;
-        input.nextElementSibling.textContent = `${fileName}`;
+
+        // input.nextElementSibling.textContent = `${fileName}`;
       } else {
         submitButton.style.display = 'none';
-        input.nextElementSibling.textContent = 'Upload';
+        // input.nextElementSibling.textContent = 'Upload';
+      }
+    }
+
+    function toggleInfo(button) {
+      const actionsContainer = button.closest('.actions');
+      const infoText = actionsContainer.querySelector('.prompt--info-text');
+      const elementsToToggle = actionsContainer.querySelectorAll('.action-buttons > *:not(.prompt--container), .prompt--container > *:not(.btn--info)');
+
+      if (infoText.style.display === 'none') {
+        // Show info text and hide other elements
+        infoText.style.display = 'block';
+        elementsToToggle.forEach(el => el.style.display = 'none');
+        button.textContent = 'x';
+      } else {
+        // Hide info text and show other elements
+        infoText.style.display = 'none';
+        elementsToToggle.forEach(el => el.style.display = '');
+        button.textContent = 'i';
       }
     }
   </script>

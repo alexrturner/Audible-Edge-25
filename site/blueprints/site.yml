@@ -135,6 +135,14 @@ tabs:
             type: writer
             help: Displayed in Plain Text View.
 
+      prompt_info:
+        label: Prompt Info
+        type: fields
+        fields:
+          prompt_info:
+            label: Prompt Info and Usage
+            type: writer
+
       # ae_prompts:
       #   label: AE Prompts
       #   type: files
