@@ -61,8 +61,11 @@ h3 {
   font-size: var(--fs-subtitle);
 }
 .actions button,
+.actions .button,
 h2.title {
   font-size: var(--fs-responsive);
+  width: 100%;
+  text-align: start;
 }
 
 ul.reviews {
@@ -107,23 +110,23 @@ button {
   /* filter: brightness(1000%); */
 }
 
-#settings {
+.ancillary {
   font-size: var(--fs-med);
   letter-spacing: -0.075em; /* reduce by 5% of fs */
   font-weight: 300;
 }
-#settings p {
+.settings p {
   margin: 1em 0;
   padding: 0;
 }
-#settings .gap {
+.settings .gap {
   padding: 0 0.5em;
   margin: 0 0.25em;
 }
-#settings .time span {
+.settings .time span {
   margin: 0 0.5em;
 }
-#settings div {
+.settings div {
   display: inline-block;
 }
 span.grey {
@@ -227,9 +230,19 @@ span.year {
 }
 
 .prompt-icon {
-  min-height: 200px;
+  min-height: 250px;
   align-items: end;
   background-color: var(--cc-light);
+  transition: height 0.4s ease-in-out 0.6s, min-height 0.6s ease-in-out,
+    background-color 0.2s linear 0.1s;
+}
+.prompt-icon.no-bg {
+  background-color: transparent;
+}
+
+.prompt-icon svg.hidden {
+  opacity: 0;
+  height: 0;
 }
 
 .action-buttons > * {
@@ -243,6 +256,7 @@ span.year {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  gap: 1rem;
 }
 
 .actions button {
@@ -364,8 +378,10 @@ button:focus {
   mix-blend-mode: saturation;
 }
 
-#prompt--next {
+.prompt--next {
   white-space: nowrap;
+  justify-content: start;
+  height: fit-content;
 }
 .prompt--container {
   display: flex;
@@ -373,6 +389,10 @@ button:focus {
   /* vertical space between buttons */
   justify-content: space-between;
   align-items: start;
+}
+
+.prompt--info-text {
+  grid-column: 1 / -1;
 }
 .switch {
   position: relative;
@@ -562,4 +582,28 @@ svg {
 /* rm */
 .temp * {
   font-size: var(--fs-body);
+}
+.temp {
+  display: none !important;
+}
+
+/* ae mix */
+.audible-edge-mix {
+  margin: 2rem 0;
+}
+
+.mix-player {
+  width: 100%;
+  max-width: 600px;
+}
+
+.mix-player audio {
+  /* width: 100%; */
+  border-radius: 2.5rem;
+}
+
+.mix-description {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin-top: 0.5rem;
 }

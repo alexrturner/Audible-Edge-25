@@ -1,0 +1,12 @@
+title: Audible Edge Mix
+
+accept:
+  mime: audio/*
+  type: audio
+  maxsize: 80000000 # 80mb in bytes
+
+fields:
+  description:
+    label: Mix Description
+    type: textarea
+    size: small

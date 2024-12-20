@@ -135,6 +135,13 @@ tabs:
             type: writer
             help: Displayed in Plain Text View.
 
+      ae_mix:
+        label: AE Mix
+        type: files
+        template: audio_ae_mix
+        multiple: false
+        help: Audio mix for the festival.
+
       prompt_info:
         label: Prompt Info
         type: fields

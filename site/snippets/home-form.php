@@ -1,12 +1,5 @@
 <div class="actions <?= $device ?>">
-    <div class="prompt--info-text" style="display: none;">
 
-        <?php $prompt_info = $site->prompt_info(); ?>
-        <?php if ($prompt_info): ?>
-            <?= $prompt_info->kt() ?>
-        <?php endif ?>
-
-    </div>
     <div class="action-buttons">
         <div class="audio-container">
             <?php
@@ -44,51 +37,61 @@
             </div>
 
             <!-- <div class="action-buttons"> -->
-            <div class="btns--upload">
+            <div class="btns--upload form-field">
 
-                <div class="form-field">
-                    <label for="fileInput">
-                        <!-- select files -->
-                        <input
-                            name="file[]"
-                            type="file"
-                            accept="audio/*"
-                            id="fileInput-<?= $device ?>"
-                            style="display: none;"
-                            onchange="handleFileSelect(this)">
-                        <button class="prompt--upload" id="prompt--upload-<?= $device ?>" type="button" onclick="document.getElementById('fileInput-<?= $device ?>').click()">
-                            Upload
-                        </button>
-                    </label>
-                    <!-- <div class="help">You can upload 1 file, no larger than 6 MB.</div> -->
-
-
+                <label for="fileInput">
+                    <!-- select files -->
                     <input
-                        type="submit"
-                        name="submit"
-                        value="Submit"
-                        class="button submit-button"
-                        style="display: none;">
+                        name="file[]"
+                        type="file"
+                        accept="audio/*"
+                        id="fileInput-<?= $device ?>"
+                        style="display: none;"
+                        onchange="handleFileSelect(this)">
+                    <button class="prompt--upload" id="prompt--upload-<?= $device ?>" type="button" onclick="document.getElementById('fileInput-<?= $device ?>').click()">
+                        Upload
+                    </button>
+                </label>
+                <!-- <div class="help">You can upload 1 file, no larger than 6 MB.</div> -->
 
-                    <input type="hidden" name="current_prompt" class="current_prompt" id="current_prompt-<?= $device ?>" value="">
-                    <input type="hidden" name="current_prompt_text" class="current_prompt_text" id="current_prompt_text-<?= $device ?>" value="">
-                    <?php if ($success): ?>
-                        <div class="alert success">
-                            <?= $success ?>
-                        </div>
-                    <?php endif ?>
-
-                    <?php if (!empty($alerts)): ?>
-                        <div class="alert error">
-                            <?php foreach ($alerts as $alert): ?>
-                                <div><?= $alert ?></div>
-                            <?php endforeach ?>
-                        </div>
-                    <?php endif ?>
+                <div class="file-info" style="display: none;">
+                    <span class="filename ancillary"></span>
                 </div>
+
+
+                <input
+                    type="submit"
+                    name="submit"
+                    value="Submit"
+                    class="button submit-button"
+                    style="display: none;">
+
+                <input type="hidden" name="current_prompt" class="current_prompt" id="current_prompt-<?= $device ?>" value="">
+                <input type="hidden" name="current_prompt_text" class="current_prompt_text" id="current_prompt_text-<?= $device ?>" value="">
+                <?php if ($success): ?>
+                    <div class="alert success">
+                        <?= $success ?>
+                    </div>
+                <?php endif ?>
+
+                <?php if (!empty($alerts)): ?>
+                    <div class="alert error">
+                        <?php foreach ($alerts as $alert): ?>
+                            <div><?= $alert ?></div>
+                        <?php endforeach ?>
+                    </div>
+                <?php endif ?>
 
             </div>
         </form>
         <button class="prompt--next" id="prompt--next-<?= $device ?>">Next Prompt</button>
+    </div>
+    <div class="prompt--info-text" style="display: none;">
+
+        <?php $prompt_info = $site->prompt_info(); ?>
+        <?php if ($prompt_info): ?>
+            <?= $prompt_info->kt() ?>
+        <?php endif ?>
+
     </div>
 </div>

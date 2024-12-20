@@ -59,7 +59,7 @@
           </div>
         </div>
         <div class="col flex-end">
-          <div class="settings">
+          <div class="settings ancillary">
             <span class="grey">you are viewing this website in</span>
             <span id="mode" class="gap mode">high contrast</span>
             <span class="grey">mode</span>
@@ -127,8 +127,28 @@
     <section class="column b">
       <div class="row when details flex-end desktop">
         <h3><span class="grey">Happening</span><br /><span class="grey">April 3–6</span></h3>
+
+
       </div>
-      <div class="row space"></div>
+      <div class="row space">
+        <div class="audible-edge-mix">
+          <?php
+          $mixFile = $site->files()->template('audio_ae_mix')->first();
+          if ($mixFile): ?>
+            <div class="mix-player">
+              <audio id="mixPlayer" controls>
+                <source src="<?= $mixFile->url() ?>" type="<?= $mixFile->mime() ?>">
+                Your browser does not support the audio element.
+              </audio>
+              <div class="mix-info">
+                <?php if ($mixFile->description()->isNotEmpty()): ?>
+                  <p class="mix-description"><?= $mixFile->description() ?></p>
+                <?php endif ?>
+              </div>
+            </div>
+          <?php endif ?>
+        </div>
+      </div>
       <div class="row">
         <h2 id="btn-accessibility" class="title">Accessibility</h2>
         <div class="content" id="accessibility">
@@ -141,7 +161,7 @@
     </section>
 
     <section class="column c">
-      <div class="row desktop" id="settings">
+      <div class="row desktop settings ancillary">
         <p>
           <span class="grey">you are sharing this website with</span>
           <span id="sharing" class="gap">2</span>
@@ -172,7 +192,7 @@
 
         <div
           class="temp"
-          style="position: relative; background-color: yellow; display: none;">
+          style="position: relative; background-color: yellow;">
           <div
             class="control"
             style="display: flex; flex-direction: row; flex-wrap: wrap">
@@ -224,34 +244,87 @@
     </section>
   </div>
   <script>
-    function handleFileSelect(input) {
-      const submitButton = input.closest('.form-field').querySelector('.submit-button');
-      if (input.files.length > 0) {
-        submitButton.style.display = 'block';
-        // show the filename
-        const fileName = input.files[0].name;
+    // function handleFileSelect(input) {
+    //   const submitButton = input.closest('.form-field').querySelector('.submit-button');
+    //   if (input.files.length > 0) {
+    //     submitButton.style.display = 'block';
+    //     // show the filename
+    //     const fileName = input.files[0].name;
 
-        // input.nextElementSibling.textContent = `${fileName}`;
+    //     // input.nextElementSibling.textContent = `${fileName}`;
+    //   } else {
+    //     submitButton.style.display = 'none';
+    //     // input.nextElementSibling.textContent = 'Upload';
+    //   }
+    // }
+    function handleFileSelect(input) {
+      const formField = input.closest('.form-field');
+      const submitButton = formField.querySelector('.submit-button');
+      const nextPromptButton = document.getElementById(`prompt--next-${input.id.split('-')[1]}`);
+      const fileInfo = formField.querySelector('.file-info');
+      const fileNameSpan = fileInfo.querySelector('.filename');
+
+      if (input.files.length > 0) {
+        // Show submit button, hide next prompt
+        submitButton.style.display = 'block';
+        nextPromptButton.style.display = 'none';
+
+        // Show filename
+        const fileName = input.files[0].name;
+        fileNameSpan.textContent = fileName;
+        fileInfo.style.display = 'block';
       } else {
+        // Hide submit button, show next prompt
         submitButton.style.display = 'none';
-        // input.nextElementSibling.textContent = 'Upload';
+        nextPromptButton.style.display = 'block';
+
+        // Hide filename
+        fileInfo.style.display = 'none';
       }
     }
 
+    // function toggleInfo(button) {
+    //   const actionsContainer = button.closest('.actions');
+    //   const infoText = actionsContainer.querySelector('.prompt--info-text');
+    //   const elementsToToggle = actionsContainer.querySelectorAll('.action-buttons > *:not(.prompt--container), .prompt--container > *:not(.btn--info)');
+
+    //   if (infoText.style.display === 'none') {
+    //     // Show info text and hide other elements
+    //     infoText.style.display = 'block';
+    //     elementsToToggle.forEach(el => el.style.display = 'none');
+    //     button.textContent = 'x';
+    //   } else {
+    //     // Hide info text and show other elements
+    //     infoText.style.display = 'none';
+    //     elementsToToggle.forEach(el => el.style.display = '');
+    //     button.textContent = 'i';
+    //   }
+    // }
     function toggleInfo(button) {
       const actionsContainer = button.closest('.actions');
       const infoText = actionsContainer.querySelector('.prompt--info-text');
-      const elementsToToggle = actionsContainer.querySelectorAll('.action-buttons > *:not(.prompt--container), .prompt--container > *:not(.btn--info)');
+      const promptIcons = actionsContainer.querySelectorAll('.prompt-icon');
+      const elementsToToggle = actionsContainer.querySelectorAll('.action-buttons > *:not(.prompt--container):not(.audio-container), .prompt--container > *:not(.btn--info)');
 
       if (infoText.style.display === 'none') {
         // Show info text and hide other elements
         infoText.style.display = 'block';
         elementsToToggle.forEach(el => el.style.display = 'none');
+        promptIcons.forEach(icon => {
+          icon.classList.add('no-bg');
+          icon.style.minHeight = '0px';
+          icon.querySelector('svg').classList.add('hidden');
+        });
         button.textContent = 'x';
       } else {
         // Hide info text and show other elements
         infoText.style.display = 'none';
         elementsToToggle.forEach(el => el.style.display = '');
+        promptIcons.forEach(icon => {
+          icon.classList.remove('no-bg');
+          icon.style.minHeight = ''; // This will revert to the CSS default
+          icon.querySelector('svg').classList.remove('hidden');
+        });
         button.textContent = 'i';
       }
     }
