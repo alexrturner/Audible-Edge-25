@@ -62,19 +62,19 @@ function handleScroll(column) {
   }
 
   // noise floor by distance
-  if (isNoiseEnabled) {
-    const scrollDistance = Math.abs(column.scrollTop);
-    const maxScroll = column.scrollHeight - column.clientHeight;
-    const noiseIntensity = Math.min(scrollDistance / maxScroll, 1); // cap it at 1
-    img.style.filter = `grayscale(${noiseIntensity}) contrast(${
-      1 + noiseIntensity
-    })`;
-  } else {
-    img.style.filter = "none";
-  }
+  // if (isNoiseEnabled) {
+  //   const scrollDistance = Math.abs(column.scrollTop);
+  //   const maxScroll = column.scrollHeight - column.clientHeight;
+  //   const noiseIntensity = Math.min(scrollDistance / maxScroll, 1); // cap it at 1
+  //   img.style.filter = `grayscale(${noiseIntensity}) contrast(${
+  //     1 + noiseIntensity
+  //   })`;
+  // } else {
+  //   img.style.filter = "none";
+  // }
 }
 
-// on/off burrow
+// on/off layering
 document.getElementById("scrollMode").addEventListener("click", () => {
   document.querySelectorAll(".column").forEach((column) => {
     const img = column.querySelector(".img");
@@ -105,21 +105,20 @@ document.getElementById("scrollMode").addEventListener("click", () => {
 
   scrollTimeouts.clear();
   document.getElementById("scrollMode").textContent = isParallaxScroll
-    ? "burrow scroll"
-    : "parallax scroll";
+    ? "roaming"
+    : "parallax";
 });
 
 // on/off noise
-document.getElementById("noiseMode").addEventListener("click", () => {
-  isNoiseEnabled = !isNoiseEnabled;
-  document.querySelectorAll(".column .img").forEach((img) => {
-    img.style.filter = "none";
-  });
-  //change text
-  document.getElementById("noiseMode").textContent = isNoiseEnabled
-    ? "++ noise"
-    : "no noise";
-});
+// document.getElementById("noiseMode").addEventListener("click", () => {
+//   isNoiseEnabled = !isNoiseEnabled;
+//   document.querySelectorAll(".column .img").forEach((img) => {
+//     img.style.filter = "none";
+//   });
+//   document.getElementById("noiseMode").textContent = isNoiseEnabled
+//     ? "with noise"
+//     : "no noise";
+// });
 
 document.addEventListener("DOMContentLoaded", function () {
   const columns = document.querySelectorAll(".column");
@@ -233,21 +232,52 @@ document.querySelectorAll(".prompt--next").forEach((button) => {
   button.addEventListener("click", nextPrompt);
 });
 
-// burrowing
+function getTimeOfDay() {
+  const now = new Date();
+  const hour = now.getHours();
+  if (hour < 6) return "night";
+  if (hour < 12) return "day";
+  if (hour < 18) return "dusk";
+  return "dawn";
+}
+
 function changeMode(button) {
   const modeElement = document.querySelector(".mode");
   if (modeElement.textContent === "high contrast") {
-    modeElement.textContent = "onion skin";
+    modeElement.textContent = "burrowing";
+    document.getElementById("timeOfDay").style.display = "block";
+
+    const timeOfDay = getTimeOfDay();
+    document.body.classList.toggle(timeOfDay + "-background");
+    document.body.classList.toggle(timeOfDay + "-foreground");
+    document.body.classList.toggle("mode-high-contrast");
   } else {
     modeElement.textContent = "high contrast";
+    document.getElementById("timeOfDay").style.display = "none";
+    // remove all body classes
+    document.body.className = "";
+    document.body.classList.toggle("mode-high-contrast");
   }
+  // show time of day selector
 
   const icons = document.querySelectorAll(".img svg");
   icons.forEach((icon) => {
     icon.style.display = icon.style.display === "block" ? "none" : "block";
   });
-  document.body.classList.toggle("burrowing");
 }
+
+document.getElementById("timeOfDay").addEventListener("change", function () {
+  // rm old classes, then add time-based classes
+  const classes = document.body.classList;
+  const classArray = Array.from(classes);
+  classArray.forEach((className) => {
+    if (className !== "burrowing") {
+      classes.remove(className);
+    }
+  });
+  classes.add(this.value + "-background");
+  classes.add(this.value + "-foreground");
+});
 
 // init first prompt
 updatePromptDisplay();

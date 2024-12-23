@@ -11,7 +11,7 @@
                     $promptText = str_replace('"', '&quot;', $promptText);
 
                     ?>
-                    <div class="prompt-icon" data-icon="<?= $prompt->filename() ?>" data-prompt='<?= $promptText ?>' style="display: none;">
+                    <div class="prompt-icon lighten" data-icon="<?= $prompt->filename() ?>" data-prompt='<?= $promptText ?>' style="display: none;">
                         <?= svg($prompt) ?>
 
                     </div>
@@ -20,9 +20,9 @@
         </div>
 
         <div class="prompt--container">
-            <button id="prompt--info-<?= $device ?>" class="btn--info"
+            <button id="prompt--info-<?= $device ?>" class="btn--info lighten"
                 onclick="toggleInfo(this)">i</button>
-            <button class="prompt--input" id="prompt--input-<?= $device ?>" onclick="userUpload()">
+            <button class="prompt--input lighten" id="prompt--input-<?= $device ?>" onclick="userUpload()">
                 <!-- Prompt Me -->
             </button>
         </div>
@@ -48,7 +48,7 @@
                         id="fileInput-<?= $device ?>"
                         style="display: none;"
                         onchange="handleFileSelect(this)">
-                    <button class="prompt--upload" id="prompt--upload-<?= $device ?>" type="button" onclick="document.getElementById('fileInput-<?= $device ?>').click()">
+                    <button class="prompt--upload lighten" id="prompt--upload-<?= $device ?>" type="button" onclick="document.getElementById('fileInput-<?= $device ?>').click()">
                         Upload
                     </button>
                 </label>
@@ -84,7 +84,7 @@
 
             </div>
         </form>
-        <button class="prompt--next" id="prompt--next-<?= $device ?>">Next Prompt</button>
+        <button class="prompt--next lighten" id="prompt--next-<?= $device ?>">Next Prompt</button>
     </div>
     <div class="prompt--info-text" style="display: none;">
 
