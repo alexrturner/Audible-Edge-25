@@ -1,3 +1,8 @@
+<?php
+
+$activeVisitors = countActiveVisitors();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,11 +20,6 @@
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
   <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 
-  <?= js([
-    // 'assets/js/script.js'
-  ]) ?>
-  <!-- <link rel="stylesheet" href="assets/css/style.css" /> -->
-  <!-- <script src="assets/js/script.js" defer></script> -->
 
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -155,7 +155,7 @@
       <div class="row desktop settings ancillary">
         <?php snippet('audio-mix') ?>
         <div>
-          <span class="lighten">you are sharing this website with</span><span id="sharing" class="gap">2</span><span class="lighten">other people,</span>
+          <span class="lighten">you are sharing this website with</span><span id="sharing" class="gap"><?= $activeVisitors ?></span><span class="lighten">other people,</span>
         </div>
 
         <div>
@@ -328,6 +328,24 @@
         }
       });
     });
+
+    // fetch active visitor count
+    async function fetchVisitorCount() {
+      try {
+        const response = await fetch('<?= url('assets/visitor.json') ?>');
+        const data = await response.json();
+        const currentVisitors = data.currentVisitors - 1;
+        document.getElementById('sharing').textContent = currentVisitors;
+
+        console.log(data);
+      } catch (error) {
+        console.error('Error fetching visitor count:', error);
+      }
+    }
+
+    // 30s fetch
+    setInterval(fetchVisitorCount, 30000);
+    fetchVisitorCount();
   </script>
   <!-- <div>icons are living</div> -->
   <?= js('assets/js/templates/home.js') ?>
