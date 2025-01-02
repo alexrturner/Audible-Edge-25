@@ -241,7 +241,6 @@ section.column {
   backdrop-filter: brightness(1.1);
 }
 
-/* Add these new utility classes */
 .dusk-background .lighten {
   background-color: color-mix(
     in srgb,
@@ -714,19 +713,24 @@ svg {
 }
 
 .plyr--audio .plyr__controls {
-  background: transparent;
+  background: transparent !important;
   padding: 20px 0;
+  color: unset !important;
+}
+
+/* handle high contrast / burrowing modes */
+.mode-high-contrast .plyr--audio .plyr__progress__buffer,
+.mode-high-contrast .plyr--audio .plyr__volume--display {
   color: var(--cc-body);
 }
 
-.plyr--audio .plyr__progress__buffer,
-.plyr--audio .plyr__volume--display {
+.mode-high-contrast .plyr--audio .plyr__progress input[type="range"],
+.mode-high-contrast .plyr--audio .plyr__volume input[type="range"] {
   color: var(--cc-body);
 }
-
 .plyr--audio .plyr__progress input[type="range"],
 .plyr--audio .plyr__volume input[type="range"] {
-  color: var(--cc-body);
+  color: unset;
 }
 
 .plyr__tooltip {

@@ -82,9 +82,7 @@ $activeVisitors = countActiveVisitors();
     </section>
     <section class="audio">
 
-
       <?php snippet('home-form', ['device' => 'mobile']) ?>
-
 
     </section>
   </div>
@@ -237,11 +235,11 @@ $activeVisitors = countActiveVisitors();
           <?= kirby()->page('supporters')->description()->kirbytext() ?>
         </div>
         <div class="logos">
-          <?=
+          <?php
           $logos = kirby()->page('supporters')->smalllogos()->toFiles();
           if ($logos->count() > 0): ?>
             <?php foreach ($logos as $logo): ?>
-              <img src="<?= $logo->url() ?>" alt="<?= $logo->filename() ?>" />
+              <img src="<?= $logo->url() ?>" alt="<?= $logo->alt()->escape() ?>">
             <?php endforeach ?>
           <?php endif ?>
         </div>

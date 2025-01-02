@@ -112,28 +112,28 @@ tabs:
       #   type: files
       #   template: ae_logo_combined
 
-      audio_intro:
-        type: files
-        label: Audio Introduction
-        template: audio_intro
-        multiple: true
-        help: Audio introduction to the festival.
+      # audio_intro:
+      #   type: files
+      #   label: Audio Introduction
+      #   template: audio_intro
+      #   multiple: true
+      #   help: Audio introduction to the festival.
 
-      audio_intro_text:
-        type: fields
-        fields:
-          audio_intro_text:
-            label: Audio Introduction Text
-            type: writer
-            help: Text to accompany the audio introduction.
+      # audio_intro_text:
+      #   type: fields
+      #   fields:
+      #     audio_intro_text:
+      #       label: Audio Introduction Text
+      #       type: writer
+      #       help: Text to accompany the audio introduction.
 
-      audio_intro_transcription:
-        type: fields
-        fields:
-          audio_intro_transcription:
-            label: Audio Introduction Transcription
-            type: writer
-            help: Displayed in Plain Text View.
+      # audio_intro_transcription:
+      #   type: fields
+      #   fields:
+      #     audio_intro_transcription:
+      #       label: Audio Introduction Transcription
+      #       type: writer
+      #       help: Displayed in Plain Text View.
 
       ae_mix:
         label: AE Mix
@@ -147,7 +147,7 @@ tabs:
         type: fields
         fields:
           prompt_info:
-            label: Prompt Info and Usage
+            label: Audio Upload Instructions
             type: writer
 
       # ae_prompts:

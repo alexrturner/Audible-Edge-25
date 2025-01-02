@@ -23,23 +23,20 @@ function countActiveVisitors()
     $totalVisitors++;
 
 
-    // remove visitors who have timed out
+    // rm visitors who have timed out
     foreach ($visitors as $visitorIP => $lastActive) {
         if ($lastActive + $timeout < time()) {
             unset($visitors[$visitorIP]);
         }
     }
 
-    // save updated visitors to JSON
+    // save to json & cache
     $jsonData = json_encode([
         'currentVisitors' => count($visitors),
         'totalVisitors' => $totalVisitors
     ], JSON_PRETTY_PRINT);
     file_put_contents($kirby->root('assets') . '/visitor.json', $jsonData);
 
-    // save updated visitors to cache
     $cache->set('visitors', $visitors, $timeout);
-
-    // return current visitor count
     return count($visitors);
 }
