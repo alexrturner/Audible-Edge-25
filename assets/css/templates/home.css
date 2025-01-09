@@ -3,11 +3,17 @@
   --fs-subtitle: 3rem;
   --fs-med: 1.5rem;
   --fs-body: 1rem;
-  --fs-sml: 0.75rem;
+  --fs-sml: 0.66rem;
   --fs-responsive: clamp(1.25rem, 2vw + 1rem, 2rem);
 
   --ff-inter: "Inter", sans-serif;
   --fw-inter: 400;
+
+  --ff-body: "neue-haas-grotesk-text", sans-serif;
+  --fw-body: 400;
+
+  --ff-header: "neue-haas-grotesk-display", sans-serif;
+  --fw-header: 500;
 
   --ff-fancy: "Playfair Display", serif;
   --ff-sans: "Helvetica Neue", sans-serif;
@@ -79,8 +85,8 @@ html {
   /* color: var(--cc-body); */
   font-optical-sizing: auto;
 
-  font-family: var(--ff-inter);
-  font-weight: var(--fw-inter);
+  font-family: var(--ff-body);
+  font-weight: var(--fw-body);
 }
 body {
   transition: background-color 1s ease, color 1s ease;
@@ -96,11 +102,11 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--ff-inter);
-  font-weight: var(--fw-inter);
+  font-family: var(--ff-header);
+  font-weight: var(--fw-header);
   margin: 0;
   padding: 0;
-  line-height: 1;
+  /* line-height: 1; */
 }
 /* p {
   font-size: var(--fs-med);
@@ -109,6 +115,10 @@ h1,
 h2,
 h3 {
   font-size: var(--fs-subtitle);
+}
+
+.row.subtitle.details.desktop {
+  line-height: 0.75;
 }
 .actions button,
 .actions .button,
@@ -161,9 +171,14 @@ button {
 
 .ancillary {
   font-size: var(--fs-med);
-  letter-spacing: -0.075em; /* reduce by 5% of fs */
+  letter-spacing: -0.025em; /* reduce by 25% of fs */
   font-weight: 300;
 }
+.small {
+  font-size: var(--fs-sml);
+  font-style: italic;
+}
+
 .settings p {
   margin: 1em 0;
   padding: 0;
@@ -192,9 +207,10 @@ span.lighten {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 5px;
-  height: 0.8em;
-  background-color: var(--cc-grey);
+  /* bottom: 0.2em; */
+  bottom: 0px;
+  height: 0.7em;
+  background-color: var(--cc-light);
   z-index: -1;
 }
 
@@ -202,16 +218,7 @@ span.lighten {
   height: 100%;
   font-size: var(--fs-title);
   background-color: var(--cc-light);
-
-  /* color: white; */
-  /* mix-blend-mode: difference; */
-  /* mix-blend-mode: multiply; */
-  /* mix-blend-mode: exclusion; */
-  /* mix-blend-mode: hue; */
   z-index: -1;
-}
-.opacity-75 {
-  opacity: 0.75;
 }
 
 /* data stream */
@@ -224,16 +231,29 @@ span.lighten {
 }
 
 section.column {
-  overflow: scroll;
+  /* overflow: scroll; */
+  scroll-behavior: smooth;
+  overflow: auto;
   scrollbar-color: transparent transparent;
   padding: 0.5em;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 50vh 50vh auto;
+  grid-template-rows: 50vh calc(50vh - 3em) auto;
 }
 
 .content {
   font-size: var(--fs-body);
+}
+.row a {
+  text-decoration: none;
+  /* background: var(--cc-blend-hue); */
+  /* color: var(--cc-body); */
+  color: unset;
+  transition: all 0.2s ease;
+}
+.row a:hover {
+  background: var(--cc-blend-saturation);
+  color: var(--cc-blend-colour);
 }
 .lighten {
   /* background-color: var(--cc-light); */
@@ -580,8 +600,7 @@ footer {
 }
 
 .legal p {
-  font-size: var(--fs-sml);
-  margin: 0;
+  /* margin: 0; */
 }
 
 .footer-link:hover {

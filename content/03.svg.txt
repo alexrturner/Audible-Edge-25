@@ -1,4 +1,4 @@
-Prompt: Go "BANG".
+Prompt: Make the sound that your body is feeling right now.
 
 ----
 

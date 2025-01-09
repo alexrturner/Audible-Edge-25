@@ -20,9 +20,9 @@
         </div>
 
         <div class="prompt--container">
-            <button id="prompt--info-<?= $device ?>" class="btn--info lighten"
+            <button id="prompt--info-<?= $device ?>" class="btn--info lighten" aria-label="Show information about Audio Upload"
                 onclick="toggleInfo(this)">i</button>
-            <button class="prompt--input lighten" id="prompt--input-<?= $device ?>" onclick="userUpload()">
+            <button class="prompt--input lighten" id="prompt--input-<?= $device ?>" onclick="userUpload()" aria-label="Next audio prompt">
                 <!-- Prompt Me -->
             </button>
         </div>
@@ -48,11 +48,10 @@
                         id="fileInput-<?= $device ?>"
                         style="display: none;"
                         onchange="handleFileSelect(this)">
-                    <button class="prompt--upload lighten" id="prompt--upload-<?= $device ?>" type="button" onclick="document.getElementById('fileInput-<?= $device ?>').click()">
+                    <button class="prompt--upload lighten" id="prompt--upload-<?= $device ?>" type="button" onclick="document.getElementById('fileInput-<?= $device ?>').click()" aria-label="Browse for audio">
                         Upload
                     </button>
                 </label>
-                <!-- <div class="help">You can upload 1 file, no larger than 6 MB.</div> -->
 
                 <div class="file-info" style="display: none;">
                     <span class="filename ancillary"></span>
@@ -64,7 +63,8 @@
                     name="submit"
                     value="Submit"
                     class="button submit-button"
-                    style="display: none;">
+                    style="display: none;"
+                    aria-label="Submit audio">
 
                 <input type="hidden" name="current_prompt" class="current_prompt" id="current_prompt-<?= $device ?>" value="">
                 <input type="hidden" name="current_prompt_text" class="current_prompt_text" id="current_prompt_text-<?= $device ?>" value="">

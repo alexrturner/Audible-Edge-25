@@ -3,31 +3,8 @@
 $activeVisitors = countActiveVisitors();
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AE25 STD</title>
-
-  <?= css([
-    'assets/css/normalize.v8.0.1.css',
-    // 'assets/css/index.css',
-    '@auto',
-  ]) ?>
-
-  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-  <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-
-
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-    rel="stylesheet" />
-</head>
+<?php snippet('header') ?>
 
 <body class="mode-high-contrast">
   <div id="mobile">
@@ -40,7 +17,7 @@ $activeVisitors = countActiveVisitors();
             $logo = $logoFiles->first();
             ?>
             <?= $logo->read() ?>
-            <span class="year opacity-75">'25</span>
+            <span class="year">'25</span>
 
           </div>
         </div>
@@ -55,10 +32,10 @@ $activeVisitors = countActiveVisitors();
           <div class="subtitle">
             <h3>
               <span class="lighten">Audible Edge</span>
-              <span class="lighten">Festival of</span><br />
+              <span class="lighten">Festival of</span>
               <span class="lighten">Exploratory</span>
               <span class="lighten">Music</span>
-              <a href="#about"><button class="btn--info lighten">i</button></a>
+              <a href="#about"><button class="btn--info lighten" aria-label="Go to information about Audible Edge Festival">i</button></a>
             </h3>
           </div>
         </div>
@@ -90,7 +67,7 @@ $activeVisitors = countActiveVisitors();
   <div id="container" class="container">
     <section class="column a">
       <div class="row title desktop">
-        <div class="ae opacity-75 lighten">
+        <div class="ae lighten">
           <?php
           $logoFiles = $site->files()->template('ae_logo');
           $logo = $logoFiles->first();
@@ -107,20 +84,27 @@ $activeVisitors = countActiveVisitors();
           <span class="lighten">Exploratory</span>
           <span class="lighten">Music</span>
 
-          <button id="content--info" class="btn--info lighten">i</button>
+          <button id="content--info" class="btn--info lighten" aria-label="Go to information about Audible Edge Festival">i</button>
 
         </h3>
       </div>
 
       <div class="row">
 
-        <h2 id="btn-about" class="title lighten">About</h2>
+        <h2 id="about" class="title lighten"><a href="#about">About</a></h2>
 
-        <div class="info content lighten" id="about">
+        <div class="info content lighten">
           <?= kirby()->page('about')->description()->kirbytext() ?>
         </div>
         <ul class="reviews lighten">
-          <?= kirby()->page('about')->reviews()->kirbytext() ?>
+          <?php
+          $reviews = kirby()->page('about')->reviews()->toStructure();
+          foreach ($reviews as $review): ?>
+            <li>
+              <p><?= $review->review() ?></p>
+              <p class="small"><?= $review->reviewer() ?></p>
+            </li>
+          <?php endforeach ?>
         </ul>
       </div>
 
@@ -130,7 +114,7 @@ $activeVisitors = countActiveVisitors();
     </section>
 
     <section class="column b">
-      <div class="row when details flex-end desktop">
+      <div class="row when subtitle details flex-end desktop">
         <h3><span class="lighten">Happening</span><br /><span class="lighten">April 3–6</span></h3>
 
 
@@ -139,9 +123,13 @@ $activeVisitors = countActiveVisitors();
 
       </div>
       <div class="row">
-        <h2 id="btn-accessibility" class="title lighten">Accessibility</h2>
-        <div class="content lighten" id="accessibility">
+        <h2 id="accessibility" class="title lighten"><a href="#accessibility">Accessibility</a></h2>
+        <div class="content lighten">
           <?= kirby()->page('accessibility')->description()->kirbytext() ?>
+        </div>
+        <h2 id="contact" class="title lighten"><a href="#contact">Contact</a></h2>
+        <div class="content lighten">
+
         </div>
       </div>
       <div class="img" id="icon-saturation">
@@ -161,7 +149,7 @@ $activeVisitors = countActiveVisitors();
           <span class="time gap">
             <span class="hour"></span>:<span class="minute"></span>
           </span>
-          <span class="lighten">in boorloo,</span>
+          <span class="lighten">in Boorloo,</span>
         </div>
 
         <div>
@@ -229,9 +217,9 @@ $activeVisitors = countActiveVisitors();
 
       <div class="row">
 
-        <h2 id="btn-acknowledgements" class="title lighten">Acknowledgements</h2>
+        <h2 id="acknowledgements" class="title lighten"><a href="#acknowledgements">Acknowledgements</a></h2>
 
-        <div class="content lighten" id="acknowledgements">
+        <div class="content lighten">
           <?= kirby()->page('supporters')->description()->kirbytext() ?>
         </div>
         <div class="logos">
@@ -243,15 +231,16 @@ $activeVisitors = countActiveVisitors();
             <?php endforeach ?>
           <?php endif ?>
         </div>
+        <footer class="lighten">
+
+          <div class="legal">
+            <p>Audible Edge 2025 brought to you by <a href="https://www.tonelist.com.au/">Tone List</a>.</p>
+
+            <p>Site by Oliva Rawlings and Alex Turner.</p>
+          </div>
+        </footer>
       </div>
-      <footer class="lighten">
 
-        <div class="legal">
-          <p>Audible Edge 2025 brought to you by <a href="https://www.tonelist.com.au/">Tone List</a>.</p>
-
-          <p>Site by Oliva Rawlings and Alex Turner.</p>
-        </div>
-      </footer>
     </section>
   </div>
   <script>
@@ -335,7 +324,7 @@ $activeVisitors = countActiveVisitors();
         const currentVisitors = data.currentVisitors - 1;
         document.getElementById('sharing').textContent = currentVisitors;
 
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         console.error('Error fetching visitor count:', error);
       }

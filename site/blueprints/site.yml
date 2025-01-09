@@ -45,6 +45,20 @@ tabs:
             label: Contact Email
             type: email
 
+          socials:
+            label: Socials
+            type: structure
+            fields:
+              name:
+                label: Name
+                type: text
+              email:
+                label: Email
+                type: email
+              link:
+                label: Link
+                type: url
+
           acknowledgement:
             label: Acknowledgement of Country
             type: writer
@@ -60,16 +74,6 @@ tabs:
           metaKeywords:
             label: Meta Keywords
             type: writer
-
-          dbSuccessMessage:
-            label: Database Connection Success Message
-            type: writer
-            width: 1/2
-
-          dbErrorMessage:
-            label: Database Connection Error Message
-            type: writer
-            width: 1/2
 
   media:
     label: files
@@ -101,6 +105,14 @@ tabs:
             label: Use as Prompt?
             type: toggle
         help: SVG file of Swamp Icons for the homepage. Add prompt text to use icon in prompt rotation.
+
+      ae_favicon:
+        label: AE Favicon
+        type: files
+        template: ae_favicon
+        multiple: false
+        max: 1
+        cover: true
 
       # ae_logo_menu:
       #   label: AE logos (menu version)

@@ -132,17 +132,17 @@ document.addEventListener("DOMContentLoaded", function () {
 document.getElementById("content--info").addEventListener("click", () => {
   const subtitles = [
     {
-      element: document.getElementById("btn-about"),
+      element: document.getElementById("about"),
       delay: 0, // immediate
       duration: 400, // fast scroll
     },
     {
-      element: document.getElementById("btn-accessibility"),
+      element: document.getElementById("accessibility"),
       delay: 100, // wait a bit
       duration: 400, // medium scroll
     },
     {
-      element: document.getElementById("btn-acknowledgements"),
+      element: document.getElementById("acknowledgements"),
       delay: 200, // wait longer
       duration: 400, // slow scroll
     },
