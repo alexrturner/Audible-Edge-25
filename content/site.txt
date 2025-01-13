@@ -14,6 +14,17 @@ Email: info@tonelist.com.au
 
 ----
 
+Socials:
+
+- 
+  text: Instagram
+  link: https://www.instagram.com
+- 
+  text: Newsletter
+  link: http://eepurl.com/iwklBs
+
+----
+
 Acknowledgement: <p>Tone List operates on Whadjuk Noongar boodja/country, and also hosts concerts on Mandjoogoordap Bindjareb, Ballardong and Minang boodja. We pay respects to Birdiya/Elders across time. We strive to listen to and be guided by place - boodja nih - in what we do.</p>
 
 ----
@@ -23,6 +34,10 @@ Metadescription: <p>Audible Edge Festival of Exploratory Music 2025. Presented b
 ----
 
 Metakeywords: <p>Audible Edge Festival Exploratory Music Sound Music Art Boorloo Perth</p>
+
+----
+
+Prompt-info: <p>Statement about sound usage on main site.</p><p>You may contribute by [instructions].</p>
 
 ----
 
@@ -39,10 +54,6 @@ Audio-intro-text: <p>Click for an audio introduction to this website.</p>
 ----
 
 Audio-intro-transcription: <p>Kaya! This is the website of exploratory music festival Audible Edge, which will happen in Boorloo and Walyalup between April 26th and 28th this year. This festival focusses on experimental, marginal and not-normal music. We like how being playful, silly and freaky opens us up to new and even challenging experiences. And we like trying to make experimental music accessible to all kinds of folks. We hope this website and design by Alex Turner and Oli Rawlings, reflects this attitude.</p><p>If you have access needs or questions, we can do our best to support these via the Accessibility page. You can also turn off the CSS with the Plain Text View button. By pressing the button, it will show the plain-text version of the site.</p><p>The full program is announced on March 13, with a launch party at Astral Weeks, a listening bar in Northbridge. There’ll be vinyl DJ sets by Sookie, and a live performance by improvising quartet Group Therapy. It’s free, so we’d love to see you there.</p><p>In the meantime, check out the program for our Night School, a series of workshops, discussions and talks happening between March 24 and April 21.</p><p>On this launch page you can click on each little ‘a’ and ‘e’ button to hear someone from the Audible Edge team saying ‘a’ or ‘e’. It is very silly and we hope you have lots of fun creating your own tiny AE sonic collage piece.</p>
-
-----
-
-Prompt-info: <p>Statement about sound usage on main site.</p><p>You may contribute by [instructions]. </p>
 
 ----
 
@@ -81,3 +92,13 @@ Audiointro:
 ----
 
 Lettersounds: 
+
+----
+
+Contact-list:
+
+- 
+  name: null
+  email: null
+  link: null
+  _id: 759e5416-8577-4c8e-aafa-598e7b89b0ff

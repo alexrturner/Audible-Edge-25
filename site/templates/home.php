@@ -9,21 +9,37 @@ $activeVisitors = countActiveVisitors();
 <body class="mode-high-contrast">
   <div id="mobile">
     <section class="mobile header">
-      <div class="row">
-        <div class="col">
-          <div class="ae relative lighten">
-            <?php
-            $logoFiles = $site->files()->template('ae_logo');
-            $logo = $logoFiles->first();
-            ?>
-            <?= $logo->read() ?>
-            <span class="year">'25</span>
+      <div class="row viewing">
+        <div class="space"></div>
+        <div class="settings ancillary">
+          <span class="grey">you are viewing this website in</span>
+          <span id="mode-desktop" class="gap mode">high contrast</span>
+          <span class="grey">mode</span>
 
-          </div>
+          <label class="switch">
+            <input
+              type="checkbox"
+              id="toggle-mode-mobile"
+              onclick="changeMode(this)" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+      </div>
+      <div class="row lighten">
+        <div class="title col flex-end">
+          <h1>Audible Edge</h1>
         </div>
         <div class="col">
-          <div class="when flex-end">
-            <h3><span>Happening</span><br /><span>April 3–6</span></h3>
+          <div class="when">
+            <div class="ae relative lighten">
+              <?php
+              $logoFiles = $site->files()->template('ae_logo');
+              $logo = $logoFiles->first();
+              ?>
+              <?= $logo->read() ?>
+              <span class="year">'25</span>
+            </div>
           </div>
         </div>
       </div>
@@ -31,31 +47,24 @@ $activeVisitors = countActiveVisitors();
         <div class="col">
           <div class="subtitle">
             <h3>
-              <span class="lighten">Audible Edge</span>
-              <span class="lighten">Festival of</span>
-              <span class="lighten">Exploratory</span>
-              <span class="lighten">Music</span>
-              <a href="#about"><button class="btn--info lighten" aria-label="Go to information about Audible Edge Festival">i</button></a>
+              <span class="lighten">Tone List Presents</span>
             </h3>
           </div>
         </div>
-        <div class="col flex-end">
-          <div class="settings ancillary">
-            <span class="grey">you are viewing this website in</span>
-            <span id="mode" class="gap mode">high contrast</span>
-            <span class="grey">mode</span>
-
-            <label class="switch">
-              <input
-                type="checkbox"
-                id="toggle_switch"
-                onclick="changeMode(this)" />
-              <span class="slider round"></span>
-            </label>
-          </div>
+        <div class="col flex">
+          <span class="lighten">a Festival of</span>
+          <span class="lighten">Exploratory Music</span>
+          <span class="lighten">Happening April 3–6</span>
+          <span class="lighten">in Boorloo and Walyalup</span>
         </div>
       </div>
+      <div class="mobile-swamp-container column">
 
+        <div class="img mobile-icon">
+          <?= svg('assets/img/Swamp Icons/Swampy Icons-01.svg') ?>
+        </div>
+
+      </div>
     </section>
     <section class="audio">
 
@@ -65,26 +74,18 @@ $activeVisitors = countActiveVisitors();
   </div>
 
   <div id="container" class="container">
+    <?php snippet('audio-mix') ?>
     <section class="column a">
-      <div class="row title desktop">
-        <div class="ae lighten">
-          <?php
-          $logoFiles = $site->files()->template('ae_logo');
-          $logo = $logoFiles->first();
-          ?>
-          <?= $logo->read() ?>
-        </div>
-        <span class="year lighten">'25</span>
+      <div class="row title subtitle details flex-end desktop lighten">
+        <h1>Audible</h1>
       </div>
 
       <div class="row subtitle details desktop">
         <h3>
-          <span class="lighten">Audible Edge</span>
-          <span class="lighten">Festival of</span><br />
-          <span class="lighten">Exploratory</span>
-          <span class="lighten">Music</span>
+          <span class="lighten">Tone List Presents</span>
 
-          <button id="content--info" class="btn--info lighten" aria-label="Go to information about Audible Edge Festival">i</button>
+
+          <!-- <button id="content--info" class="btn--info lighten" aria-label="Go to information about Audible Edge Festival">i</button> -->
 
         </h3>
       </div>
@@ -114,13 +115,26 @@ $activeVisitors = countActiveVisitors();
     </section>
 
     <section class="column b">
-      <div class="row when subtitle details flex-end desktop">
-        <h3><span class="lighten">Happening</span><br /><span class="lighten">April 3–6</span></h3>
-
-
+      <div class="row title desktop">
+        <div class="ae lighten">
+          <?php
+          $logoFiles = $site->files()->template('ae_logo');
+          $logo = $logoFiles->first();
+          ?>
+          <?= $logo->read() ?>
+        </div>
+        <h1>Edge</h1>
+        <span class="year lighten">'25</span>
       </div>
-      <div class="row space desktop">
 
+      <!-- <div class="row space desktop"> -->
+      <div class="row subtitle details desktop">
+        <h3>
+          <span class="lighten">A Festival of </span>
+          <span class="lighten">Exploratory Music</span>
+          <span class="lighten">Happening April 3–6</span>
+          <span class="lighten">in Boorloo and Walyalup</span>
+        </h3>
       </div>
       <div class="row">
         <h2 id="accessibility" class="title lighten"><a href="#accessibility">Accessibility</a></h2>
@@ -128,9 +142,14 @@ $activeVisitors = countActiveVisitors();
           <?= kirby()->page('accessibility')->description()->kirbytext() ?>
         </div>
         <h2 id="contact" class="title lighten"><a href="#contact">Contact</a></h2>
-        <div class="content lighten">
+        <ul class="reviews lighten">
 
-        </div>
+          <?php
+          $socials = $site->socials()->toStructure();
+          foreach ($socials as $social): ?>
+            <li><a href="<?= $social->link() ?>"><?= $social->text() ?></a></li>
+          <?php endforeach ?>
+        </ul>
       </div>
       <div class="img" id="icon-saturation">
         <?= svg('assets/img/Swamp Icons/Swampy Icons-02.svg') ?>
@@ -139,10 +158,12 @@ $activeVisitors = countActiveVisitors();
 
     <section class="column c">
       <div class="row desktop settings ancillary">
-        <?php snippet('audio-mix') ?>
+
         <div>
           <span class="lighten">you are sharing this website with</span><span id="sharing" class="gap"><?= $activeVisitors ?></span><span class="lighten">other people,</span>
         </div>
+
+
 
         <div>
           <span class="lighten">it is currently</span>
@@ -153,59 +174,26 @@ $activeVisitors = countActiveVisitors();
         </div>
 
         <div>
-          <span class="lighten">and you are viewing this website in</span><span id="mode" class="mode gap">high contrast</span><span class="lighten">mode</span>
+          <span class="lighten">and you are viewing this website in</span><span id="mode-mobile" class="mode gap">high contrast</span><span class="lighten">mode</span>
 
           <label class="switch">
             <input
               type="checkbox"
-              id="toggle_switch"
+              id="toggle-mode-desktop"
               onclick="changeMode(this)" />
             <span class="slider round"></span>
           </label>
+
+          <button id="toggle-mix" class="btn--play switch" aria-label="Play/Stop the audio mix">
+            <span class="play-icon">&#9658;</span>
+
+          </button>
         </div>
 
-        <button id="toggleTemp" class="btn--temp" style="padding: 0.5em;  background-color: yellow;">temp settings</button>
-        <script>
-          document.getElementById('toggleTemp').addEventListener('click', function() {
-            const tempContainer = document.querySelector('.temporary');
-            tempContainer.style.display = tempContainer.style.display === 'none' ? 'block' : 'none';
-          });
-        </script>
 
-        <div
-          class="temporary"
-          style="position: relative; background-color: yellow; display: none;">
-          <p>These are to demo potential interactions & behaviours. They will not be visible on the live site.</p>
-          <br>
 
-          <div
-            class="control"
-            style="display: flex; flex-direction: row; flex-wrap: wrap">
+        <!-- settings -->
 
-            <span>weight for icon movement (effect more noticable in parallax scroll mode): <input
-                id="transformWeight"
-                type="range"
-                min="1"
-                max="10"
-                value="5"
-                step="1" /></span>
-
-          </div>
-          <span>current scroll mode (affects icon position): </span><button id="scrollMode">roaming</button><br />
-          <!-- <span>current svg filter (affected by scroll): </span><button id="noiseMode">no noise</button><br /> -->
-          <span>emulate change of time (affects colour): </span>
-          <div class="time-of-day">
-
-            <select id="timeOfDay" style="display: none;">
-              <option value="currentTime">current time</option>
-              <option value="dawn">dawn</option>
-              <option value="day">day</option>
-              <option value="dusk">dusk</option>
-              <option value="night">night</option>
-            </select>
-          </div>
-
-        </div>
       </div>
       <div class="row audio">
         <?php snippet('home-form', ['device' => 'desktop']) ?>
@@ -231,14 +219,7 @@ $activeVisitors = countActiveVisitors();
             <?php endforeach ?>
           <?php endif ?>
         </div>
-        <footer class="lighten">
 
-          <div class="legal">
-            <p>Audible Edge 2025 brought to you by <a href="https://www.tonelist.com.au/">Tone List</a>.</p>
-
-            <p>Site by Oliva Rawlings and Alex Turner.</p>
-          </div>
-        </footer>
       </div>
 
     </section>
@@ -298,6 +279,10 @@ $activeVisitors = countActiveVisitors();
 
     // mix player
     document.addEventListener('DOMContentLoaded', function() {
+
+      const playButton = document.getElementById('toggle-mix');
+      const mixContainer = document.querySelector('.audible-edge-mix');
+
       const player = new Plyr('#player', {
         controls: [
           'play',
@@ -314,6 +299,30 @@ $activeVisitors = countActiveVisitors();
           global: true
         }
       });
+
+
+
+      playButton.addEventListener('click', function() {
+        const isPlaying = mixContainer.classList.contains('active');
+
+        if (isPlaying) {
+          // Stop and hide
+          player.pause();
+          mixContainer.classList.remove('active');
+          playButton.innerHTML = '&#9658;'; // Play icon
+        } else {
+          // Show and play
+          mixContainer.classList.add('active');
+          player.play();
+          playButton.innerHTML = '&#9632;'; // Stop icon
+        }
+      });
+
+      // Optional: Stop playback when audio ends
+      player.on('ended', function() {
+        mixContainer.classList.remove('active');
+        playButton.innerHTML = '&#9658;';
+      });
     });
 
     // fetch active visitor count
@@ -328,10 +337,11 @@ $activeVisitors = countActiveVisitors();
       } catch (error) {
         console.error('Error fetching visitor count:', error);
       }
+
     }
 
     // 30s fetch
-    setInterval(fetchVisitorCount, 30000);
+    // setInterval(fetchVisitorCount, 30000);
     fetchVisitorCount();
   </script>
   <!-- <div>icons are living</div> -->

@@ -38,6 +38,7 @@ function handleScroll(column) {
   const transformWeight = document.getElementById("transformWeight").value;
   const maxOffset = 1600;
 
+  console.log(column);
   const img = column.querySelector(".img");
   if (!img) return;
 
@@ -60,18 +61,6 @@ function handleScroll(column) {
     }, 30);
     scrollTimeouts.set(column, timeout);
   }
-
-  // noise floor by distance
-  // if (isNoiseEnabled) {
-  //   const scrollDistance = Math.abs(column.scrollTop);
-  //   const maxScroll = column.scrollHeight - column.clientHeight;
-  //   const noiseIntensity = Math.min(scrollDistance / maxScroll, 1); // cap it at 1
-  //   img.style.filter = `grayscale(${noiseIntensity}) contrast(${
-  //     1 + noiseIntensity
-  //   })`;
-  // } else {
-  //   img.style.filter = "none";
-  // }
 }
 
 // on/off layering
@@ -109,64 +98,44 @@ document.getElementById("scrollMode").addEventListener("click", () => {
     : "parallax";
 });
 
-// on/off noise
-// document.getElementById("noiseMode").addEventListener("click", () => {
-//   isNoiseEnabled = !isNoiseEnabled;
-//   document.querySelectorAll(".column .img").forEach((img) => {
-//     img.style.filter = "none";
-//   });
-//   document.getElementById("noiseMode").textContent = isNoiseEnabled
-//     ? "with noise"
-//     : "no noise";
-// });
+function checkMobile() {
+  if (window.innerWidth <= 768) {
+    document.body.classList.add("mobile");
+  } else {
+    document.body.classList.remove("mobile");
+  }
+}
 
+// Add event listeners for document load and window resize
+document.addEventListener("DOMContentLoaded", checkMobile);
+window.addEventListener("resize", checkMobile);
+
+// desktop scroll logic
 document.addEventListener("DOMContentLoaded", function () {
   const columns = document.querySelectorAll(".column");
   columns.forEach((column) => {
     column.addEventListener("scroll", () => handleScroll(column));
   });
+
+  // mobile scroll logic
+  // check mobile
+  checkMobile();
+  if (document.body.classList.contains("mobile")) {
+    const mobileIcon = document.querySelector(".mobile-icon");
+
+    if (mobileIcon) {
+      window.addEventListener("scroll", () => {
+        const scrollTop = window.scrollY;
+        const transformWeight = 20;
+        const scrollTopWeighted = scrollTop / transformWeight;
+
+        mobileIcon.style.transform = `translateY(${scrollTopWeighted}px) translateX(${scrollTopWeighted}px)`;
+      });
+    }
+  }
 });
 
 // scroll content into view
-
-document.getElementById("content--info").addEventListener("click", () => {
-  const subtitles = [
-    {
-      element: document.getElementById("about"),
-      delay: 0, // immediate
-      duration: 400, // fast scroll
-    },
-    {
-      element: document.getElementById("accessibility"),
-      delay: 100, // wait a bit
-      duration: 400, // medium scroll
-    },
-    {
-      element: document.getElementById("acknowledgements"),
-      delay: 200, // wait longer
-      duration: 400, // slow scroll
-    },
-  ];
-
-  subtitles.forEach(({ element, delay, duration }) => {
-    setTimeout(() => {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start", // or center
-      });
-
-      setTimeout(() => {
-        element.style.transition = "background-color 0.3s";
-        element.style.backgroundColor = "yellow";
-
-        setTimeout(() => {
-          element.style.backgroundColor = "";
-        }, 400);
-      }, duration);
-    }, delay);
-  });
-});
-
 const prompts = Array.from(document.querySelectorAll(".prompt-icon"));
 let availablePrompts = [...prompts];
 let currentPromptIndex = 0;
@@ -242,9 +211,16 @@ function getTimeOfDay() {
 }
 
 function changeMode(button) {
-  const modeElement = document.querySelector(".mode");
-  if (modeElement.textContent === "high contrast") {
-    modeElement.textContent = "burrowing";
+  const modeElements = document.querySelectorAll(".mode");
+
+  // use first element to check current state
+  const currentMode = modeElements[0].textContent;
+
+  if (currentMode === "high contrast") {
+    modeElements.forEach((element) => {
+      element.textContent = "burrowing";
+    });
+
     document.getElementById("timeOfDay").style.display = "block";
 
     const timeOfDay = getTimeOfDay();
@@ -252,12 +228,22 @@ function changeMode(button) {
     document.body.classList.toggle(timeOfDay + "-foreground");
     document.body.classList.toggle("mode-high-contrast");
   } else {
-    modeElement.textContent = "high contrast";
+    modeElements.forEach((element) => {
+      element.textContent = "high contrast";
+    });
+
     document.getElementById("timeOfDay").style.display = "none";
-    // remove all body classes
     document.body.className = "";
     document.body.classList.toggle("mode-high-contrast");
   }
+
+  // sync checkbox states
+  const checkboxes = document.querySelectorAll(
+    'input[type="checkbox"][id^="toggle-mode-"]'
+  );
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = currentMode === "high contrast";
+  });
   // show time of day selector
 
   const icons = document.querySelectorAll(".img svg");

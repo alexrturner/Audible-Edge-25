@@ -49,12 +49,9 @@ tabs:
             label: Socials
             type: structure
             fields:
-              name:
-                label: Name
+              text:
+                label: Text
                 type: text
-              email:
-                label: Email
-                type: email
               link:
                 label: Link
                 type: url

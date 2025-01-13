@@ -6,7 +6,7 @@ Description: <p>Audible Edge is funded by the Western Australian government thro
 
 ----
 
-Smalllogos-partial: - file://amujghy9bDJ5tHL7
+Smalllogos-partial: 
 
 ----
 
@@ -20,8 +20,11 @@ Largelogos-partial:
 
 Smalllogos:
 
-- file://amujghy9bDJ5tHL7
-- file://oW7eFM6p44UjcWe2
+- file://l3Y5eXmesuBoCzI8
+- file://HbJIo2sB7Sd2qP73
+- file://XGNWKeD5e42UZrqC
+- file://qzWjyb8Cou0QeFAN
+- file://1axBFH1oSsQK6lDO
 
 ----
 
