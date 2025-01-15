@@ -64,39 +64,39 @@ function handleScroll(column) {
 }
 
 // on/off layering
-document.getElementById("scrollMode").addEventListener("click", () => {
-  document.querySelectorAll(".column").forEach((column) => {
-    const img = column.querySelector(".img");
-    if (!img) return;
+// document.getElementById("scrollMode").addEventListener("click", () => {
+//   document.querySelectorAll(".column").forEach((column) => {
+//     const img = column.querySelector(".img");
+//     if (!img) return;
 
-    // current scroll position
-    const transformWeight = document.getElementById("transformWeight").value;
-    const scrollTop = column.scrollTop / transformWeight;
-    const scrollTopWeighted = column.scrollTop / 80;
+//     // current scroll position
+//     const transformWeight = document.getElementById("transformWeight").value;
+//     const scrollTop = column.scrollTop / transformWeight;
+//     const scrollTopWeighted = column.scrollTop / 80;
 
-    // 1. enable transition
-    img.style.transition = "transform 1s ease-out";
+//     // 1. enable transition
+//     img.style.transition = "transform 1s ease-out";
 
-    // 2. toggle mode w delay
-    setTimeout(() => {
-      isParallaxScroll = !isParallaxScroll;
+//     // 2. toggle mode w delay
+//     setTimeout(() => {
+//       isParallaxScroll = !isParallaxScroll;
 
-      // Apply the transform based on new mode
-      img.style.transform = isParallaxScroll
-        ? `translateY(${scrollTop}px) skew(${scrollTopWeighted}deg)`
-        : "none";
+//       // Apply the transform based on new mode
+//       img.style.transform = isParallaxScroll
+//         ? `translateY(${scrollTop}px) skew(${scrollTopWeighted}deg)`
+//         : "none";
 
-      // 3. reset
-      img.style.filter = "none";
-      currentPositions.delete(img);
-    }, 50);
-  });
+//       // 3. reset
+//       img.style.filter = "none";
+//       currentPositions.delete(img);
+//     }, 50);
+//   });
 
-  scrollTimeouts.clear();
-  document.getElementById("scrollMode").textContent = isParallaxScroll
-    ? "roaming"
-    : "parallax";
-});
+//   scrollTimeouts.clear();
+//   document.getElementById("scrollMode").textContent = isParallaxScroll
+//     ? "roaming"
+//     : "parallax";
+// });
 
 function checkMobile() {
   if (window.innerWidth <= 768) {
@@ -221,7 +221,7 @@ function changeMode(button) {
       element.textContent = "burrowing";
     });
 
-    document.getElementById("timeOfDay").style.display = "block";
+    // document.getElementById("timeOfDay").style.display = "block";
 
     const timeOfDay = getTimeOfDay();
     document.body.classList.toggle(timeOfDay + "-background");
@@ -232,7 +232,7 @@ function changeMode(button) {
       element.textContent = "high contrast";
     });
 
-    document.getElementById("timeOfDay").style.display = "none";
+    // document.getElementById("timeOfDay").style.display = "none";
     document.body.className = "";
     document.body.classList.toggle("mode-high-contrast");
   }
@@ -252,18 +252,18 @@ function changeMode(button) {
   });
 }
 
-document.getElementById("timeOfDay").addEventListener("change", function () {
-  // rm old classes, then add time-based classes
-  const classes = document.body.classList;
-  const classArray = Array.from(classes);
-  classArray.forEach((className) => {
-    if (className !== "burrowing") {
-      classes.remove(className);
-    }
-  });
-  classes.add(this.value + "-background");
-  classes.add(this.value + "-foreground");
-});
+// document.getElementById("timeOfDay").addEventListener("change", function () {
+//   // rm old classes, then add time-based classes
+//   const classes = document.body.classList;
+//   const classArray = Array.from(classes);
+//   classArray.forEach((className) => {
+//     if (className !== "burrowing") {
+//       classes.remove(className);
+//     }
+//   });
+//   classes.add(this.value + "-background");
+//   classes.add(this.value + "-foreground");
+// });
 
 // init first prompt
 updatePromptDisplay();

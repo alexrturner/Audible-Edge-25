@@ -77,7 +77,9 @@ $activeVisitors = countActiveVisitors();
     <?php snippet('audio-mix') ?>
     <section class="column a">
       <div class="row title subtitle details flex-end desktop lighten">
-        <h1>Audible</h1>
+        <h1>
+          <?= svg('assets/img/logo-audible.svg') ?>
+        </h1>
       </div>
 
       <div class="row subtitle details desktop">
@@ -123,7 +125,9 @@ $activeVisitors = countActiveVisitors();
           ?>
           <?= $logo->read() ?>
         </div>
-        <h1>Edge</h1>
+        <h1>
+          <?= svg('assets/img/logo-edge.svg') ?>
+        </h1>
         <span class="year lighten">'25</span>
       </div>
 
