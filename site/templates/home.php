@@ -77,9 +77,9 @@ $activeVisitors = countActiveVisitors();
     <?php snippet('audio-mix') ?>
     <section class="column a">
       <div class="row title subtitle details flex-end desktop lighten">
-        <h1>
+        <div class="logo-container">
           <?= svg('assets/img/logo-audible.svg') ?>
-        </h1>
+        </div>
       </div>
 
       <div class="row subtitle details desktop">
@@ -125,9 +125,9 @@ $activeVisitors = countActiveVisitors();
           ?>
           <?= $logo->read() ?>
         </div>
-        <h1>
+        <div class="logo-container">
           <?= svg('assets/img/logo-edge.svg') ?>
-        </h1>
+        </div>
         <span class="year lighten">'25</span>
       </div>
 
@@ -166,7 +166,9 @@ $activeVisitors = countActiveVisitors();
         <div>
           <span class="lighten">you are sharing this website with</span><span id="sharing" class="gap"><?= $activeVisitors ?></span><span class="lighten">other people,</span>
         </div>
-
+        <div class="img" id="icon-color">
+          <?= svg('assets/img/Swamp Icons/Swampy Icons-03.svg') ?>
+        </div>
 
 
         <div>
@@ -201,10 +203,6 @@ $activeVisitors = countActiveVisitors();
       </div>
       <div class="row audio">
         <?php snippet('home-form', ['device' => 'desktop']) ?>
-
-        <div class="img" id="icon-color">
-          <?= svg('assets/img/Swamp Icons/Swampy Icons-03.svg') ?>
-        </div>
       </div>
 
       <div class="row">
@@ -219,7 +217,10 @@ $activeVisitors = countActiveVisitors();
           $logos = kirby()->page('supporters')->smalllogos()->toFiles();
           if ($logos->count() > 0): ?>
             <?php foreach ($logos as $logo): ?>
-              <img src="<?= $logo->url() ?>" alt="<?= $logo->alt()->escape() ?>">
+              <div class="logo" role="img" aria-label="<?= $logo->alt() ?>">
+
+                <?= $logo->read() ?>
+              </div>
             <?php endforeach ?>
           <?php endif ?>
         </div>

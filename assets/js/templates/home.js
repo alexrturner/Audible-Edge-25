@@ -35,10 +35,12 @@ function getRandomPosition(maxOffset) {
 }
 
 function handleScroll(column) {
-  const transformWeight = document.getElementById("transformWeight").value;
+  // const defaultTransformWeight = 5;
+  // let transformWeight = document.getElementById("transformWeight").value;
+  // transformWeight = transformWeight || defaultTransformWeight;
+  const transformWeight = 5;
   const maxOffset = 1600;
 
-  console.log(column);
   const img = column.querySelector(".img");
   if (!img) return;
 
@@ -233,6 +235,7 @@ function changeMode(button) {
     });
 
     // document.getElementById("timeOfDay").style.display = "none";
+    // reset classes, then add high contrast
     document.body.className = "";
     document.body.classList.toggle("mode-high-contrast");
   }

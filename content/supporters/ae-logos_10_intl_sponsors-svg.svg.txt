@@ -1,8 +1,16 @@
-Sort: 8
+Caption: 
 
 ----
 
-Caption: 
+Alt: Logos for international sponsors: Goethe Institut, Audiofoundation, Regione Emilia-Romagna, Konstnärsnämnden The Swedish Arts Grants Committee
+
+----
+
+Link: 
+
+----
+
+Sort: 8
 
 ----
 

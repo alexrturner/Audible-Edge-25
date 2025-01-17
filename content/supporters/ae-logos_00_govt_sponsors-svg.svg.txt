@@ -1,8 +1,16 @@
-Sort: 8
+Caption: 
 
 ----
 
-Caption: 
+Alt: Logos for government sponsors: Department of Local Government, Sport and Cultural Industries, City of Melville, City of Perth
+
+----
+
+Link: 
+
+----
+
+Sort: 8
 
 ----
 

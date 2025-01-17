@@ -1,8 +1,16 @@
-Sort: 8
+Caption: 
 
 ----
 
-Caption: 
+Alt: Logos for partners: Goolugatup Heathcote, WA Museum Boola Bardip, City of Fremantle, STRUT Dance
+
+----
+
+Link: 
+
+----
+
+Sort: 8
 
 ----
 
