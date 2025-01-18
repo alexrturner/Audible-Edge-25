@@ -17,7 +17,7 @@
   ]) ?>
 
   <?= js([
-    // 'assets/js/script.js'
+    'assets/js/columnFocus.js'
   ]) ?>
 
   <link rel="shortcut icon" type="image/x-icon" href="<?= url('/assets/favicon.ico') ?>">

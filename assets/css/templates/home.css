@@ -19,7 +19,7 @@
   --cc-fill: #0091ff;
   --cc-burrowing-text: #eaeaea;
 
-  --cc-overlay: rgba(255, 255, 255, 0.1); /* 10% white overlay */
+  --cc-overlay: rgba(255, 255, 255, 0.1);
 
   /* blend */
   --cc-blend-hue: #5e5e5e;
@@ -82,6 +82,9 @@ html {
 
   font-family: var(--ff-body);
   font-weight: var(--fw-body);
+}
+html *:focus {
+  outline: 2px solid var(--cc-body);
 }
 
 body {
@@ -252,9 +255,10 @@ section.column {
   color: unset;
   transition: all 0.2s ease;
 }
-.row a:hover {
-  background: var(--cc-blend-saturation);
-  color: var(--cc-blend-colour);
+.row a:hover,
+.row a:focus {
+  background-color: yellow;
+  /* color: var(--cc-body); */
 }
 .lighten {
   /* background-color: var(--cc-light); */
@@ -420,7 +424,7 @@ button,
 button.btn--info:hover,
 button:hover,
 button:focus {
-  background-color: var(--cc-grey);
+  background-color: yellow;
 }
 
 .column {

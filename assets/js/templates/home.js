@@ -203,6 +203,7 @@ document.querySelectorAll(".prompt--next").forEach((button) => {
   button.addEventListener("click", nextPrompt);
 });
 
+// not the early morning transitions, full daylight, evening transitions, darkness
 function getTimeOfDay() {
   const now = new Date();
   const hour = now.getHours();
@@ -211,6 +212,8 @@ function getTimeOfDay() {
   if (hour < 18) return "dusk";
   return "dawn";
 }
+
+document.body.dataset.timeOfDay = getTimeOfDay();
 
 function changeMode(button) {
   const modeElements = document.querySelectorAll(".mode");
@@ -225,7 +228,7 @@ function changeMode(button) {
 
     // document.getElementById("timeOfDay").style.display = "block";
 
-    const timeOfDay = getTimeOfDay();
+    const timeOfDay = document.body.dataset.timeOfDay;
     document.body.classList.toggle(timeOfDay + "-background");
     document.body.classList.toggle(timeOfDay + "-foreground");
     document.body.classList.toggle("mode-high-contrast");
@@ -254,19 +257,6 @@ function changeMode(button) {
     icon.style.display = icon.style.display === "block" ? "none" : "block";
   });
 }
-
-// document.getElementById("timeOfDay").addEventListener("change", function () {
-//   // rm old classes, then add time-based classes
-//   const classes = document.body.classList;
-//   const classArray = Array.from(classes);
-//   classArray.forEach((className) => {
-//     if (className !== "burrowing") {
-//       classes.remove(className);
-//     }
-//   });
-//   classes.add(this.value + "-background");
-//   classes.add(this.value + "-foreground");
-// });
 
 // init first prompt
 updatePromptDisplay();
