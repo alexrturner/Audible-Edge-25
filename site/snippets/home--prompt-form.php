@@ -11,7 +11,7 @@
                     $promptText = str_replace('"', '&quot;', $promptText);
 
                     ?>
-                    <div class="prompt-icon lighten" data-icon="<?= $prompt->filename() ?>" data-prompt='<?= $promptText ?>' style="display: none;">
+                    <div class="prompt-icon lighten interact" data-icon="<?= $prompt->filename() ?>" data-prompt='<?= $promptText ?>' style="display: none;">
                         <?= svg($prompt) ?>
 
                     </div>
@@ -20,11 +20,13 @@
         </div>
 
         <div class="prompt--container">
-            <button id="prompt--info-<?= $device ?>" class="btn--info lighten" aria-label="Show information about Audio Upload"
+            <button id="prompt--info-<?= $device ?>" class="btn--info lighten interact" aria-label="Show information about Audio Upload"
                 onclick="toggleInfo(this)">i</button>
-            <button class="prompt--input lighten" id="prompt--input-<?= $device ?>" onclick="userUpload()" aria-label="Next audio prompt">
+
+
+            <div class="prompt--input lighten interact" id="prompt--input-<?= $device ?>">
                 <!-- Prompt Me -->
-            </button>
+            </div>
         </div>
     </div>
 
@@ -48,7 +50,7 @@
                         id="fileInput-<?= $device ?>"
                         style="display: none;"
                         onchange="handleFileSelect(this)">
-                    <button class="prompt--upload lighten" id="prompt--upload-<?= $device ?>" type="button" onclick="document.getElementById('fileInput-<?= $device ?>').click()" aria-label="Browse for audio">
+                    <button class="prompt--upload lighten interact" id="prompt--upload-<?= $device ?>" type="button" onclick="document.getElementById('fileInput-<?= $device ?>').click()" aria-label="Browse for audio">
                         Upload
                     </button>
                 </label>
@@ -84,7 +86,7 @@
 
             </div>
         </form>
-        <button class="prompt--next lighten" id="prompt--next-<?= $device ?>">Next Prompt</button>
+        <button class="prompt--next lighten interact" id="prompt--next-<?= $device ?>" aria-label="Get next audio prompt">Next Prompt</button>
     </div>
     <div class="prompt--info-text" style="display: none;">
 

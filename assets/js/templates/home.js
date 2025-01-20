@@ -17,8 +17,17 @@ function updateTime() {
   // schedule next update for start of next minute
   setTimeout(updateTime, msTillNextMinute);
 }
-
 updateTime();
+
+// not the early morning transitions, full daylight, evening transitions, darkness
+function getTimeOfDayLabel() {
+  const now = new Date();
+  const hour = now.getHours();
+  if (hour < 6) return "night";
+  if (hour < 12) return "day";
+  if (hour < 18) return "dusk";
+  return "dawn";
+}
 
 // scroll behaviours
 // default: burrow scroll, no noise floor
@@ -57,58 +66,36 @@ function handleScroll(column) {
     const timeout = setTimeout(() => {
       const newPos = getRandomPosition(maxOffset);
       currentPositions.set(img, newPos);
-      img.style.transition =
-        "transform 2s cubic-bezier(.19,1,.22,1), filter 3s ease-in-out";
+      // img.style.transition = "transform 2s cubic-bezier(.19,1,.22,1), filter 3s ease-in-out";
       img.style.transform = `translate(${newPos.x}px, ${newPos.y}px)`;
-    }, 30);
+    }, 1000);
     scrollTimeouts.set(column, timeout);
   }
 }
-
-// on/off layering
-// document.getElementById("scrollMode").addEventListener("click", () => {
-//   document.querySelectorAll(".column").forEach((column) => {
-//     const img = column.querySelector(".img");
-//     if (!img) return;
-
-//     // current scroll position
-//     const transformWeight = document.getElementById("transformWeight").value;
-//     const scrollTop = column.scrollTop / transformWeight;
-//     const scrollTopWeighted = column.scrollTop / 80;
-
-//     // 1. enable transition
-//     img.style.transition = "transform 1s ease-out";
-
-//     // 2. toggle mode w delay
-//     setTimeout(() => {
-//       isParallaxScroll = !isParallaxScroll;
-
-//       // Apply the transform based on new mode
-//       img.style.transform = isParallaxScroll
-//         ? `translateY(${scrollTop}px) skew(${scrollTopWeighted}deg)`
-//         : "none";
-
-//       // 3. reset
-//       img.style.filter = "none";
-//       currentPositions.delete(img);
-//     }, 50);
-//   });
-
-//   scrollTimeouts.clear();
-//   document.getElementById("scrollMode").textContent = isParallaxScroll
-//     ? "roaming"
-//     : "parallax";
-// });
-
 function checkMobile() {
+  const playButton = document.getElementById("toggle-mix");
+  const desktopContainer = document.querySelector(
+    ".row.desktop.settings.ancillary"
+  );
+  const mobileContainer = document.querySelector(
+    ".mobile.header .row.viewing .space"
+  );
+
   if (window.innerWidth <= 768) {
     document.body.classList.add("mobile");
+    // move play button to mobile container, if it exists
+    if (playButton && mobileContainer) {
+      mobileContainer.appendChild(playButton);
+    }
   } else {
     document.body.classList.remove("mobile");
+    if (playButton && desktopContainer) {
+      desktopContainer.appendChild(playButton);
+    }
   }
 }
 
-// Add event listeners for document load and window resize
+// check on load & resize window resize
 document.addEventListener("DOMContentLoaded", checkMobile);
 window.addEventListener("resize", checkMobile);
 
@@ -122,18 +109,26 @@ document.addEventListener("DOMContentLoaded", function () {
   // mobile scroll logic
   // check mobile
   checkMobile();
+
   if (document.body.classList.contains("mobile")) {
-    const mobileIcon = document.querySelector(".mobile-icon");
+    let isAnimating = false;
 
-    if (mobileIcon) {
-      window.addEventListener("scroll", () => {
-        const scrollTop = window.scrollY;
-        const transformWeight = 20;
-        const scrollTopWeighted = scrollTop / transformWeight;
+    window.addEventListener("scroll", () => {
+      if (!isAnimating) {
+        isAnimating = true;
 
-        mobileIcon.style.transform = `translateY(${scrollTopWeighted}px) translateX(${scrollTopWeighted}px)`;
-      });
-    }
+        const imgs = document.querySelectorAll(".img");
+        imgs.forEach((img) => {
+          const newPos = getRandomPosition(400);
+          img.style.transform = `translate(${newPos.x}px, ${newPos.y}px)`;
+        });
+
+        // wait before next call
+        setTimeout(() => {
+          isAnimating = false;
+        }, 500);
+      }
+    });
   }
 });
 
@@ -203,17 +198,22 @@ document.querySelectorAll(".prompt--next").forEach((button) => {
   button.addEventListener("click", nextPrompt);
 });
 
-// not the early morning transitions, full daylight, evening transitions, darkness
-function getTimeOfDay() {
-  const now = new Date();
-  const hour = now.getHours();
-  if (hour < 6) return "night";
-  if (hour < 12) return "day";
-  if (hour < 18) return "dusk";
-  return "dawn";
-}
+function setHighlightColors() {
+  const timeOfDay = getTimeOfDayLabel();
+  const root = document.documentElement;
 
-document.body.dataset.timeOfDay = getTimeOfDay();
+  // set highlight colors based on time of day
+  root.style.setProperty(
+    "--cc-highlight-background",
+    `var(--cc-${timeOfDay}-background)`
+  );
+  root.style.setProperty(
+    "--cc-highlight-foreground",
+    `var(--cc-${timeOfDay}-foreground)`
+  );
+}
+document.body.dataset.timeOfDay = getTimeOfDayLabel();
+setHighlightColors();
 
 function changeMode(button) {
   const modeElements = document.querySelectorAll(".mode");
@@ -226,8 +226,6 @@ function changeMode(button) {
       element.textContent = "burrowing";
     });
 
-    // document.getElementById("timeOfDay").style.display = "block";
-
     const timeOfDay = document.body.dataset.timeOfDay;
     document.body.classList.toggle(timeOfDay + "-background");
     document.body.classList.toggle(timeOfDay + "-foreground");
@@ -237,9 +235,9 @@ function changeMode(button) {
       element.textContent = "high contrast";
     });
 
-    // document.getElementById("timeOfDay").style.display = "none";
     // reset classes, then add high contrast
     document.body.className = "";
+    checkMobile();
     document.body.classList.toggle("mode-high-contrast");
   }
 
@@ -258,5 +256,18 @@ function changeMode(button) {
   });
 }
 
+// document.addEventListener("DOMContentLoaded", function () {
+//   const body = document.body;
+//   const timeOfDay = getTimeOfDayLabel();
+
+//   // Initialize in burrowing mode
+//   body.classList.add(`${timeOfDay}-background`);
+//   body.classList.add(`${timeOfDay}-foreground`);
+
+//   // Switch to high contrast mode after 2s
+//   setTimeout(() => {
+//     changeMode(document.querySelector("#toggle-mode-desktop"));
+//   }, 2000);
+// });
 // init first prompt
 updatePromptDisplay();

@@ -1,5 +1,4 @@
-<div class="audible-edge-mix">
-
+<div class="audible-edge-mix interact">
     <?php
     $mixFile = $site->files()->template('audio_ae_mix')->first();
     if ($mixFile): ?>
