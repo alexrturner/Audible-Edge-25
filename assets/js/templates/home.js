@@ -42,6 +42,7 @@ function getRandomPosition(maxOffset) {
     y: Math.random() * maxOffset - maxOffset / 2,
   };
 }
+const columnAnimationLocks = new Map();
 
 function handleScroll(column) {
   // const defaultTransformWeight = 5;
@@ -53,25 +54,37 @@ function handleScroll(column) {
   const img = column.querySelector(".img");
   if (!img) return;
 
-  // clear current timeout (for this column)
-  if (scrollTimeouts.has(column)) {
-    clearTimeout(scrollTimeouts.get(column));
-  }
-
   if (isParallaxScroll) {
     const scrollTop = column.scrollTop / transformWeight;
     const scrollTopWeighted = column.scrollTop / 80;
     img.style.transform = `translateY(${scrollTop}px) skew(${scrollTopWeighted}deg)`;
-  } else {
-    const timeout = setTimeout(() => {
-      const newPos = getRandomPosition(maxOffset);
-      currentPositions.set(img, newPos);
-      // img.style.transition = "transform 2s cubic-bezier(.19,1,.22,1), filter 3s ease-in-out";
-      img.style.transform = `translate(${newPos.x}px, ${newPos.y}px)`;
-    }, 1000);
-    scrollTimeouts.set(column, timeout);
+    return;
   }
+  // Check if this column is currently locked (animating)
+  if (columnAnimationLocks.get(column)) {
+    return;
+  }
+
+  // Clear any pending timeouts
+  if (scrollTimeouts.has(column)) {
+    clearTimeout(scrollTimeouts.get(column));
+  }
+
+  const newPos = getRandomPosition(maxOffset);
+  currentPositions.set(img, newPos);
+  img.style.transform = `translate(${newPos.x}px, ${newPos.y}px)`;
+
+  // Lock the column for animations
+  columnAnimationLocks.set(column, true);
+
+  // Set a timeout to unlock the column after animation completes
+  const unlockTimeout = setTimeout(() => {
+    columnAnimationLocks.set(column, false);
+  }, 1000); // 1 second lockout period
+
+  scrollTimeouts.set(column, unlockTimeout);
 }
+
 function checkMobile() {
   const playButton = document.getElementById("toggle-mix");
   const desktopContainer = document.querySelector(
@@ -252,22 +265,10 @@ function changeMode(button) {
 
   const icons = document.querySelectorAll(".img svg");
   icons.forEach((icon) => {
-    icon.style.display = icon.style.display === "block" ? "none" : "block";
+    // icon.style.display = icon.style.display === "block" ? "none" : "block";
+    icon.style.opacity = icon.style.opacity === "1" ? "0" : "1";
   });
 }
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   const body = document.body;
-//   const timeOfDay = getTimeOfDayLabel();
-
-//   // Initialize in burrowing mode
-//   body.classList.add(`${timeOfDay}-background`);
-//   body.classList.add(`${timeOfDay}-foreground`);
-
-//   // Switch to high contrast mode after 2s
-//   setTimeout(() => {
-//     changeMode(document.querySelector("#toggle-mode-desktop"));
-//   }, 2000);
-// });
 // init first prompt
 updatePromptDisplay();

@@ -1,0 +1,74 @@
+name: Deploy to remote
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Deployment environment"
+        type: choice
+        options:
+          - "STG"
+          - "PRD"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Determine env
+        run: |
+          echo "HOST=${{ vars[format('{0}_REMOTE_DEPLOY_HOST', github.event.inputs.environment)] }}" >> "$GITHUB_ENV"
+          echo "USERNAME=${{ vars[format('{0}_REMOTE_DEPLOY_USERNAME', github.event.inputs.environment)] }}" >> "$GITHUB_ENV"
+          echo "DEST_PARENT_FOLDER=${{ vars[format('{0}_REMOTE_DEPLOY_DEST_PARENT_FOLDER', github.event.inputs.environment)] }}" >> "$GITHUB_ENV"
+          echo "SSH_PRIVATE_KEY<<EOF" >> "$GITHUB_ENV"
+          echo "${{ secrets[format('{0}_REMOTE_DEPLOY_SSH_PRIVATE_KEY', github.event.inputs.environment)] }}" >> "$GITHUB_ENV"
+          echo "EOF" >> "$GITHUB_ENV"
+      - name: Clone or pull on remote
+        uses: appleboy/ssh-action@v0.1.6
+        env:
+          REPO_KEY: ${{ secrets.REMOTE_DEPLOY_REPO_KEY }} # SSH key used for cloning Github repo
+          REPO_SHORT_NAME: ${{ github.event.repository.name }} # e.g. 'kirbysite'
+          REPO_LONG_NAME: ${{ github.repository }} # e.g. 'coolchangecontemporary/kirbysite'
+          BRANCH: ${{ github.ref_name }} # branch this action was run from, e.g. 'main'
+        with:
+          host: ${{ env.HOST }}
+          username: ${{ env.USERNAME }}
+          key: ${{ env.SSH_PRIVATE_KEY }} # SSH key used to connect to the remote
+          port: 22
+          debug: true
+          envs: DEST_PARENT_FOLDER,REPO_KEY,REPO_SHORT_NAME,REPO_LONG_NAME,BRANCH
+          script: |-
+            set -e
+            # Setup SSH
+            echo -n "$REPO_KEY" > ~/.github_deploy_tmp_ssh_key
+            chmod 600 ~/.github_deploy_tmp_ssh_key
+            # Get git to use our Github private key when pulling
+            export GIT_SSH_COMMAND='ssh -i ~/.github_deploy_tmp_ssh_key -o IdentitiesOnly=yes'
+            # Make the destination directory if needed
+            mkdir -p "$DEST_PARENT_FOLDER"
+            cd "$DEST_PARENT_FOLDER"
+            apt install composer -y
+            # Repository hasn't yet been cloned, first time setup
+            if [ ! -d "$REPO_SHORT_NAME" ]; then 
+              # Create known_hosts if needed
+              touch ~/.ssh/known_hosts
+              # If there's no keys for github in known_hosts, fetch them using ssh-keyscan
+              # Otherwise SSH will complain about not knowing github's host keys
+              if [[ $(cat ~/.ssh/known_hosts | grep -c github.com) -eq "0" ]]; then
+                ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+              fi
+              git clone git@github.com:"$REPO_LONG_NAME".git
+              cd "$REPO_SHORT_NAME"
+            else
+              cd "$REPO_SHORT_NAME"
+              git fetch --all
+            fi
+            git checkout "$BRANCH"
+            git pull
+            composer install
+            chown -R $(whoami):www-data "$DEST_PARENT_FOLDER"
+            chmod 775 $(find "$DEST_PARENT_FOLDER" -type d)
+            chmod 664 $(find "$DEST_PARENT_FOLDER" -type f)
+            # Remove the SSH key now that deploy is done
+            rm ~/.github_deploy_tmp_ssh_key

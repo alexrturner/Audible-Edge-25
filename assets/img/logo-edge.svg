@@ -1,7 +1,7 @@
 <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 380" width="1080" height="380">
 	<title>Edge</title>
 	<style>
-		.cls-rect { fill: #d1d3d4 } 
+		.cls-rect { fill: #eaeaea90 }
 	</style>
 	<g>
 		<path class="s0" d="m0 114.6h187.9v29.4h-154.4v84.1h140.3v28.2h-140.3v93.4h158.9v30.9h-192.4c0 0 0-266 0-266z"/>

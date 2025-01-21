@@ -1,7 +1,7 @@
 <?php
 
 $activeVisitors = countActiveVisitors();
-
+$timeOfDay = getTimeOfDayBoorloo();
 ?>
 
 <?php snippet('header') ?>
@@ -171,7 +171,7 @@ $activeVisitors = countActiveVisitors();
       <div class="row desktop settings ancillary">
 
         <div>
-          <span class="lighten">you are sharing this website with</span><span id="sharing" class="gap"><?= $activeVisitors ?></span><span class="lighten">other people,</span>
+          <span class="lighten">you have shared this <span id="time-of-day" class="gap"><?= $timeOfDay ?></span> on this website with</span><span id="sharing" class="gap"><?= $activeVisitors ?></span><span class="lighten">other people,</span>
         </div>
         <div class="img" id="icon-color">
           <?= svg('assets/img/Swamp Icons/Swampy Icons-03.svg') ?>
@@ -343,26 +343,6 @@ $activeVisitors = countActiveVisitors();
       }
 
     });
-
-
-    // fetch active visitor count
-    async function fetchVisitorCount() {
-      try {
-        const response = await fetch('<?= url('assets/visitor.json') ?>');
-        const data = await response.json();
-        const currentVisitors = data.currentVisitors - 1;
-        document.getElementById('sharing').textContent = currentVisitors;
-
-        // console.log(data);
-      } catch (error) {
-        console.error('Error fetching visitor count:', error);
-      }
-
-    }
-
-    // 30s fetch
-    // setInterval(fetchVisitorCount, 30000);
-    fetchVisitorCount();
   </script>
   <!-- <div>icons are living</div> -->
   <?= js('assets/js/templates/home.js') ?>

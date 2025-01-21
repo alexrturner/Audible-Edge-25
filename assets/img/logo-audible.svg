@@ -1,7 +1,8 @@
 <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 380" width="1080" height="380">
-	<title>logo-audible</title>
+	<title>Audible</title>
 	<style>
-		.cls-rect { fill: #d1d3d4 } 
+		
+		.cls-rect { fill: #eaeaea90}
 	</style>
 	<g>
 		<path class="s0" d="m97.9 113.9h37.5l98.3 266h-36.5l-28.3-81.1h-106l-28.7 81.1h-34.2zm-25.3 157.8h87.1l-30.5-89.3c-5.2-14.9-11.9-37.6-11.9-37.6h-0.8c0 0-7.1 22.4-12.3 37.6z"/>

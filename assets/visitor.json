@@ -1,4 +1,10 @@
 {
     "currentVisitors": 1,
-    "totalVisitors": 1
+    "totalVisitors": 539,
+    "periods": {
+        "day": 0,
+        "dusk": 11,
+        "night": 0,
+        "dawn": 0
+    }
 }
