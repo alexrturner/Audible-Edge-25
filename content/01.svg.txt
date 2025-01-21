@@ -6,6 +6,10 @@ Is-prompt: true
 
 ----
 
+Position: left
+
+----
+
 Sort: 2
 
 ----

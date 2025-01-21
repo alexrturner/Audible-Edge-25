@@ -2,6 +2,9 @@
 
 $activeVisitors = countActiveVisitors();
 $timeOfDay = getTimeOfDayBoorloo();
+
+$swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
+
 ?>
 
 <?php snippet('header') ?>
@@ -118,7 +121,7 @@ $timeOfDay = getTimeOfDayBoorloo();
       </div>
 
       <div class="img" id="icon-hue">
-        <?= svg('assets/img/Swamp Icons/Swampy Icons-01.svg') ?>
+        <?= svg($swamps->filterBy('position', 'left')->first()) ?>
       </div>
     </section>
 
@@ -162,8 +165,10 @@ $timeOfDay = getTimeOfDayBoorloo();
           </ul>
         </div>
       </div>
-      <div class="img" id="icon-saturation">
-        <?= svg('assets/img/Swamp Icons/Swampy Icons-02.svg') ?>
+      <div class="img" id="icon-saturation" style="rotate: 20deg;">
+        <?=
+        svg($swamps->filterBy('position', 'middle')->first())
+        ?>
       </div>
     </section>
 
@@ -174,7 +179,9 @@ $timeOfDay = getTimeOfDayBoorloo();
           <span class="lighten">you have shared this <span id="time-of-day" class="gap"><?= $timeOfDay ?></span> on this website with</span><span id="sharing" class="gap"><?= $activeVisitors ?></span><span class="lighten">other people,</span>
         </div>
         <div class="img" id="icon-color">
-          <?= svg('assets/img/Swamp Icons/Swampy Icons-03.svg') ?>
+          <?=
+          svg($swamps->filterBy('position', 'right')->first())
+          ?>
         </div>
 
 

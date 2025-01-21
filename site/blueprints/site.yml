@@ -98,10 +98,17 @@ tabs:
           prompt:
             label: Prompt Text
             type: text
+            width: 1/2
           is_prompt:
             label: Use as Prompt?
             type: toggle
-        help: SVG file of Swamp Icons for the homepage. Add prompt text to use icon in prompt rotation.
+            width: 1/6
+          position:
+            label: Display
+            type: text
+            value: "{{ file.position }}"
+            width: 1/6
+        help: SVG file of Swamp Icons for the homepage. Add prompt text to use icon in prompt rotation. The 'Display' field indicates icons to be positioned within desktop columns.
 
       ae_favicon:
         label: AE Favicon
