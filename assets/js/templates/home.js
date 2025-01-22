@@ -45,44 +45,40 @@ function getRandomPosition(maxOffset) {
 const columnAnimationLocks = new Map();
 
 function handleScroll(column) {
-  // const defaultTransformWeight = 5;
-  // let transformWeight = document.getElementById("transformWeight").value;
-  // transformWeight = transformWeight || defaultTransformWeight;
-  const transformWeight = 5;
-  const maxOffset = 1600;
-
-  const img = column.querySelector(".img");
-  if (!img) return;
-
-  if (isParallaxScroll) {
-    const scrollTop = column.scrollTop / transformWeight;
-    const scrollTopWeighted = column.scrollTop / 80;
-    img.style.transform = `translateY(${scrollTop}px) skew(${scrollTopWeighted}deg)`;
-    return;
-  }
-  // Check if this column is currently locked (animating)
-  if (columnAnimationLocks.get(column)) {
-    return;
+  if (column.scrollRAF) {
+    cancelAnimationFrame(column.scrollRAF);
   }
 
-  // Clear any pending timeouts
-  if (scrollTimeouts.has(column)) {
-    clearTimeout(scrollTimeouts.get(column));
-  }
+  column.scrollRAF = requestAnimationFrame(() => {
+    const transformWeight = 5;
+    const maxOffset = 1600;
 
-  const newPos = getRandomPosition(maxOffset);
-  currentPositions.set(img, newPos);
-  img.style.transform = `translate(${newPos.x}px, ${newPos.y}px)`;
+    const img = column.querySelector(".img");
+    if (!img) return;
 
-  // Lock the column for animations
-  columnAnimationLocks.set(column, true);
+    // is this column is currently locked (animating)?
+    if (columnAnimationLocks.get(column)) {
+      return;
+    }
 
-  // Set a timeout to unlock the column after animation completes
-  const unlockTimeout = setTimeout(() => {
-    columnAnimationLocks.set(column, false);
-  }, 1000); // 1 second lockout period
+    // clear pending timeouts
+    if (scrollTimeouts.has(column)) {
+      clearTimeout(scrollTimeouts.get(column));
+    }
 
-  scrollTimeouts.set(column, unlockTimeout);
+    const newPos = getRandomPosition(maxOffset);
+    currentPositions.set(img, newPos);
+    img.style.transform = `translate(${newPos.x}px, ${newPos.y}px)`;
+
+    // lock column for animations
+    columnAnimationLocks.set(column, true);
+
+    const unlockTimeout = setTimeout(() => {
+      columnAnimationLocks.set(column, false);
+    }, 1000);
+
+    scrollTimeouts.set(column, unlockTimeout);
+  });
 }
 
 function checkMobile() {
@@ -165,20 +161,23 @@ const getPrompt = () => {
 
 const updatePromptDisplay = () => {
   const prompt = getPrompt();
+
+  // update prompt text
   document.querySelectorAll(".prompt--input").forEach((promptElement) => {
     promptElement.textContent = prompt.text;
   });
 
+  // update visible prompt icon
   document.querySelectorAll(".prompt-icon").forEach((icon) => {
     icon.style.display = icon.dataset.icon === prompt.icon ? "flex" : "none";
   });
 
-  // set hidden input value (zero-padded index)
-  const currentPromptTitle =
-    "p-" + currentPromptIndex.toString().padStart(2, "0");
+  // get filename w/o extension ("01.svg" -> "01")
+  const promptNumber = prompt.icon.split(".")[0];
 
+  // update hidden inputs
   document.querySelectorAll(".current_prompt").forEach((input) => {
-    input.value = currentPromptTitle;
+    input.value = promptNumber;
   });
   document.querySelectorAll(".current_prompt_text").forEach((input) => {
     input.value = prompt.text;
@@ -206,7 +205,6 @@ const nextPrompt = () => {
 };
 
 // listen for next prompt
-// document.getElementById("prompt--next").addEventListener("click", nextPrompt);
 document.querySelectorAll(".prompt--next").forEach((button) => {
   button.addEventListener("click", nextPrompt);
 });

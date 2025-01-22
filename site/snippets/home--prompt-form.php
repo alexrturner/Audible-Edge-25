@@ -3,7 +3,7 @@
     <div class="action-buttons">
         <div class="audio-container">
             <?php
-            $prompts = site()->files()->filterBy('template', 'ae_swamp_svg')->filterBy('is_prompt', true);
+            $prompts = site()->files()->filterBy('template', 'ae_swamp_svg')->filterBy('is_prompt', true)->shuffle();
             if ($prompts->count() > 0): ?>
                 <?php foreach ($prompts as $prompt): ?>
                     <?php $promptText = $prompt->prompt()->html();

@@ -904,3 +904,11 @@ svg {
 .mode-high-contrast .cls-rect {
   fill: var(--cc-light-darker) !important;
 }
+
+.file-info {
+  position: fixed;
+  top: 0.5em;
+  left: 0.5em;
+  background-color: var(--cc-highlight-foreground);
+  z-index: 100;
+}

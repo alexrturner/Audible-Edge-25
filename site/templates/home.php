@@ -156,7 +156,7 @@ $swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
         <h2 id="contact" class="title lighten"><a href="#contact">Contact</a></h2>
         <div>
           <ul class="reviews lighten">
-
+            <li><a href="mailto:<?= $site->email() ?>">Email</a></li>
             <?php
             $socials = $site->socials()->toStructure();
             foreach ($socials as $social): ?>
