@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1080 1080">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clippath);
+      }
+    </style>
+    <clipPath id="clippath">
+      <path class="cls-1" d="M899.14,1079.34c-37.27,0-111.41-20.56-111.41-62.06,0-62.68,119.03-52.85,82.61-80.81-39.83-30.57-160.21,20.51-294.65-101.58-99.88-90.71-90.23-183.1-47.31-237.38,75.43-95.38,240.46-87.37,318.77-185.63,40.98-51.42,46.69-144.1-30.18-210.66-79.54-68.87-259.2-174.49-419.86-121.2-43.28,14.36-121.32,51.82-105.27,112.31,20.91,78.82,134.85,109.47,208.33,142.73,107.29,48.56,102.6,158.77,30.49,188.61-65.51,27.11-201.38-10.6-277.83-49.69-57.52-29.42-147.39-89.53-191.07-137.75C-75.47,184.73,40.87,73.09,138.98,37.26,203.44,13.72,281.4,3.67,359.68.77c75.31-2.79,160.16,1.71,247.24,20.13,299.84,63.42,472.64,183.7,472.64,288.74,0,81.32-52.52,149.08-164.24,193.65-32.5,12.97-109.1,51.71-90.4,99.58,34.22,87.61,242.36,81.11,242.36,210.99,0,83.89-164.38,105.49-45.31,148.01,31.62,11.29,58.45,39.53,58.45,57.6,0,41.22-87.25,59.86-181.27,59.86Z"/>
+    </clipPath>
+  </defs>
+  <g class="cls-2">
+    <g>
+      <rect y="1060" width="1080" height="10"/>
+      <rect y="1040" width="1080" height="10"/>
+      <rect y="1020" width="1080" height="10"/>
+      <rect y="1000" width="1080" height="10"/>
+      <rect y="980" width="1080" height="10"/>
+      <rect y="960" width="1080" height="10"/>
+      <rect y="940" width="1080" height="10"/>
+      <rect y="920" width="1080" height="10"/>
+      <rect y="900" width="1080" height="10"/>
+      <rect y="880" width="1080" height="10"/>
+      <rect y="860" width="1080" height="10"/>
+      <rect y="840" width="1080" height="10"/>
+      <rect y="820" width="1080" height="10"/>
+      <rect y="800" width="1080" height="10"/>
+      <rect y="780" width="1080" height="10"/>
+      <rect y="760" width="1080" height="10"/>
+      <rect y="740" width="1080" height="10"/>
+      <rect y="720" width="1080" height="10"/>
+      <rect y="700" width="1080" height="10"/>
+      <rect y="680" width="1080" height="10"/>
+      <rect y="660" width="1080" height="10"/>
+      <rect y="640" width="1080" height="10"/>
+      <rect y="620" width="1080" height="10"/>
+      <rect y="600" width="1080" height="10"/>
+      <rect y="580" width="1080" height="10"/>
+      <rect y="560" width="1080" height="10"/>
+      <rect y="540" width="1080" height="10"/>
+      <rect y="520" width="1080" height="10"/>
+      <rect y="500" width="1080" height="10"/>
+      <rect y="480" width="1080" height="10"/>
+      <rect y="460" width="1080" height="10"/>
+      <rect y="440" width="1080" height="10"/>
+      <rect y="420" width="1080" height="10"/>
+      <rect y="400" width="1080" height="10"/>
+      <rect y="380" width="1080" height="10"/>
+      <rect y="360" width="1080" height="10"/>
+      <rect y="340" width="1080" height="10"/>
+      <rect y="320" width="1080" height="10"/>
+      <rect y="300" width="1080" height="10"/>
+      <rect y="280" width="1080" height="10"/>
+      <rect y="260" width="1080" height="10"/>
+      <rect y="240" width="1080" height="10"/>
+      <rect y="220" width="1080" height="10"/>
+      <rect y="200" width="1080" height="10"/>
+      <rect y="180" width="1080" height="10"/>
+      <rect y="160" width="1080" height="10"/>
+      <rect y="140" width="1080" height="10"/>
+      <rect y="120" width="1080" height="10"/>
+      <rect y="100" width="1080" height="10"/>
+      <rect y="80" width="1080" height="10"/>
+      <rect y="60" width="1080" height="10"/>
+      <rect y="40" width="1080" height="10"/>
+      <rect y="20" width="1080" height="10"/>
+      <rect width="1080" height="10"/>
+    </g>
+  </g>
+</svg>

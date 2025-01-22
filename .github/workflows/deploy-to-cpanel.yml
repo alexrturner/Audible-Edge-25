@@ -16,10 +16,10 @@ jobs:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@v0.1.6
         with:
-          host: a-t.com.au
-          username: atcomau1
-          key: ${{ secrets.AE_AT_SSH_PRIVATE_KEY }}
+          host: ${{ secrets.AE_AT_COM_CPANEL_HOST }}
+          username: ${{ secrets.AE_AT_COM_CPANEL_USERNAME }}
+          key: ${{ secrets.AE_AT_COM_SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.AE_AT_COM_SSH_PRIVATE_KEY_PASSPHRASE }}
           port: 22
           debug: true
-          script: cd public_html/Audible-Edge && git pull https://alexrturner:${{ secrets.AE_AT_COM_GITHUB_ACCESS_TOKEN }}@github.com/alexrturner/Audible-Edge.git
+          script: cd public_html/Audible-Edge && git pull https://alexrturner:${{ secrets.AE_AT_COM_GITHUB_ACCESS_TOKEN }}@github.com/alexrturner/Audible-Edge-25.git

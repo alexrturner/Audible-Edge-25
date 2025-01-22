@@ -503,10 +503,6 @@ button:focus {
   background-repeat: no-repeat;
   background-position: center;
 
-  /* mix-blend-mode: difference; */
-  /* filter: blur(3px) !important; */
-  /* transform: transform 1s cubic-bezier(0.19, 1, 0.22, 1), filter 3s ease-in-out; */
-
   /* movement */
   transition: transform 2s cubic-bezier(0.19, 1, 0.22, 1);
   left: 0;
@@ -522,7 +518,7 @@ button:focus {
   /* display: none; */
   /* opacity: 1; */
   scale: 1.5;
-  z-index: -1;
+  /* z-index: -1; */
 }
 .img {
   transition: fill 2.2s ease;
@@ -530,19 +526,22 @@ button:focus {
 
 .img#icon-hue,
 .img#icon-mobile {
-  mix-blend-mode: hue;
   fill: var(--cc-blend-hue);
+  mix-blend-mode: hue;
+  -webkit-mix-blend-mode: hue;
 }
 #icon-mobile {
   transform: 2.5s cubic-bezier(0.48, 1, 0.29, 1);
 }
 .img#icon-saturation {
-  mix-blend-mode: saturation;
   fill: var(--cc-blend-saturation);
+  mix-blend-mode: saturation;
+  -webkit-mix-blend-mode: saturation;
 }
 .img#icon-color {
-  mix-blend-mode: color;
   fill: var(--cc-blend-colour);
+  mix-blend-mode: color;
+  -webkit-mix-blend-mode: color;
 }
 
 .prompt--next {
@@ -706,6 +705,19 @@ svg {
 }
 .mobile .img {
   top: 0;
+
+  /* fallback ? */
+  isolation: isolate; /* create a new stacking context */
+  will-change: transform; /* hardware acceleration */
+  transform: translateZ(0); /* force GPU */
+
+  /* proper rendering */
+  backface-visibility: hidden; /* force GPU */
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+
+  opacity: 0.3;
 }
 
 #mobile {
@@ -880,6 +892,10 @@ svg {
 }
 
 /* logo */
+
+.logo {
+  fill: black !important;
+}
 
 .cls-rect {
   fill: var(--cc-light);
