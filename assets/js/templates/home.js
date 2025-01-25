@@ -23,16 +23,12 @@ updateTime();
 function getTimeOfDayLabel() {
   const now = new Date();
   const hour = now.getHours();
-  if (hour < 6) return "night";
-  if (hour < 12) return "day";
-  if (hour < 18) return "dusk";
-  return "dawn";
+  if (hour >= 3 && hour < 9) return "dawn";
+  if (hour >= 9 && hour < 15) return "day";
+  if (hour >= 15 && hour < 21) return "dusk";
+  return "night";
 }
-
 // scroll behaviours
-// default: burrow scroll, no noise floor
-let isParallaxScroll = false;
-let isNoiseEnabled = false;
 let scrollTimeouts = new Map();
 let currentPositions = new Map();
 
@@ -45,6 +41,7 @@ function getRandomPosition(maxOffset) {
 const columnAnimationLocks = new Map();
 
 function handleScroll(column) {
+  // requestAnimationFrame
   if (column.scrollRAF) {
     cancelAnimationFrame(column.scrollRAF);
   }

@@ -13,9 +13,11 @@
     '@auto',
   ]) ?>
 
-  <?= js([
-    'assets/js/columnFocus.js'
-  ]) ?>
+  <?php if ($page->isHomePage()) : ?>
+    <?= js([
+      'assets/js/columnFocus.js'
+    ]) ?>
+  <?php endif; ?>
 
   <link rel="shortcut icon" type="image/x-icon" href="<?= url('/assets/favicon.ico') ?>">
   <meta name="mobile-web-app-capable" content="yes">
@@ -23,6 +25,7 @@
 
   <meta name="description" content="<?= strip_tags($site->metaDescription()->value()) ?>">
   <meta name="keywords" content="<?= strip_tags($site->metaKeywords()->value()) ?>">
+
   <meta name="author" content="Tone List">
   <meta property="og:image" content="<?= url('/assets/img/AudibleEdge24.jpg') ?>">
 

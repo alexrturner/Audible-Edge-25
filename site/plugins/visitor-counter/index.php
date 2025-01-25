@@ -4,10 +4,10 @@ function getTimeOfDayBoorloo()
 {
     date_default_timezone_set('Australia/Perth');
     $hour = (int)date('H');
-    if ($hour < 6) return "night";
-    if ($hour < 12) return "day";
-    if ($hour < 18) return "dusk";
-    return "dawn";
+    if ($hour >= 3 && $hour < 9) return "dawn";
+    if ($hour >= 9 && $hour < 15) return "day";
+    if ($hour >= 15 && $hour < 21) return "dusk";
+    return "night";
 }
 
 function countActiveVisitors()

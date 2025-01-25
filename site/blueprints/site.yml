@@ -165,20 +165,3 @@ tabs:
           prompt_info:
             label: Audio Upload Instructions
             type: writer
-
-      # ae_prompts:
-      #   label: AE Prompts
-      #   type: files
-      #   template: ae_prompts
-      #   layout: table
-      #   columns:
-      #     title: false
-      #     prompt_text:
-      #       label: Prompt Text
-      #       type: text
-      #     prompt_icon:
-      #       label: Icon
-      #       type: files
-      #       query: site.files.filterBy('template', 'ae_swamp_svg')
-      #       multiple: false
-      #   help: Select an icon for each prompt.

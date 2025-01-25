@@ -122,6 +122,15 @@ columns:
         display: HH:mm
         time: true
       
+
+      prompts:
+        label: Event Descriptors
+        type: files
+        query: site.files.filterBy('template', 'ae_swamp_svg').filterBy('is_prompt', true)
+        multiple: true
+        width: 1
+        help: Select the prompt descriptiors to use for this event
+        text: "{{ file.promptnumber }}: {{ file.prompt }}"
       eventSchedule:
         label: Event Schedule
         type: structure

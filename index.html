@@ -1,8 +1,14 @@
 <html>
-<head>
-<title>?</title>
-</head>
-<body>
-it late
-</body>
+  <head>
+    <title>?</title>
+  </head>
+  <body>
+    <span style="position: absolute; font-size: 5vw">it late</span>
+  </body>
+  <script>
+    document.addEventListener("mousemove", (event) => {
+      document.querySelector("span").style.left = event.clientX + "px";
+      document.querySelector("span").style.top = event.clientY + "px";
+    });
+  </script>
 </html>
