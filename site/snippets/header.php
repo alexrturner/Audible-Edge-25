@@ -10,6 +10,7 @@
 
   <?= css([
     'assets/css/normalize.v8.0.1.css',
+    'assets/css/index.css',
     '@auto',
   ]) ?>
 

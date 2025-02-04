@@ -1,102 +1,9 @@
-:root {
-  --fs-title: 9rem;
-  --fs-subtitle: 3rem;
-  --fs-med: 1.5rem;
-  --fs-body: 1rem;
-  --fs-sml: 0.66rem;
-  --fs-responsive: clamp(1.25rem, 2vw + 1rem, 2rem);
-
-  /* type */
-  --ff-body: "neue-haas-grotesk-text", sans-serif;
-  --fw-body: 400;
-  --ff-header: "neue-haas-grotesk-display", sans-serif;
-  --fw-header: 500;
-
-  --cc-light: #eaeaea90;
-  --cc-light-darker: #d1d3d4;
-  --cc-grey: #ccccccd7;
-  --cc-grey: #cccccc;
-  --cc-body: #000000ef;
-  --cc-fill: #0091ff;
-  --cc-burrowing-text: #eaeaea;
-
-  --cc-overlay: rgba(255, 255, 255, 0.1);
-  --cc-highlight-background: black;
-  --cc-highlight-foreground: yellow;
-
-  /* blend */
-  --cc-blend-hue: #5e5e5e;
-  --cc-blend-saturation: #817ba8;
-  --cc-blend-colour: #585440;
-
-  --cc-dusk-background: #58424d;
-  --cc-dusk-foreground: #fa6432;
-  --cc-night-background: #424658;
-  --cc-night-foreground: #7dcff6;
-  --cc-dawn-background: #4f4258;
-  --cc-dawn-foreground: #f656b0;
-  --cc-day-background: #584e40;
-  --cc-day-foreground: #ccf13a;
-}
-
-.mode-high-contrast .lighten {
-  background-color: var(--cc-light);
-}
-.mode-high-contrast span.lighten {
-  background-color: unset !important;
-}
-.dusk-background {
-  background-color: var(--cc-dusk-background);
-}
-.dusk-foreground {
-  fill: var(--cc-dusk-foreground);
-  color: var(--cc-dusk-foreground);
-}
-.night-background {
-  background-color: var(--cc-night-background);
-}
-.night-foreground {
-  fill: var(--cc-night-foreground);
-  color: var(--cc-night-foreground);
-}
-.dawn-background {
-  background-color: var(--cc-dawn-background);
-}
-.dawn-foreground {
-  fill: var(--cc-dawn-foreground);
-  color: var(--cc-dawn-foreground);
-}
-.day-background {
-  background-color: var(--cc-day-background);
-}
-.day-foreground {
-  fill: var(--cc-day-foreground);
-  color: var(--cc-day-foreground);
-}
-body,
-html {
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-
-  font-optical-sizing: auto;
-
-  font-family: var(--ff-body);
-  font-weight: var(--fw-body);
-}
 /* rm focus state for column */
 html *:focus {
   outline: 2px solid var(--cc-highlight-foreground);
 }
 .column:focus {
   outline: unset;
-}
-::selection,
-::-moz-selection {
-  background-color: var(--cc-highlight-foreground);
-  color: var(--cc-highlight-background);
 }
 
 body {
@@ -119,9 +26,6 @@ h6 {
   padding: 0;
   /* line-height: 1; */
 }
-/* p {
-  font-size: var(--fs-med);
-} */
 
 /* subtitle */
 h3 {
@@ -236,7 +140,8 @@ span.lighten::before {
   z-index: -1;
 }
 span.lighten {
-  background-color: unset;
+  background-color: var(--cc-light);
+  background-color: var(--cc-grey);
 }
 
 .ae {
@@ -450,21 +355,6 @@ button.btn--info {
   vertical-align: top;
   /* transition: background-color 0.2s ease; */
 }
-button,
-.button {
-  /* transition: background-color 0.2s ease; */
-}
-.button:hover,
-button.btn--info:hover,
-button:hover {
-  background-color: var(--cc-highlight-foreground) !important;
-  color: var(--cc-highlight-background) !important;
-}
-button:focus {
-  outline: 2px var(--cc-highlight-foreground) solid !important;
-  filter: brightness(0.9);
-  /* border: 2px var(--cc-highlight-foreground) solid; */
-}
 
 .column {
   position: relative;
@@ -601,14 +491,10 @@ button:focus {
 }
 .switch .slider,
 .switch .slider:before {
-  /* background-color: #000; */
-  /* background-color: var(--cc-highlight-foreground); */
   background-color: var(--cc-highlight-background);
 }
 
 .switch .slider:before {
-  /* background-color: var(--cc-grey) !important; */
-  /* background-color: var(--cc-highlight-background); */
   background-color: var(--cc-highlight-foreground);
 }
 
@@ -657,15 +543,6 @@ svg {
 }
 .ae svg {
   width: 100%;
-}
-.logo-container svg {
-  width: 100%;
-  height: auto;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  /* DOES THE MAGIC */
-  overflow: initial;
 }
 
 .flex {

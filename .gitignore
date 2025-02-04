@@ -87,3 +87,7 @@ error_log
 # ---------------
 .env
 /.well-known
+
+# Content
+content/*
+assets/visitor.json

@@ -3,7 +3,7 @@
 
 <style>
     :root {
-        --fs-body: 16px;
+        --fs-body: var(--fs-med);
         --cc-dusk-foreground: #fa6432;
     }
 
@@ -11,13 +11,15 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+
     }
 
     body {
-        font-family: Arial, sans-serif;
-        padding: 1em;
+        padding: 0 1em;
+        overflow-x: hidden;
     }
 
+    body,
     h1,
     h2,
     h3,
@@ -27,20 +29,39 @@
         margin: 0;
         font-weight: 400;
         font-size: var(--fs-body);
+
+        letter-spacing: -0.025em;
     }
 
     /* nav */
-    nav {
+    header {
         border-bottom: 1px solid #000;
-        padding: 1.5em 0;
-        margin-bottom: 3em;
+        /* margin-bottom: 3em; */
+        /* padding: 1.5em 0; */
+
+        /* sticky */
+        position: fixed;
+        top: 0;
+        left: 1em;
+        right: 1em;
+
+        z-index: 100;
+        background: white;
+    }
+
+    nav {
+        align-content: flex-end;
+        position: absolute;
+        right: 0;
+        bottom: 0;
     }
 
     nav ul {
         display: flex;
         justify-content: flex-end;
         list-style: none;
-        gap: 30px;
+        gap: 2rem;
+
     }
 
     nav a {
@@ -67,30 +88,32 @@
     }
 
     .logo-container {
-        width: 100%;
+        width: auto;
         height: 100%;
-        max-width: 5em;
+        position: relative;
+        /* max-width: 5em; */
     }
 
     .logo-container svg {
-        width: 100%;
+        width: auto;
         height: 100%;
     }
 
     /* erebus */
     .descriptors {
         display: inline-flex;
-        gap: 5px;
+        gap: 0.6em;
     }
 
     .descriptors img {
-        width: 2ch;
+        width: auto;
         cursor: pointer;
+        height: var(--fs-body);
+        scale: 2;
     }
 
     .descriptors img:hover {
-        transform: scale(1.3);
-        /* fill: var(--cc-dusk-foreground); */
+        transform: scale(1.5);
     }
 
     /* underline border */
@@ -99,18 +122,24 @@
     .show-title,
     .date,
     .time {
-        border-bottom: 1px solid #000;
+        /* border-bottom: 1px solid #000; */
         display: inherit;
     }
 
-    /* element padding */
+
     .performers span,
     .show-title,
     .time,
     .date,
-    .descriptors,
+    /* .description, */
     .venue {
-        padding: 0.5em 0;
+        /* centred vs baseline */
+        /* padding: 0.5em 0; */
+        padding-top: 1rem;
+    }
+
+    .descriptors {
+        padding-top: 0.6em;
     }
 
     span.prefix {
@@ -126,6 +155,16 @@
             grid-template-columns: minmax(min-content, 1fr) 1fr 2fr 2fr;
             margin-bottom: 2em;
             color: #666;
+
+            /* sticky */
+            margin-top: 6em;
+            position: absolute;
+            left: 0;
+            right: 0;
+        }
+
+        .program-item-container {
+            margin-top: 10em;
         }
 
         .program-item {
@@ -152,22 +191,56 @@
             margin: 0.5em 0;
         }
     }
+
+    header {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        min-height: 5rem;
+    }
+
+    .time,
+    .date,
+    .show>*:not(:last-child),
+    .performers>*:not(:last-child),
+    .show>*:only-child,
+    .performers>*:only-child {
+        background-color: #eaeaea90;
+    }
+
+
+    .time:hover,
+    .date:hover,
+    .show>*:hover,
+    .performers>*:hover {
+        background-color: unset;
+    }
+
+    .program-header span {
+        background-color: #eaeaea;
+    }
+
+    .prefix,
+    .sml {
+        font-size: var(--fs-sml);
+        font-size: 1rem;
+    }
 </style>
 </head>
 
 <body>
     <div class="container">
         <header>
-            <nav>
-                <h1>
-                    <div class="logo-container" title="Audible Edge Logo">
-                        <?php
-                        $logoFiles = $site->files()->template('ae_logo');
-                        $logo = $logoFiles->first();
-                        ?>
-                        <?= $logo->read() ?>
-                    </div>
-                </h1>
+            <div class="title col flex-end">
+                <div class="logo-container lighten" title="Audible">
+                    <?= svg('assets/img/logo-audible.svg') ?>
+                </div>
+            </div>
+            <div class="col">
+                <div class="logo-container lighten" title="Edge">
+                    <?= svg('assets/img/logo-edge.svg') ?>
+                </div>
+            </div>
+            <nav class="sml">
                 <ul>
                     <li><a href="#">Program</a></li>
                     <li><a href="#">Night School</a></li>
@@ -176,98 +249,100 @@
                     <li><a href="#">Contact</a></li>
                 </ul>
             </nav>
+
+            <div class="program-header sml">
+                <div><span>date</span></div>
+                <div><span>time</span></div>
+                <div><span>show</span></div>
+                <div><span>performer(s)</span></div>
+            </div>
         </header>
-
-        <div class="program-header">
-            <div>date</div>
-            <div>time</div>
-            <div>show</div>
-            <div>performer(s)</div>
-        </div>
     </div>
+    <div class="program-item-container">
 
-    <div class="program-item">
-        <div>
-            <span class="date">Friday, April 21</span>
-        </div>
-        <div>
-            <span class="time">7am–8am</span>
-        </div>
-        <div class="show">
-            <h2 class="show-title">Sun Returns</h2>
-            <div class="description">
-                <span class="prefix">a</span>
-                <div class="descriptors">
-                    <img
-                        class="descriptor" data-sound="00"
-                        alt="PHWOAR"
-                        src="../assets/img/Swamp Icons/Swampy Icons-01.svg" />,
-                    <img
-                        class="descriptor" data-sound="01"
-                        alt="grr"
-                        src="../assets/img/Swamp Icons/Swampy Icons-02.svg" />,
-                    <img
-                        class="descriptor" data-sound="02"
-                        alt="bang"
-                        src="../assets/img/Swamp Icons/Swampy Icons-03.svg" />
+        <div class="program-item">
+            <div>
+                <span class="date">Friday, April 21</span>
+            </div>
+            <div>
+                <span class="time">7am–8am</span>
+            </div>
+            <div class="show">
+                <h2 class="show-title">Sun Returns</h2>
+                <div class="description">
+                    <span class="prefix sml">a</span>
+                    <div class="descriptors">
+                        <img
+                            class="descriptor" data-sound="00"
+                            alt="PHWOAR"
+                            src="../assets/img/Swamp Icons/Swampy Icons-01.svg" />,
+                        <img
+                            class="descriptor" data-sound="01"
+                            alt="grr"
+                            src="../assets/img/Swamp Icons/Swampy Icons-02.svg" />,
+                        <img
+                            class="descriptor" data-sound="02"
+                            alt="bang"
+                            src="../assets/img/Swamp Icons/Swampy Icons-03.svg" />
+                    </div>
+                    show
                 </div>
-                show
-            </div>
-            <div class="venue">
-                <span class="prefix">at</span>
-                <span>WA Museum Boola Bardip</span>
-            </div>
-        </div>
-        <div class="performers">
-            <span>Anaxios</span>
-        </div>
-    </div>
-
-    <div class="program-item">
-        <div>
-            <!-- <span class="date">Friday, April 21</span> -->
-        </div>
-        <div>
-            <span class="time">10am–12pm</span>
-        </div>
-        <div class="show">
-            <h2 class="show-title">Befores</h2>
-            <div class="description">
-                <span class="prefix">a</span>
-                <div class="descriptors">
-
-                    <img
-                        class="descriptor" data-sound="04"
-                        alt="wiggle"
-                        src="../assets/img/Swamp Icons/Swampy Icons-05.svg" />,
-                    <img
-                        class="descriptor" data-sound="00"
-                        alt="PHWOAR"
-                        src="../assets/img/Swamp Icons/Swampy Icons-01.svg" />,
-                    <img
-                        class="descriptor" data-sound="03"
-                        alt="huh"
-                        src="../assets/img/Swamp Icons/Swampy Icons-04.svg" />
+                <div class="venue">
+                    <span class="prefix sml">at</span>
+                    <span>WA Museum Boola Bardip</span>
                 </div>
-                show
             </div>
-            <div class="venue">
-                <span class="prefix">at</span>
-                <span>The Bird</span>
+            <div class="performers">
+                <span>Anaxios</span>
             </div>
         </div>
-        <div class="performers">
-            <span>Jameson Feakes</span>
-            <span>Nick Ashwood [Naarm]</span>
-            <span>Samuel Beilby</span>
-            <span>Chi Po Hao</span>
-            <span>Chloe Lin</span>
-            <span>Sarah Song</span>
-            <span>suzueri</span>
-            <span>Shih Ya Tien</span>
-            <span>Monica Brooks & Sage Pbbbt</span>
-            <span>Ben & Luka Buchanan</span>
-            <span>Ayo Busari DJ</span>
+
+        <div class="program-item">
+            <div>
+                <!-- <span class="date">Friday, April 21</span> -->
+            </div>
+            <div>
+                <span class="time">10am–12pm</span>
+            </div>
+            <div class="show">
+                <h2 class="show-title">Befores</h2>
+                <div class="description">
+                    <span class="prefix sml">a</span>
+                    <div class="descriptors">
+
+                        <img
+                            class="descriptor" data-sound="04"
+                            alt="wiggle"
+                            src="../assets/img/Swamp Icons/Swampy Icons-05.svg" />,
+                        <img
+                            class="descriptor" data-sound="00"
+                            alt="PHWOAR"
+                            src="../assets/img/Swamp Icons/Swampy Icons-01.svg" />,
+                        <img
+                            class="descriptor" data-sound="03"
+                            alt="huh"
+                            src="../assets/img/Swamp Icons/Swampy Icons-04.svg" />
+                    </div>
+                    show
+                </div>
+                <div class="venue">
+                    <span class="prefix sml">at</span>
+                    <span>The Bird</span>
+                </div>
+            </div>
+            <div class="performers">
+                <span>Jameson Feakes</span>
+                <span>Nick Ashwood [Naarm]</span>
+                <span>Samuel Beilby</span>
+                <span>Chi Po Hao</span>
+                <span>Chloe Lin</span>
+                <span>Sarah Song</span>
+                <span>suzueri</span>
+                <span>Shih Ya Tien</span>
+                <span>Monica Brooks & Sage Pbbbt</span>
+                <span>Ben & Luka Buchanan</span>
+                <span>Ayo Busari DJ</span>
+            </div>
         </div>
     </div>
 </body>
@@ -389,10 +464,10 @@
 
         initEventListeners() {
             const icons = document.querySelectorAll('.descriptor');
-            console.log(`Found ${icons.length} descriptor icons`);
+            // console.log(`Found ${icons.length} descriptor icons`);
 
             icons.forEach(icon => {
-                icon.addEventListener('click', (e) => {
+                icon.addEventListener('mouseover', (e) => {
                     const soundType = e.target.dataset.sound;
                     // console.log(`Icon sound type = ${soundType}`);
 
