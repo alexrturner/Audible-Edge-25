@@ -3,19 +3,17 @@
 
 <style>
     :root {
-        --fs-body: var(--fs-med);
         --cc-dusk-foreground: #fa6432;
     }
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-
+    @media screen and (min-width: 768px) {
+        :root {
+            --fs-body: var(--fs-med);
+        }
     }
 
     body {
-        padding: 0 1em;
+        /* padding: 0 1em; */
         overflow-x: hidden;
     }
 
@@ -29,49 +27,6 @@
         margin: 0;
         font-weight: 400;
         font-size: var(--fs-body);
-
-        letter-spacing: -0.025em;
-    }
-
-    /* nav */
-    header {
-        border-bottom: 1px solid #000;
-        /* margin-bottom: 3em; */
-        /* padding: 1.5em 0; */
-
-        /* sticky */
-        position: fixed;
-        top: 0;
-        left: 1em;
-        right: 1em;
-
-        z-index: 100;
-        background: white;
-    }
-
-    nav {
-        align-content: flex-end;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-    }
-
-    nav ul {
-        display: flex;
-        justify-content: flex-end;
-        list-style: none;
-        gap: 2rem;
-
-    }
-
-    nav a {
-        text-decoration: none;
-        color: #000;
-    }
-
-    /* program */
-    .program-header {
-        display: none;
     }
 
     .program-item {
@@ -80,23 +35,9 @@
         padding: 1em 0;
     }
 
-
-
-    .performers {
+    .artists {
         display: flex;
         flex-direction: column;
-    }
-
-    .logo-container {
-        width: auto;
-        height: 100%;
-        position: relative;
-        /* max-width: 5em; */
-    }
-
-    .logo-container svg {
-        width: auto;
-        height: 100%;
     }
 
     /* erebus */
@@ -117,9 +58,9 @@
     }
 
     /* underline border */
-    .performers span,
+    .artists span,
     .description,
-    .show-title,
+    .event-title,
     .date,
     .time {
         /* border-bottom: 1px solid #000; */
@@ -127,11 +68,10 @@
     }
 
 
-    .performers span,
-    .show-title,
+    .artists>*,
+    .event-title,
     .time,
     .date,
-    /* .description, */
     .venue {
         /* centred vs baseline */
         /* padding: 0.5em 0; */
@@ -146,23 +86,17 @@
         margin-right: 2ch;
     }
 
+    .container {
+        /* padding: 0 1em;
+        padding: 0 0.5em; */
+        padding: 0 0.5rem;
+    }
+
+
     /* responsive */
 
     /* tablet / desktop */
     @media screen and (min-width: 768px) {
-        .program-header {
-            display: grid;
-            grid-template-columns: minmax(min-content, 1fr) 1fr 2fr 2fr;
-            margin-bottom: 2em;
-            color: #666;
-
-            /* sticky */
-            margin-top: 6em;
-            position: absolute;
-            left: 0;
-            right: 0;
-        }
-
         .program-item-container {
             margin-top: 10em;
         }
@@ -173,179 +107,100 @@
             padding: 1em 0;
             border-bottom: none;
         }
+
+        /* distinct columns */
+        .date,
+        .time,
+        .venue {
+            padding-right: 0.5em;
+        }
     }
 
     /* mobile */
     @media screen and (max-width: 767px) {
-        nav ul {
-            flex-direction: column;
-            align-items: center;
-            gap: 1em;
-        }
-
-        .container {
-            padding: 0 1em;
-        }
 
         .descriptors {
             margin: 0.5em 0;
         }
+
+        .program-item>div:not(:first-child) {
+            margin-left: 2em;
+        }
+
+        /* .time::before {
+            content: "*";
+            position: absolute;
+            transform: translateX(-2em);
+        } */
     }
 
-    header {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        min-height: 5rem;
+    /* hover state */
+    /* desktop */
+    @media screen and (min-width: 768px) {
+
+        .time,
+        .date,
+        .event>*:not(:last-child),
+        .artists>*:not(:last-child),
+        .event>*:only-child,
+        .artists>*:only-child {
+            /* background-color: #eaeaea90; */
+        }
+
+        .event>.lighten:last-child {
+            background-color: unset;
+        }
+
+        /* .time:hover, */
+        /* .date:hover, */
+        .event>*:hover,
+        .artists>*:hover {
+            background-color: unset;
+        }
     }
 
-    .time,
-    .date,
-    .show>*:not(:last-child),
-    .performers>*:not(:last-child),
-    .show>*:only-child,
-    .performers>*:only-child {
-        background-color: #eaeaea90;
-    }
-
-
-    .time:hover,
-    .date:hover,
-    .show>*:hover,
-    .performers>*:hover {
-        background-color: unset;
-    }
-
-    .program-header span {
-        background-color: #eaeaea;
-    }
-
-    .prefix,
-    .sml {
-        font-size: var(--fs-sml);
-        font-size: 1rem;
+    .tooltip {
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 14px;
+        pointer-events: none;
+        z-index: 100;
+        display: none;
     }
 </style>
-</head>
 
-<body>
-    <div class="container">
-        <header>
-            <div class="title col flex-end">
-                <div class="logo-container lighten" title="Audible">
-                    <?= svg('assets/img/logo-audible.svg') ?>
-                </div>
-            </div>
-            <div class="col">
-                <div class="logo-container lighten" title="Edge">
-                    <?= svg('assets/img/logo-edge.svg') ?>
-                </div>
-            </div>
-            <nav class="sml">
-                <ul>
-                    <li><a href="#">Program</a></li>
-                    <li><a href="#">Night School</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Support</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
+<div class="container">
+    <?php snippet('nav') ?>
 
-            <div class="program-header sml">
-                <div><span>date</span></div>
-                <div><span>time</span></div>
-                <div><span>show</span></div>
-                <div><span>performer(s)</span></div>
-            </div>
-        </header>
-    </div>
-    <div class="program-item-container">
+    <?php snippet('events') ?>
+</div>
 
-        <div class="program-item">
-            <div>
-                <span class="date">Friday, April 21</span>
-            </div>
-            <div>
-                <span class="time">7am–8am</span>
-            </div>
-            <div class="show">
-                <h2 class="show-title">Sun Returns</h2>
-                <div class="description">
-                    <span class="prefix sml">a</span>
-                    <div class="descriptors">
-                        <img
-                            class="descriptor" data-sound="00"
-                            alt="PHWOAR"
-                            src="../assets/img/Swamp Icons/Swampy Icons-01.svg" />,
-                        <img
-                            class="descriptor" data-sound="01"
-                            alt="grr"
-                            src="../assets/img/Swamp Icons/Swampy Icons-02.svg" />,
-                        <img
-                            class="descriptor" data-sound="02"
-                            alt="bang"
-                            src="../assets/img/Swamp Icons/Swampy Icons-03.svg" />
-                    </div>
-                    show
-                </div>
-                <div class="venue">
-                    <span class="prefix sml">at</span>
-                    <span>WA Museum Boola Bardip</span>
-                </div>
-            </div>
-            <div class="performers">
-                <span>Anaxios</span>
-            </div>
-        </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Create a single tooltip element
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        document.body.appendChild(tooltip);
 
-        <div class="program-item">
-            <div>
-                <!-- <span class="date">Friday, April 21</span> -->
-            </div>
-            <div>
-                <span class="time">10am–12pm</span>
-            </div>
-            <div class="show">
-                <h2 class="show-title">Befores</h2>
-                <div class="description">
-                    <span class="prefix sml">a</span>
-                    <div class="descriptors">
+        // Add event listeners to all descriptors
+        document.querySelectorAll('.descriptor').forEach(img => {
+            img.addEventListener('mousemove', (e) => {
+                tooltip.style.display = 'block';
+                tooltip.textContent = img.dataset.tooltip;
+                // Position tooltip near cursor with offset
+                tooltip.style.left = e.pageX + 10 + 'px';
+                tooltip.style.top = e.pageY + 10 + 'px';
+            });
 
-                        <img
-                            class="descriptor" data-sound="04"
-                            alt="wiggle"
-                            src="../assets/img/Swamp Icons/Swampy Icons-05.svg" />,
-                        <img
-                            class="descriptor" data-sound="00"
-                            alt="PHWOAR"
-                            src="../assets/img/Swamp Icons/Swampy Icons-01.svg" />,
-                        <img
-                            class="descriptor" data-sound="03"
-                            alt="huh"
-                            src="../assets/img/Swamp Icons/Swampy Icons-04.svg" />
-                    </div>
-                    show
-                </div>
-                <div class="venue">
-                    <span class="prefix sml">at</span>
-                    <span>The Bird</span>
-                </div>
-            </div>
-            <div class="performers">
-                <span>Jameson Feakes</span>
-                <span>Nick Ashwood [Naarm]</span>
-                <span>Samuel Beilby</span>
-                <span>Chi Po Hao</span>
-                <span>Chloe Lin</span>
-                <span>Sarah Song</span>
-                <span>suzueri</span>
-                <span>Shih Ya Tien</span>
-                <span>Monica Brooks & Sage Pbbbt</span>
-                <span>Ben & Luka Buchanan</span>
-                <span>Ayo Busari DJ</span>
-            </div>
-        </div>
-    </div>
-</body>
+            img.addEventListener('mouseleave', () => {
+                tooltip.style.display = 'none';
+            });
+        });
+    });
+</script>
 
 <script>
     class SoundPlayer {
@@ -486,4 +341,4 @@
     });
 </script>
 
-</html>
+<?php snippet('footer') ?>

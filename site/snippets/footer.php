@@ -1,53 +1,18 @@
-<div id="lineCanvas-container" style="display: none;">
-  <svg id="lineCanvas">
-    <!-- squig -->
-  </svg>
-</div>
+<?= js([
+  '@auto',
+]); ?>
 
-<?php
-// load relations SVG on home page and nightschool index
-if ($page->isHomePage() || $page->uid() === "program" || $page->uid() === "nightschool" || $page->uid() === "satellite") : ?>
-  <?= js([
-    'assets/js/ae24-squig.js',
-    '@auto',
-  ]) ?>
-
+<?php if (!$page->isHomePage()) : ?>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // not .events-item.first-item
-      const eventItems = document.querySelectorAll('.events-item:not(.first-item)');
-      const timesContainer = document.getElementById('dates-event-times');
-      eventItems.forEach(function(item) {
-        item.addEventListener('mouseover', function() {
-          const startTime = this.getAttribute('data-start-time');
-          const endTime = this.getAttribute('data-end-time');
-          if (startTime && endTime) {
-            timesContainer.textContent = `Start: ${startTime}, End: ${endTime}`;
-          }
-        });
-
-
-        item.addEventListener('mouseout', function() {
-          timesContainer.textContent = '';
-        });
+    document.addEventListener("DOMContentLoaded", () => {
+      const modeDesktop = document.getElementById("toggle-mode");
+      modeDesktop.addEventListener("click", () => {
+        changeMode(modeDesktop);
       });
     });
   </script>
-
-<?php else : ?>
-  <?= js([
-    '@auto',
-  ]) ?>
-<?php endif ?>
-
-<?php $parent = $page->parent();
-// check if the parent UID matches one of the specific pages
-// and if the current page's template matches one of the specified templates
-if ($parent && in_array($parent->uid(), ['program', 'satellite', 'nightschool'])) :
-  js([
-    'assets/js/event-svg.js'
-  ]);
-endif; ?>
+  <?= js('assets/js/script.js') ?>
+<?php endif; ?>
 
 <div class="overlay" style="display: none;">
   <div class="overlay-svg-container">

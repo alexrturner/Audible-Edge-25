@@ -20,6 +20,8 @@
     ]) ?>
   <?php endif; ?>
 
+  <?= js('assets/js/menu-overlay.js') ?>
+
   <link rel="shortcut icon" type="image/x-icon" href="<?= url('/assets/favicon.ico') ?>">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,3 +38,5 @@
   <!-- type type -->
   <link rel="stylesheet" href="https://use.typekit.net/chf4zka.css">
 </head>
+
+<body class="mode-high-contrast">

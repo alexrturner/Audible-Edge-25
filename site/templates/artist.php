@@ -1,129 +1,150 @@
 <?php snippet('header') ?>
 
-<main class="content-container">
+<?php
+$swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
+?>
 
-    <!-- associsated event -->
-    <section class="section" id="col1">
-        <?php
-        $events = $page->events()->toPages();
 
-        if ($events->isNotEmpty()) : ?>
+<div class="container">
+    <?php snippet('nav') ?>
 
-            <ul class="associated-events">
+    <main class="content-container">
 
-                <?php if ($events->count() > 1) : ?>
-                    <span class="mobile__section-subtitle">Associated Events:</span>
-                <?php else : ?>
-                    <span class="mobile__section-subtitle">Associated Event:</span>
-                <?php endif; ?>
-                <?php foreach ($events as $event) : ?>
+        <!-- associsated event -->
+        <section class="section column a" id="col1">
+            <ul class="artists" id="events-items">
+                <!-- <span class="mobile__section-subtitle">Artist:</span> -->
 
-                    <li>
-                        <a href="<?= $event->url() ?>">
-                            <?= $event->title()->html() ?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
+                <li class="artists-item" data-type="artists" data-id="<?= $page->id() ?>">
+                    <h1 class="section-title lighten">
+                        <?= $page->title()->html() ?>
+                    </h1>
+                </li>
             </ul>
-        <?php endif; ?>
 
-        <?php
-        // fetch audio
-        $sounds = $page->files()->template('audio');
-        $counter = 0;
-        if ($sounds->isNotEmpty()) : ?>
-            <div class="artist-sounds">
-                <?php foreach ($sounds as $sound) : ?>
-                    <audio id="audioSample<?= $counter ?>" class="audio-sample" controls aria-labelledby="playAudioButtonLabel<?= $counter ?>">
-                        <source src="<?= $sound->url() ?>" type="<?= $sound->mime() ?>">
-                        Your browser does not support the audio element.
-                    </audio>
-                    <button id="playAudioButton<?= $counter ?>" class="circle-button play-audio-button" aria-label="Play <?= $page->title()->html() ?> audio sample <?= $counter ?>"></button>
-                    <span id="playAudioButtonLabel<?= $counter ?>" hidden>Play audio sample <?= $counter ?></span>
-                    <?php $counter++; ?>
-                <?php endforeach; ?>
+            <div class="row content">
+                <?php if ($page->bio_short()->isNotEmpty()) : ?>
+                    <div class="bio-short lighten">
+                        <?= kt($page->bio_short()) ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php
+                $events = $page->events()->toPages();
+
+                if ($events->isNotEmpty()) : ?>
+                    <div class="col-2">
+                        <h2 class="section-header prefix sml">playing at</h2>
+                        <ul class="associated-events">
+
+                            <?php foreach ($events as $event) : ?>
+
+                                <li class="lighten">
+                                    <a href="<?= $event->url() ?>">
+                                        <?= $event->title()->html() ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+
+
+                <?php
+                // fetch audio
+                $sounds = $page->files()->template('audio');
+                $counter = 0;
+                if ($sounds->isNotEmpty()) : ?>
+                    <div class="artist-sounds">
+                        <?php foreach ($sounds as $sound) : ?>
+                            <audio id="audioSample<?= $counter ?>" class="audio-sample" controls aria-labelledby="playAudioButtonLabel<?= $counter ?>">
+                                <source src="<?= $sound->url() ?>" type="<?= $sound->mime() ?>">
+                                Your browser does not support the audio element.
+                            </audio>
+                            <button id="playAudioButton<?= $counter ?>" class="circle-button play-audio-button" aria-label="Play <?= $page->title()->html() ?> audio sample <?= $counter ?>"></button>
+                            <span id="playAudioButtonLabel<?= $counter ?>" hidden>Play audio sample <?= $counter ?></span>
+                            <?php $counter++; ?>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
             </div>
-        <?php endif; ?>
-    </section>
 
-    <!-- artists, images -->
-    <section class="section" id="col2">
-        <ul class="artists" id="events-items">
-            <span class="mobile__section-subtitle">Artist:</span>
+            <div class="icon__swamp" id="icon-hue">
+                <?= svg($swamps->filterBy('position', 'left')->first()) ?>
+            </div>
 
-            <li class="artists-item" data-type="artists" data-id="<?= $page->id() ?>">
-                <h2 class="section-title">
-                    <?= $page->title()->html() ?>
-                </h2>
-            </li>
-        </ul>
 
-        <?php if ($page->credits()->count()->toArray() > 0) : ?>
-            <?php if ($credits = $page->credits()->toStructure()) : ?>
-                <ul class="credits">
-                    <?php foreach ($credits as $credit) : ?>
-                        <li>
-                            <?php if ($credit->other_name()->isNotEmpty()) : ?><?= $credit->other_name()->html() ?><?php endif; ?>&nbsp;<?php if ($credit->sort_name()->isNotEmpty()) : ?><?= $credit->sort_name()->html() ?><?php endif; ?><?php if ($credit->group()->isNotEmpty()) : ?>&nbsp;(<?= $credit->group()->html() ?>)<?php endif; ?>
+
+        </section>
+
+        <!-- artists, images -->
+        <section class="section column b" id="col2">
+            <!-- <div class="space"></div> -->
+            <div class="bio-container">
+
+                <?php if ($page->bio_long()->isNotEmpty()) : ?>
+                    <!-- <button id="toggleBio" class="toggle-bio-btn">+</button> -->
+                    <div class="lighten">
+                        <?= $page->bio_long()->kt() ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+
+
+            <?php if ($page->credits()->count()->toArray() > 0) : ?>
+                <?php if ($credits = $page->credits()->toStructure()) : ?>
+                    <ul class="credits">
+                        <?php foreach ($credits as $credit) : ?>
+                            <li>
+                                <?php if ($credit->other_name()->isNotEmpty()) : ?><?= $credit->other_name()->html() ?><?php endif; ?>&nbsp;<?php if ($credit->sort_name()->isNotEmpty()) : ?><?= $credit->sort_name()->html() ?><?php endif; ?><?php if ($credit->group()->isNotEmpty()) : ?>&nbsp;(<?= $credit->group()->html() ?>)<?php endif; ?>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            <?php endif; ?>
+
+            <div class="icon__swamp" id="icon-saturation" style="rotate: 20deg;">
+                <?=
+                svg($swamps->filterBy('position', 'middle')->first())
+                ?>
+            </div>
+
+        </section>
+
+        <!-- description and links -->
+        <section class="section column c" id="col3">
+            <?php snippet('gallery', ['images' => $page->images()]); ?>
+
+
+
+            <?php $links = $page->links()->toStructure(); ?>
+            <?php if ($links->isNotEmpty()) : ?>
+                <ul class="artist-links">
+                    <?php foreach ($links as $link) : ?>
+                        <li class="lighten">
+                            <a class="serif italic" href="<?= $link->url() ?>" <?= $link->popup()->toBool() ? 'target="_blank"' : '' ?>>
+
+                                <?= $link->text()->html() ?>
+                            </a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
-        <?php endif; ?>
 
-        <?php snippet('gallery', ['images' => $page->images()]); ?>
-
-    </section>
-
-    <!-- description and links -->
-    <section class="section" id="col3">
-
-        <div class="bio-container">
-            <?php if ($page->bio_short()->isNotEmpty()) : ?>
-                <div class="bio-short">
-                    <?= kt($page->bio_short()) ?>
-                </div>
+            <?php if ($page->support()->isNotEmpty()) : ?>
+                <p class="support"><span>Supported by: </span><?= html($page->support()) ?></p>
             <?php endif; ?>
-            <?php if ($page->bio_long()->isNotEmpty()) : ?>
-                <button id="toggleBio" class="toggle-bio-btn">+</button>
-                <div id="bioLong" class="bio-long" style="visibility:hidden;">
-                    <?= $page->bio_long()->kt() ?>
-                </div>
-            <?php endif; ?>
-        </div>
 
-        <?php $links = $page->links()->toStructure(); ?>
-        <?php if ($links->isNotEmpty()) : ?>
-            <ul class="artist-links">
-                <?php foreach ($links as $link) : ?>
-                    <li>
-                        [
-                        <a class="serif italic" href="<?= $link->url() ?>" <?= $link->popup()->toBool() ? 'target="_blank"' : '' ?>>
-
-                            <?= $link->text()->html() ?>
-                            <?php
-                            // construct the SVG file path based on the link type
-                            $type = $link->type()->value();
-                            $svgFilePath = 'assets/imgs/icons/' . $type . '.svg';
-
-                            if (file_exists($svgFilePath)) {
-                                svg($svgFilePath);
-                            } else {
-                                // fallback text
-                                echo htmlspecialchars($type);
-                            }
-                            ?></a> ]
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
-
-        <?php if ($page->support()->isNotEmpty()) : ?>
-            <p class="support"><span>Supported by: </span><?= html($page->support()) ?></p>
-        <?php endif; ?>
-    </section>
+            <div class="icon__swamp" id="icon-color">
+                <?=
+                svg($swamps->filterBy('position', 'right')->first())
+                ?>
+            </div>
+        </section>
 
 
-</main>
+    </main>
+</div>
 
 <?= js([
     'assets/js/gallery.js'

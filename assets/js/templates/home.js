@@ -50,7 +50,7 @@ function handleScroll(column) {
     const transformWeight = 5;
     const maxOffset = 1600;
 
-    const img = column.querySelector(".img");
+    const img = column.querySelector(".icon__swamp");
     if (!img) return;
 
     // is this column is currently locked (animating)?
@@ -81,7 +81,7 @@ function handleScroll(column) {
 function checkMobile() {
   const playButton = document.getElementById("toggle-mix");
   const desktopContainer = document.querySelector(
-    ".row.desktop.settings.ancillary"
+    ".row.desktop.settings.ancillary .extra"
   );
   const mobileContainer = document.querySelector(
     ".mobile.header .row.viewing .space"
@@ -95,9 +95,9 @@ function checkMobile() {
     }
   } else {
     document.body.classList.remove("mobile");
-    if (playButton && desktopContainer) {
-      desktopContainer.appendChild(playButton);
-    }
+    // if (playButton && desktopContainer) {
+    //   desktopContainer.appendChild(playButton);
+    // }
   }
 }
 
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!isAnimating) {
         isAnimating = true;
 
-        const imgs = document.querySelectorAll(".img");
+        const imgs = document.querySelectorAll(".icon__swamp");
         imgs.forEach((img) => {
           const newPos = getRandomPosition(400);
           img.style.transform = `translate(${newPos.x}px, ${newPos.y}px)`;
@@ -258,7 +258,8 @@ function changeMode(button) {
   });
   // show time of day selector
 
-  const icons = document.querySelectorAll(".img svg");
+  const icons = document.querySelectorAll(".icon__swamp svg");
+
   icons.forEach((icon) => {
     // icon.style.display = icon.style.display === "block" ? "none" : "block";
     icon.style.opacity = icon.style.opacity === "1" ? "0" : "1";

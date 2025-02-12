@@ -1,37 +1,148 @@
-/* 
-============
-map
-============
-*/
-.map {
-  background-color: rgba(255, 255, 255, 0.47);
-  border: 1px solid black;
-  position: fixed;
-  bottom: 3vh;
-  left: 3vh;
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
-}
-.map-open {
-  width: 431px;
-  height: 647px;
-  max-width: 100%;
-  max-height: 100%;
-  overflow: visible;
-  z-index: 9999999999;
-}
-.map img {
-  height: 94vh;
-}
-.map-open img {
-  max-height: 100%;
-}
-/* map iframe */
-iframe {
-  width: 100% !important;
-}
-
 img {
   max-width: 100%;
   height: auto;
+}
+
+/* ====
+split column
+====*/
+
+.grid {
+  display: grid;
+}
+.col-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+
+  grid-template-columns: 2rem 1fr;
+  /* gap: 2rem; */
+}
+
+.event__details .prefix {
+  align-content: end;
+  height: var(--fs-body);
+}
+.col-2:not(:first-child) {
+  padding-top: 1rem;
+}
+
+#col2 {
+  /* grid-template-rows: minmax(calc(100vh - 11.5em), auto); */
+  /* grid-template-rows: minmax(calc(100vh - 11.5em), auto); */
+  grid-template-rows: minmax(calc(100vh - 12.5em), auto);
+}
+
+#col1 {
+  grid-template-rows: 50vh minmax(calc(100vh - 10.5em), auto);
+}
+#col2 {
+  grid-template-rows: minmax(calc(100vh - 12.5em), auto) minmax(
+      calc(100vh - 10.75rem),
+      auto
+    );
+}
+#col3 {
+  /* grid-template-rows: minmax(calc(100vh - 12em), auto); */
+  /* grid-template-rows: 50vh minmax(calc(50vh - 12em), auto); */
+  grid-template-rows: 50vh minmax(calc(50vh - 12.5em), auto) minmax(
+      calc(100vh - 10.5em),
+      auto
+    );
+}
+.event-schedule {
+  display: flex;
+  /* justify-content: space-between; */
+  gap: 2rem;
+}
+
+/* .event-schedule .set-time {
+  font-family: monospace;
+} */
+
+.venue p:not(.venue__name),
+.ticket__details {
+  margin-left: 1em;
+  margin-bottom: 0;
+  font-size: smaller;
+}
+.ticket__details {
+  margin-top: 1em;
+}
+
+/* desktop */
+@media screen and (min-width: 768px) {
+  .event-schedules {
+    align-content: end;
+  }
+
+  .row.content {
+    font-size: var(--fs-med);
+  }
+  /* .event-details {
+    column-count: 2;
+  } */
+  .event__details .prefix {
+    height: var(--fs-med);
+  }
+}
+
+/* mobile */
+@media screen and (max-width: 768px) {
+  /* ul.artists li {
+    list-style: disc;
+  } */
+  .col-2 {
+    margin-top: 1em;
+    gap: 0;
+    grid-template-columns: 4rem 5fr;
+  }
+  .content-container {
+    grid-template-areas:
+      "col1"
+      "col3"
+      "col2";
+    grid-template-rows: auto !important;
+    grid-template-columns: auto;
+    display: grid;
+  }
+
+  #col1 {
+    grid-area: col1;
+  }
+  #col2 {
+    grid-area: col2;
+  }
+  #col3 {
+    grid-area: col3;
+  }
+
+  button.gallery-prev,
+  button.gallery-next {
+    bottom: 0.5em;
+    transform: 0;
+  }
+
+  .gallery-count {
+    position: unset;
+    /* margin-bottom: 0em; */
+  }
+}
+
+.event-schedule {
+  align-items: end;
+  margin-top: 1rem;
+}
+.event-schedule p {
+  margin: 0;
+}
+
+/* .artists > *:hover {
+  background-color: unset;
+} */
+
+.event-schedule {
+  display: grid;
+  gap: 0;
+  grid-template-columns: 4rem auto;
 }

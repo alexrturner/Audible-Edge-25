@@ -2,22 +2,26 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 } */
+#col1 {
+  grid-column: span 2;
 
-#col3.description {
+  overflow-y: auto;
+}
+#col2 {
   grid-column: span 4;
-  /* max-height: 66vh; */
-  overflow-y: auto; /* enable vertical scrolling */
-  scrollbar-color: var(--cc-olive-highlight) var(--cc-primary);
-  scrollbar-color: var(--cc-primary) var(--cc-purple-highlight);
-  scrollbar-color: var(--cc-scrollbar) var(--cc-primary);
-  scrollbar-width: thin;
 }
-#col1.contact {
-  grid-column: span 3;
+
+section.column {
+  grid-template-rows: unset;
 }
-#col1.contact div {
-  margin-bottom: 1em;
+.content-container {
+  width: 100%;
 }
+.content {
+  max-width: 60ch;
+  height: fit-content;
+}
+
 ul li p {
   display: inline;
 }

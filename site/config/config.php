@@ -3,7 +3,7 @@
 return [
     'debug' => false,
     'panel' => [
-        'install' => true
+        'install' => false
     ],
     'api' => [
         'basicAuth' => true
@@ -26,6 +26,12 @@ return [
             'pattern' => 'artists',
             'action'  => function () {
                 return go('/');
+            }
+        ],
+        [
+            'pattern' => 'program',
+            'action'  => function () {
+                return go('/program/program-launch');
             }
         ],
         [

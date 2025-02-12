@@ -1,246 +1,189 @@
-// - touch and scroll handling, specific to the col3 element
-// - plain text view toggle functionality
+// not the early morning transitions, full daylight, evening transitions, darkness
+function getTimeOfDayLabel() {
+  const now = new Date();
+  const hour = now.getHours();
+  if (hour >= 3 && hour < 9) return "dawn";
+  if (hour >= 9 && hour < 15) return "day";
+  if (hour >= 15 && hour < 21) return "dusk";
+  return "night";
+}
+// scroll behaviours
+let scrollTimeouts = new Map();
+let currentPositions = new Map();
 
-document.addEventListener("DOMContentLoaded", function () {
-  const handleTouchStart = function (e) {
-    this.touchStartY = e.touches[0].clientY;
+function getRandomPosition(maxOffset) {
+  return {
+    x: Math.random() * maxOffset - maxOffset / 2,
+    y: Math.random() * maxOffset - maxOffset / 2,
   };
+}
+const columnAnimationLocks = new Map();
 
-  const touchContext = { touchStartY: 0 };
+function handleScroll(column) {
+  // requestAnimationFrame
+  if (column.scrollRAF) {
+    cancelAnimationFrame(column.scrollRAF);
+  }
 
-  const handleTouchMove = function (e) {
-    e.preventDefault();
-    const touchEndY = e.touches[0].clientY;
-    const deltaY = this.touchStartY - touchEndY;
-    const col3 = document.getElementById("col3");
-    col3.scrollTop += deltaY;
-    this.touchStartY = touchEndY;
-  }.bind(touchContext);
+  column.scrollRAF = requestAnimationFrame(() => {
+    const transformWeight = 5;
+    const maxOffset = 1600;
 
-  const handleWheel = function (e) {
-    e.preventDefault();
-    const col3 = document.getElementById("col3");
-    if (col3) {
-      col3.scrollTop += e.deltaY;
+    const img = column.querySelector(".icon__swamp");
+    // console.log(img);
+    if (!img) return;
+
+    // is this column is currently locked (animating)?
+    if (columnAnimationLocks.get(column)) {
+      return;
     }
-  };
 
-  let customScrollHandlingAdded = false;
-
-  // add custom scroll handling
-  function addCustomScrollHandling() {
-    // early exit
-    if (customScrollHandlingAdded) return;
-
-    window.addEventListener("touchstart", handleTouchStart.bind(touchContext), {
-      passive: false,
-    });
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
-    window.addEventListener("wheel", handleWheel, { passive: false });
-
-    customScrollHandlingAdded = true;
-  }
-
-  function removeCustomScrollHandling() {
-    if (!customScrollHandlingAdded) return;
-
-    window.removeEventListener(
-      "touchstart",
-      handleTouchStart.bind(touchContext),
-      { passive: false }
-    );
-    window.removeEventListener("touchmove", handleTouchMove, {
-      passive: false,
-    });
-    window.removeEventListener("wheel", handleWheel, { passive: false });
-
-    customScrollHandlingAdded = false;
-  }
-
-  // desktop check
-  if (window.innerWidth >= 768) {
-    addCustomScrollHandling();
-  }
-
-  // handle window resizing
-  window.addEventListener("resize", function () {
-    if (window.innerWidth >= 768 && !customScrollHandlingAdded) {
-      addCustomScrollHandling();
-    } else if (window.innerWidth < 768 && customScrollHandlingAdded) {
-      removeCustomScrollHandling();
+    // clear pending timeouts
+    if (scrollTimeouts.has(column)) {
+      clearTimeout(scrollTimeouts.get(column));
     }
+
+    const newPos = getRandomPosition(maxOffset);
+    currentPositions.set(img, newPos);
+    img.style.transform = `translate(${newPos.x}px, ${newPos.y}px)`;
+
+    // lock column for animations
+    columnAnimationLocks.set(column, true);
+
+    const unlockTimeout = setTimeout(() => {
+      columnAnimationLocks.set(column, false);
+    }, 1000);
+
+    scrollTimeouts.set(column, unlockTimeout);
   });
+}
 
-  // function to toggle styles
-  const togglePlainText = document.getElementById("togglePlainTextView");
-  const settingsButton = document.getElementById("settingsButton");
-  const settingsContainer = document.getElementById("settingsContainer");
-  const plainTextContainer = document.getElementById("plainTextContainer");
-
-  const body = document.body;
-  const menuHeaderContainer = document.querySelector(
-    ".menu-header-container-global"
+function checkMobile() {
+  const playButton = document.getElementById("toggle-mix");
+  const desktopContainer = document.querySelector(
+    ".row.desktop.settings.ancillary"
   );
-  const menuToggleButton = document.querySelector(".menu-toggle");
-  const menuItems = document.getElementById("menu-items");
-  const ulElements = document.querySelectorAll("ul");
+  const mobileContainer = document.querySelector(
+    ".mobile.header .row.viewing .space"
+  );
 
-  // update button text based on the new state
-  const isDisabledStyles = localStorage.getItem("stylesDisabled") === "true";
-  togglePlainText.textContent = !isDisabledStyles
-    ? "Plain Text View"
-    : "Styled Text View";
-
-  function applyPlainTextStyles(enable) {
-    if (enable) {
-      body.classList.add("plain-text");
-      // limit body width for ease of reading on large screens
-      body.style.maxWidth = "60em";
-
-      // add fixed position to menu header and plain text button
-      if (menuHeaderContainer) {
-        menuHeaderContainer.style.position = "fixed";
-        menuHeaderContainer.style.right = "0.3rem";
-        menuHeaderContainer.style.top = "2em";
-      }
-      if (plainTextContainer) {
-        plainTextContainer.style.position = "fixed";
-        plainTextContainer.style.right = "0.3rem";
-        plainTextContainer.style.top = "0.5rem";
-      }
-
-      // if (menuToggleButton.attributes.expanded) {
-      if (!body.classList.contains("home") && menuToggleButton) {
-        menuToggleButton.setAttribute("expanded", "false");
-        menuItems.style.visibility = "hidden";
-        menuItems.style.opacity = "0";
-        menuItems.style.pointerEvents = "none";
-      }
-      if (settingsContainer) {
-        settingsButton.style.display = "none";
-        settingsContainer.style.display = "none";
-      }
-
-      ulElements.forEach((ul) => {
-        ul.style.margin = "0";
-        ul.style.padding = "0";
-      });
-
-      // remove custom scroll handling in plain text mode
-      removeCustomScrollHandling();
-    } else {
-      body.classList.remove("plain-text");
-      body.style.maxWidth = "";
-      if (menuHeaderContainer) {
-        menuHeaderContainer.style.position = "";
-        menuHeaderContainer.style.right = "";
-        menuHeaderContainer.style.top = "";
-      }
-      if (settingsContainer) {
-        settingsButton.style.display = "block";
-        settingsContainer.style.display = "flex";
-      }
-      ulElements.forEach((ul) => {
-        ul.style.margin = "";
-        ul.style.padding = "";
-      });
-      // add custom scroll handling in styled text mode
-      addCustomScrollHandling();
+  if (window.innerWidth <= 768) {
+    document.body.classList.add("mobile");
+    // move play button to mobile container, if it exists
+    if (playButton && mobileContainer) {
+      mobileContainer.appendChild(playButton);
+    }
+  } else {
+    document.body.classList.remove("mobile");
+    if (playButton && desktopContainer) {
+      desktopContainer.appendChild(playButton);
     }
   }
+}
 
-  if (isDisabledStyles) {
-    applyPlainTextStyles(true);
-  }
+// check on load & resize window resize
+document.addEventListener("DOMContentLoaded", checkMobile);
+window.addEventListener("resize", checkMobile);
 
-  togglePlainText.addEventListener("click", function () {
-    const isDisabled = localStorage.getItem("stylesDisabled") === "true";
-    // Toggle the disabled state based on the opposite of the current state
-    for (let i = 0; i < document.styleSheets.length; i++) {
-      document.styleSheets[i].disabled = !isDisabled;
-    }
-    // Save the new state in localStorage
-    localStorage.setItem("stylesDisabled", !isDisabled);
-
-    // Apply or remove plain text styles
-    applyPlainTextStyles(!isDisabled);
-
-    if (settingsButton) {
-      settingsButton.style.display = !isDisabled
-        ? "block !important"
-        : "none !important";
-    }
-    // update button text based on the new state
-    togglePlainText.textContent = isDisabled
-      ? "Plain Text View"
-      : "Styled Text View";
+// desktop scroll logic
+document.addEventListener("DOMContentLoaded", function () {
+  const columns = document.querySelectorAll(".column");
+  columns.forEach((column) => {
+    column.addEventListener("scroll", () => handleScroll(column));
   });
 
-  // function to toggle visibility of sections
-  function toggleSection(button) {
-    // toggle aria-expanded attribute of button
-    const isExpanded = button.getAttribute("aria-expanded") === "true";
-    button.setAttribute("aria-expanded", !isExpanded);
+  // mobile scroll logic
+  // check mobile
+  checkMobile();
 
-    // show/hide the related section content
-    // toggle display on mobile, and visibility on desktop to avoid layout issues
-    const sectionId = button.getAttribute("aria-controls");
-    const sectionItems = document.getElementById(sectionId);
+  if (document.body.classList.contains("mobile")) {
+    let isAnimating = false;
 
-    const isMobile = window.innerWidth <= 768;
+    window.addEventListener("scroll", () => {
+      if (!isAnimating) {
+        isAnimating = true;
 
-    if (isMobile) {
-      sectionItems.style.display = isExpanded ? "none" : "block";
-    } else {
-      if (isExpanded) {
-        sectionItems.style.opacity = "0";
-        sectionItems.style.visibility = "hidden";
-        sectionItems.style.pointerEvents = "none";
-      } else {
-        sectionItems.style.opacity = "1";
-        sectionItems.style.visibility = "visible";
-        sectionItems.style.pointerEvents = "all";
-      }
-    }
+        const imgs = document.querySelectorAll(".icon__swamp");
+        imgs.forEach((img) => {
+          const newPos = getRandomPosition(400);
+          img.style.transform = `translate(${newPos.x}px, ${newPos.y}px)`;
+        });
 
-    // update button list-style
-    var parent = button.closest("li.first-item");
-    if (parent) {
-      parent.classList.toggle("list-style-circle", isExpanded);
-    }
-    var desktopMenu = document.getElementById("desktop-menu");
-    if (desktopMenu) {
-      if (button.classList.contains("menu-toggle")) {
-        button.classList.toggle("list-style-circle");
-        desktopMenu.classList.toggle("hidden");
-      }
-    }
-  }
-
-  // attach event listeners to all toggle buttons
-  document.querySelectorAll(".toggle").forEach(function (toggle) {
-    toggle.addEventListener("click", function () {
-      toggleSection(this);
-    });
-  });
-
-  // function to init sections
-  function initSections() {
-    const isMobile = window.innerWidth <= 768;
-    const sections = document.querySelectorAll("[aria-controls]");
-
-    sections.forEach((button) => {
-      const sectionId = button.getAttribute("aria-controls");
-      const sectionItems = document.getElementById(sectionId);
-
-      // style collapsed sections for desktop
-      const isExpanded = button.getAttribute("aria-expanded") === "true";
-      const parent = button.closest("li.first-item");
-      if (parent) {
-        parent.classList.toggle("list-style-circle", !isExpanded);
+        // wait before next call
+        setTimeout(() => {
+          isAnimating = false;
+        }, 500);
       }
     });
   }
-  // initialize sections on page load
-  initSections();
+});
+
+// change mode
+function setHighlightColors() {
+  const timeOfDay = getTimeOfDayLabel();
+  const root = document.documentElement;
+
+  // set highlight colors based on time of day
+  root.style.setProperty(
+    "--cc-highlight-background",
+    `var(--cc-${timeOfDay}-background)`
+  );
+  root.style.setProperty(
+    "--cc-highlight-foreground",
+    `var(--cc-${timeOfDay}-foreground)`
+  );
+}
+document.body.dataset.timeOfDay = getTimeOfDayLabel();
+setHighlightColors();
+
+function changeMode(button) {
+  const modeElements = document.querySelectorAll(".mode");
+
+  // use first element to check current state
+  const currentMode = modeElements[0].textContent;
+
+  if (currentMode === "high contrast") {
+    modeElements.forEach((element) => {
+      element.textContent = "burrowing";
+    });
+
+    const timeOfDay = document.body.dataset.timeOfDay;
+    document.body.classList.toggle(timeOfDay + "-background");
+    document.body.classList.toggle(timeOfDay + "-foreground");
+    document.body.classList.toggle("mode-high-contrast");
+  } else {
+    modeElements.forEach((element) => {
+      element.textContent = "high contrast";
+    });
+
+    // reset classes, then add high contrast
+    document.body.className = "";
+    checkMobile();
+    document.body.classList.toggle("mode-high-contrast");
+  }
+
+  // sync checkbox states
+  const checkboxes = document.querySelectorAll(
+    'input[type="checkbox"][id^="toggle-mode-"]'
+  );
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = currentMode === "high contrast";
+  });
+  // show time of day selector
+
+  const icons = document.querySelectorAll(".icon__swamp svg");
+  // console.log(icons);
+  icons.forEach((icon) => {
+    // icon.style.display = icon.style.display === "block" ? "none" : "block";
+    icon.style.opacity = icon.style.opacity === "1" ? "0" : "1";
+  });
+}
+
+addEventListener("DOMContentLoaded", () => {
+  let changeModeButtons = document.querySelectorAll(".mode");
+  changeModeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      changeMode(button);
+    });
+  });
 });

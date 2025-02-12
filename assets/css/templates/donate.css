@@ -1,8 +1,17 @@
 #col1 {
-  grid-column: span 4;
-  /* max-height: 66vh; */
-  overflow-y: auto; /* enable vertical scrolling */
+  grid-column: span 2;
+
+  overflow-y: auto;
 }
-#col3 {
-  grid-column: span 3;
+#col2 {
+  grid-column: span 4;
+}
+
+section.column {
+  grid-template-rows: unset;
+}
+
+.content {
+  max-width: 60ch;
+  height: fit-content;
 }
