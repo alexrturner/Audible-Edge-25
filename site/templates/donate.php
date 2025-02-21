@@ -3,7 +3,7 @@
 <div class="container">
     <?php snippet('nav') ?>
     <main class="content-container">
-        <section class="column a" id="col1">
+        <section class="column a min-height" id="col1">
             <div class="donate">
                 <a class="button__link" aria-label="Visit Audible Edge 2025 ACF fundraiser website" aria-type="link" href="<?= $page->link()->url() ?>">
                     <h1 class="section-title lighten"><?= $page->link_text() ?> ↗</h1>
@@ -11,7 +11,7 @@
 
             </div>
         </section>
-        <section id="col2" class="column b">
+        <section id="col2" class="column b min-height">
             <div class="content lighten">
                 <?= $page->description() ?>
             </div>

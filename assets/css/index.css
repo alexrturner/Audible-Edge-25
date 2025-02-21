@@ -619,3 +619,37 @@ section > div > p:first-child {
     margin-top: 2rem;
   }
 }
+
+/* erebus */
+.descriptors {
+  display: inline-flex;
+  gap: 0.6em;
+  padding-top: 0.6em;
+}
+
+.description span.prefix {
+  margin-right: 2ch;
+}
+
+.descriptors svg {
+  width: auto;
+  cursor: pointer;
+  height: var(--fs-body);
+  scale: 2;
+}
+
+.descriptors svg:hover {
+  transform: scale(1.5);
+}
+
+.tooltip {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  pointer-events: none;
+  z-index: 100;
+  display: none;
+}

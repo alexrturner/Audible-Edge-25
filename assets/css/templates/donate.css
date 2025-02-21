@@ -7,7 +7,7 @@
   grid-column: span 4;
 }
 
-section.column {
+section.column.min-height {
   grid-template-rows: unset;
 }
 

@@ -19,6 +19,12 @@ fields:
     width: 1/3
     default: true
 
+  icon_label:
+    label: Icon Label
+    type: text
+    help: Event is "..."
+    width: 1/2
+
   position:
     label: Display Position
     type: select

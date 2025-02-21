@@ -130,7 +130,8 @@ columns:
         multiple: true
         width: 1
         help: Select the prompt descriptiors to use for this event
-        text: "{{ file.promptnumber }}: {{ file.prompt }}"
+        text: "{{ file.icon_label }}: {{ file.prompt }}"
+        
       eventSchedule:
         label: Event Schedule
         type: structure

@@ -1,6 +1,9 @@
 <?php
+
+$parentPageSlug = $parentPageSlug ?? 'program';
+
 // Get all events and sort them by start date/time
-$events = page('program')->children()
+$events = page($parentPageSlug)->children()
     ->listed()
     ->sortBy('start_date', 'asc', 'start_time', 'asc');
 
@@ -42,21 +45,28 @@ foreach ($events as $event) {
                     <h2 class="event-title lighten">
                         <a href="<?= $event->url() ?>"><?= $event->title() ?></a>
                     </h2>
-                    <div class="description lighten">
-                        <span class="prefix sml">a</span>
-                        <div class="descriptors">
-                            <?php foreach ($event->prompts()->toFiles() as $prompt): ?>
-                                <!-- TODO: comma is still showing on last prompt -->
-                                <img
-                                    class="descriptor"
-                                    data-sound="<?= $prompt->promptnumber() ?>"
-                                    data-tooltip="<?= $prompt->prompt() ?>"
-                                    alt="<?= $prompt->prompt() ?>"
-                                    src="<?= $prompt->url() ?>" /><?= !$prompt->isLast() ? ',' : '' ?>
-                            <?php endforeach ?>
+                    <?php if ($event->prompts()->isNotEmpty()): ?>
+                        <div class="description lighten">
+                            <span class="prefix sml">a</span>
+                            <div class="descriptors">
+                                <?php
+                                $prompts = $event->prompts()->toFiles();
+                                $index = 0;
+                                foreach ($prompts as $prompt): ?>
+                                    <div
+                                        class="descriptor"
+                                        data-sound="<?= $prompt->promptnumber() ?>"
+                                        data-tooltip="<?= $prompt->icon_label() ?>"
+                                        aria-label="<?= $prompt->prompt() ?>">
+                                        <?= svg($prompt) ?>
+
+
+                                    </div><?= ++$index < $prompts->count() ? ',' : '&nbsp;' ?>
+                                <?php endforeach ?>
+                            </div>
+                            show
                         </div>
-                        show
-                    </div>
+                    <?php endif ?>
                     <div class="venue lighten">
                         <span class="prefix sml">at</span>
                         <?php if ($event->venues()->isNotEmpty()): ?>

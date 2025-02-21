@@ -6,10 +6,6 @@ $expanded = $expanded ?? "true";
 
 <style>
     header {
-        /* border-bottom: 1px solid #000; */
-        /* margin-bottom: 3em; */
-        /* padding: 1.5em 0; */
-
         /* sticky */
         position: fixed;
         top: 0;
@@ -82,10 +78,6 @@ $expanded = $expanded ?? "true";
             margin-bottom: 0;
             pointer-events: none;
         }
-
-        /* .title--edge {
-            margin-left: 0.5em;
-        } */
     }
 
     /* mobile */
@@ -123,15 +115,6 @@ $expanded = $expanded ?? "true";
     }
 </style>
 
-<!-- 
-<ul>
-    <li><a href="#">Program</a></li>
-    <li><a href="#">Night School</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Support</a></li>
-    <li><a href="#">Contact</a></li>
-</ul> 
--->
 <header>
     <div class="title col flex-end">
         <div class="logo-container" title="Audible">
@@ -167,10 +150,27 @@ $expanded = $expanded ?? "true";
         </button>
 
         <nav class="menu-items-container">
-            <ul class="items <?php e($expanded === "true", "", "hidden__visibility"); ?>" id="menu-items">
 
-                <li><a href="/program/program-launch" class="lighten menu-item">Program Launch</a></li>
-                <li><a href="/donate" class="lighten menu-item">Donate</a></li>
+            <ul class="menu-items items <?php e($expanded === "true", "", "hidden__visibility"); ?>" id="menu-items">
+
+                <?php if (date('Y-m-d') < '2025-02-26'): ?>
+                    <li><a href="/program/program-launch" class="lighten">Program Launch</a></li>
+                    <li><a href="/donate" class="lighten">Donate</a></li>
+
+                <?php else: ?>
+
+                    <li><a href="/program/program-launch" class="lighten">Program Launch</a></li>
+
+                    <?php foreach ($site->children()->listed() as $p) : ?>
+                        <li class="lighten menu-item">
+                            <a <?php e($p->isOpen(), 'aria-current="page"') ?> href="<?= $p->url() ?>" class="lighten menu-link<?php e($p->isOpen(), ' active') ?>">
+                                <?= $p->title()->esc() ?>
+                            </a>
+                        </li>
+
+                    <?php endforeach ?>
+
+                <?php endif ?>
             </ul>
         </nav>
 

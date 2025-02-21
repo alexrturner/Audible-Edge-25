@@ -2,6 +2,7 @@
   '@auto',
 ]); ?>
 
+<?= js('assets/js/script.js') ?>
 <?php if (!$page->isHomePage()) : ?>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -11,7 +12,7 @@
       });
     });
   </script>
-  <?= js('assets/js/script.js') ?>
+
 <?php endif; ?>
 
 <div class="overlay" style="display: none;">

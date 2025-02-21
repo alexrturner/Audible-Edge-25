@@ -34,6 +34,28 @@ $swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
                 <span><?= kt($subtitle) ?></span>
             <?php endif; ?>
         </div>
+
+        <?php if ($page->prompts()->isNotEmpty()): ?>
+            <div class="description lighten">
+                <span class="prefix sml">a</span>
+                <div class="descriptors">
+                    <?php
+                    $prompts = $page->prompts()->toFiles();
+                    $index = 0;
+                    foreach ($prompts as $prompt): ?>
+                        <div
+                            class="descriptor"
+                            data-sound="<?= $prompt->promptnumber() ?>"
+                            data-tooltip="<?= $prompt->icon_label() ?>"
+                            aria-label="<?= $prompt->prompt() ?>">
+                            <?= svg($prompt) ?>
+                        </div><?= ++$index < $prompts->count() ? ',' : '&nbsp;' ?>
+                    <?php endforeach ?>
+                </div>
+                show
+            </div>
+        <?php endif ?>
+
     </div>
 
     <div class="row content event__details">
@@ -82,9 +104,6 @@ $swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
                 </div>
             </div>
         </div>
-
-
-
 
         <?php
         // tickets

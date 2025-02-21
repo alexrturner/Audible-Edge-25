@@ -1,9 +1,14 @@
 <?php snippet('header') ?>
 
-<main class="content-container">
 
-    <?php snippet('event-content', ['sectionSubtitle' => 'Nightschool']) ?>
+<div class="container">
+    <?php snippet('nav') ?>
 
-</main>
+    <main class="content-container">
+
+        <?php snippet('event-content', ['sectionSubtitle' => 'Nightschool']) ?>
+
+    </main>
+</div>
 
 <?php snippet('footer') ?>

@@ -4,7 +4,7 @@ $activeVisitors = countActiveVisitors();
 $timeOfDay = getTimeOfDayBoorloo();
 
 $swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
-
+date_default_timezone_set('Australia/Perth');
 ?>
 
 <?php snippet('header') ?>
@@ -35,9 +35,25 @@ $swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
             </button>
             <ul class="menu-items items <?php e($expanded === "true", "", "hidden__visibility"); ?>" id="menu-items">
 
-              <li><a href="/program/program-launch" class="lighten">Program Launch</a></li>
-              <li><a href="/donate" class="lighten">Donate</a></li>
+              <?php if (date('Y-m-d') < '2025-02-26'): ?>
+                <li><a href="/program/program-launch" class="lighten">Program Launch</a></li>
+                <li><a href="/donate" class="lighten">Donate</a></li>
 
+              <?php else: ?>
+
+                <li><a href="/program/program-launch" class="lighten">Program Launch</a></li>
+                <li><a href="/donate" class="lighten">Donate</a></li>
+
+                <?php foreach ($site->children()->listed() as $p) : ?>
+                  <li class="lighten menu-item">
+                    <a <?php e($p->isOpen(), 'aria-current="page"') ?> href="<?= $p->url() ?>" class="lighten menu-link<?php e($p->isOpen(), ' active') ?>">
+                      <?= $p->title()->esc() ?>
+                    </a>
+                  </li>
+
+                <?php endforeach ?>
+
+              <?php endif ?>
             </ul>
           </nav>
         </div>
@@ -200,8 +216,26 @@ $swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
 
           <ul class="menu-items items <?php e($expanded === "true", "", "hidden__visibility"); ?>" id="menu-items-desktop">
 
-            <li><a href="/program/program-launch" class="lighten">Program Launch</a></li>
-            <li><a href="/donate" class="lighten">Donate</a></li>
+            <?php
+
+            if (date('Y-m-d') < '2025-02-26'): ?>
+              <li><a href="/program/program-launch" class="lighten">Program Launch</a></li>
+              <li><a href="/donate" class="lighten">Donate</a></li>
+
+            <?php else: ?>
+
+              <li><a href="/program/program-launch" class="lighten">Program Launch</a></li>
+
+              <?php foreach ($site->children()->listed() as $p) : ?>
+                <li class="lighten menu-item">
+                  <a <?php e($p->isOpen(), 'aria-current="page"') ?> href="<?= $p->url() ?>" class="lighten menu-link<?php e($p->isOpen(), ' active') ?>">
+                    <?= $p->title()->esc() ?>
+                  </a>
+                </li>
+
+              <?php endforeach ?>
+
+            <?php endif ?>
 
           </ul>
         </nav>
@@ -221,7 +255,7 @@ $swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
 
         <div>
           <span class="lighten">it is currently</span>
-          <span class="time gap">
+          <span id="time-is-now" class="time gap">
             <span class="hour"></span>:<span class="minute"></span>
           </span>
           <span class="lighten">in Boorloo,</span>
