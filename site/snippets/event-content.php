@@ -12,19 +12,15 @@ $eventSchedules = $page->eventSchedule()->toStructure() ?? [];
 $description = kt($page->description()) ?? '';
 $accessibility = kt($page->accessibility()) ?? '';
 $artists = $page->artist_link()->toPages() ?? [];
-
-
-// format time
-$start_time = $page->start_time()->toDate('g' . (substr($page->start_time()->toDate('i'), 0, 2) === '00' ? '' : ':i') . 'a');
-
-$end_time = $page->end_time()->toDate('g' . (substr($page->end_time()->toDate('i'), 0, 2) === '00' ? '' : ':i') . 'a');
-
 $swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
 
+
+// time
+$multi_day = $page->start_date()->toDate('Y-m-d') !== $page->end_date()->toDate('Y-m-d');
+$start_time = $page->start_time()->toDate('g' . (substr($page->start_time()->toDate('i'), 0, 2) === '00' ? '' : ':i') . 'a');
+$end_time = $page->end_time()->toDate('g' . (substr($page->end_time()->toDate('i'), 0, 2) === '00' ? '' : ':i') . 'a');
 ?>
 <section class="section column a" id="col1">
-
-    <!-- <h2 class="section-header mobile__section-subtitle"><?= $sectionSubtitle ?> Event</h2> -->
 
     <div class="row">
         <h1 class="section-title lighten"><?= $page->title()->html() ?></h1>
@@ -52,7 +48,7 @@ $swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
                         </div><?= ++$index < $prompts->count() ? ',' : '&nbsp;' ?>
                     <?php endforeach ?>
                 </div>
-                show
+                <?= $sectionSubtitle === 'Nightschool' ? 'Night School event' : 'show' ?>
             </div>
         <?php endif ?>
 
@@ -97,13 +93,22 @@ $swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
             <h2 class="section-header prefix sml">on</h2>
             <div class="datetime">
                 <div class="date">
-                    <?= $page->start_date()->toDate('l, F j') ?>
+                    <?= $page->start_date()->toDate('l, F j') ?> <?= $multi_day ? ', <span class="time">' . $start_time . '</span>' : '' ?>
                 </div>
-                <div class="time">
-                    <?= $start_time ?>–<?= $end_time     ?>
-                </div>
+                <?php if ($multi_day): ?>
+                    <div class="time">
+                        till
+                        <?= $page->end_date()->toDate('l, F j') ?>, <?= $end_time ?>
+                    </div>
+                <?php else: ?>
+                    <div class="time">
+                        <?= $start_time ?>–<?= $end_time ?>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
+
+
 
         <?php
         // tickets
@@ -186,7 +191,6 @@ $swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
         <?php
         // event accessibility
         if ($accessibility = kt($page->accessibility())) : ?>
-            <!-- <h3 class="section__subtitle pseudo-list-item">Accessibility information</h3> -->
             <h2 id="accessibility" class="title lighten"><a href="#accessibility">Accessibility</a></h2>
             <div class="accessibility-info content lighten"><?= $accessibility ?></div>
         <?php endif; ?>
@@ -212,25 +216,30 @@ $swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
         <?php foreach ($page->eventSchedule()->toStructure() as $schedule) : ?>
             <li class="event-schedule">
                 <div class="details sml">
-                    <?php if ($schedule->location()->isNotEmpty()) : ?>
-                        <p class="location"><?= $schedule->location()->html() ?></p>
-                    <?php endif; ?>
-
-                    <?php if ($schedule->scheduleType()->value() === 'set time' && $schedule->setTime()->isNotEmpty()) : ?>
+                    <?php
+                    $is_multi_day_event = $schedule->scheduleType()->value() === 'multi-day event';
+                    $is_set_time = $schedule->scheduleType()->value() === 'set time';
+                    // set time
+                    if ($is_set_time && $schedule->setTime()->isNotEmpty()) : ?>
                         <p class="set-time"><?= $schedule->setTime()->toDate('g' . (substr($schedule->setTime()->toDate('i'), 0, 2) === '00' ? '' : ':i') . 'a') ?></p>
                     <?php endif; ?>
 
-                    <?php if ($schedule->scheduleType()->value() === 'multi-day event') : ?>
+                    <?php
+                    // multi-day event
+                    if ($is_multi_day_event) : ?>
                         <?php if ($schedule->startDate()->isNotEmpty()) : ?>
-                            <p class="start-date"><?= $schedule->startDate()->toDate('d/m/Y H:i') ?></p>
+                            <p class="start-date"><?= $schedule->startDate()->toDate('D jS, ga') ?></p>
                         <?php endif; ?>
                         <?php if ($schedule->endDate()->isNotEmpty()) : ?>
-                            <p class="end-date"><?= $schedule->endDate()->toDate('d/m/Y H:i') ?></p>
+                            <p class="end-date"><?= $schedule->endDate()->toDate('D jS, ga') ?></p>
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
                 <div class="description">
                     <?= kt($schedule->description()) ?>
+                    <?php if ($schedule->location()->isNotEmpty()) : ?>
+                        <span class="location">at <?= $schedule->location()->html() ?></span>
+                    <?php endif; ?>
                 </div>
             </li>
         <?php endforeach; ?>

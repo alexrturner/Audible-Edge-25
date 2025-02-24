@@ -49,6 +49,12 @@ $swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
                     </div>
                 <?php endif; ?>
 
+                <?php if ($page->support()->isNotEmpty()) : ?>
+                    <div class="col-2">
+                        <h2 class="section-header prefix sml">supported by</h2>
+                        <p class="lighten"> <?= html($page->support()) ?></p>
+                    </div>
+                <?php endif; ?>
 
                 <?php
                 // fetch audio
@@ -88,7 +94,22 @@ $swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
                         <?= $page->bio_long()->kt() ?>
                     </div>
                 <?php endif; ?>
+
+                <?php $links = $page->links()->toStructure(); ?>
+                <?php if ($links->isNotEmpty()) : ?>
+                    <ul class="artist-links">
+                        <?php foreach ($links as $link) : ?>
+                            <li class="lighten">
+                                <a class="serif italic" href="<?= $link->url() ?>" <?= $link->popup()->toBool() ? 'target="_blank"' : '' ?>>
+                                    <?= $link->text()->html() ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
             </div>
+
+
 
 
             <?php if ($page->credits()->count()->toArray() > 0) : ?>
@@ -116,24 +137,6 @@ $swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
             <?php snippet('gallery', ['images' => $page->images()]); ?>
 
 
-
-            <?php $links = $page->links()->toStructure(); ?>
-            <?php if ($links->isNotEmpty()) : ?>
-                <ul class="artist-links">
-                    <?php foreach ($links as $link) : ?>
-                        <li class="lighten">
-                            <a class="serif italic" href="<?= $link->url() ?>" <?= $link->popup()->toBool() ? 'target="_blank"' : '' ?>>
-
-                                <?= $link->text()->html() ?>
-                            </a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php endif; ?>
-
-            <?php if ($page->support()->isNotEmpty()) : ?>
-                <p class="support"><span>Supported by: </span><?= html($page->support()) ?></p>
-            <?php endif; ?>
 
             <div class="icon__swamp" id="icon-color">
                 <?=

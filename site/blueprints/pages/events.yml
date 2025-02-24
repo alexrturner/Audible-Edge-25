@@ -13,6 +13,15 @@ listed:
     start_date:
       label: Start
 
+unlisted:
+  extends: sections/events
+  label: Unlisted Events
+  layout: table
+  columns:
+    title: false
+    start_date:
+      label: Start
+
 drafts:
   extends: sections/events
   label: Draft Events

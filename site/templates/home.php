@@ -35,14 +35,12 @@ date_default_timezone_set('Australia/Perth');
             </button>
             <ul class="menu-items items <?php e($expanded === "true", "", "hidden__visibility"); ?>" id="menu-items">
 
-              <?php if (date('Y-m-d') < '2025-02-26'): ?>
+              <?php if (strtotime('now') < strtotime('2025-02-26 18:00:00')): ?>
+
                 <li><a href="/program/program-launch" class="lighten">Program Launch</a></li>
                 <li><a href="/donate" class="lighten">Donate</a></li>
 
               <?php else: ?>
-
-                <li><a href="/program/program-launch" class="lighten">Program Launch</a></li>
-                <li><a href="/donate" class="lighten">Donate</a></li>
 
                 <?php foreach ($site->children()->listed() as $p) : ?>
                   <li class="lighten menu-item">
@@ -216,15 +214,13 @@ date_default_timezone_set('Australia/Perth');
 
           <ul class="menu-items items <?php e($expanded === "true", "", "hidden__visibility"); ?>" id="menu-items-desktop">
 
-            <?php
 
-            if (date('Y-m-d') < '2025-02-26'): ?>
+
+            <?php if (strtotime('now') < strtotime('2025-02-26 18:00:00')): ?>
               <li><a href="/program/program-launch" class="lighten">Program Launch</a></li>
               <li><a href="/donate" class="lighten">Donate</a></li>
 
             <?php else: ?>
-
-              <li><a href="/program/program-launch" class="lighten">Program Launch</a></li>
 
               <?php foreach ($site->children()->listed() as $p) : ?>
                 <li class="lighten menu-item">

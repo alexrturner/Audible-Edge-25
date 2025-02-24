@@ -8,6 +8,9 @@ status:
   draft:
     label: Draft
     text: The {{ page.title }} is invisible.
+  unlisted:
+    label: Unlisted
+    text: The {{ page.title }} is visible but not shared.
   listed:
     label: Published
     text: The {{ page.title }} is shared.

@@ -8,21 +8,14 @@ fields:
     label: {{ page.title }} Description
     type: textarea
   
-  # reviews:
-  #   label: Reviews
-  #   type: textarea
+  
   reviews:
     type: structure
     fields:
       review:
         label: Review
         type: text
-      # stars:
-      #   label: Rating
-      #   type: number
-      #   min: 1
-      #   max: 5
-      #   width: 1/3
+      
       reviewer:
         label: Reviewer Details
         type: text
@@ -31,3 +24,4 @@ fields:
     label: Email Newsletter Sign-up Link
     type: url
     width: 1/2
+

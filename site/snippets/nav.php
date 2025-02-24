@@ -67,7 +67,7 @@ $expanded = $expanded ?? "true";
             display: grid;
             grid-template-columns: minmax(min-content, 1fr) 1fr 2fr 2fr;
             /* margin-bottom: 2em; */
-            color: #666;
+            /* color: #666; */
 
             /* sticky */
             margin-top: 6em;

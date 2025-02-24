@@ -5,17 +5,14 @@ image:
 
 fields:
 
-  intro:
-    label: {{ page.title }} Introduction
+  page_title:
+    label: Page Title
     type: writer
-    
+    size: medium
 
   description:
     label: {{ page.title }} Description
     type: writer
     size: medium
 
-  form:
-    label: {{ page.title }} Form Introduction
-    type: writer
-    
+  

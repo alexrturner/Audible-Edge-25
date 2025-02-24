@@ -1,20 +1,18 @@
+#col1 {
+  grid-column: span 3;
+
+  overflow-y: auto;
+}
+#col2 {
+  grid-column: span 2;
+}
+
 /* 
 Layout
  */
-.form {
-  grid-column: span 3;
-}
-.intro {
-  grid-column: span 2;
-}
-.description {
-  grid-column: span 2;
-  max-height: 66vh;
-  overflow-y: auto;
-  scrollbar-color: var(--cc-olive-highlight) var(--cc-primary);
-  scrollbar-color: var(--cc-primary) var(--cc-purple-highlight);
-  scrollbar-color: var(--cc-scrollbar) var(--cc-primary);
-  scrollbar-width: thin;
+.content {
+  max-width: 60ch;
+  height: fit-content;
 }
 
 /* mobile */
@@ -39,107 +37,9 @@ Layout
 /* 
 content layout 
 */
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  gap: 1em 0;
+.content {
+  height: fit-content;
 }
-input,
-textarea {
-  color: var(--cc-olive);
-  border: 2px solid var(--cc-olive);
-  outline: none;
-  padding: 0;
-}
-button.button__link.button__submit,
-input[type="submit"] {
-  width: auto;
-  align-self: flex-end;
-  border: none;
-  font-weight: 400;
-  font-style: normal;
-  padding: 0 0.5em;
-  cursor: pointer;
-}
-
-input:focus,
-textarea:focus {
-  border-color: var(--cc-secondary);
-  outline: var(--cc-secondary) 2px;
-}
-
-.field.half {
-  display: flex;
-}
-
-.field.half input {
-  flex: 1;
-  margin-right: 5px;
-}
-
-.field.half:last-child input {
-  margin-right: 0;
-}
-
-.field,
-.field-group {
-  display: flex;
-}
-
-.field {
-  width: 100%;
-}
-
-.field-group {
-  justify-content: space-between;
-}
-
-.field.half input {
-  width: 40%;
-}
-
-.field input,
-.field textarea {
-  width: 100%;
-}
-
-@media screen and (max-width: 600px) {
-  .field input,
-  .field textarea {
-    width: 100%;
-    margin-right: 0;
-  }
-
-  .field-group {
-    margin-right: 0;
-  }
-
-  main {
-    gap: 0;
-  }
-}
-
-.form-container {
-  padding: 2em;
-  margin: auto;
-  background-color: var(--cc-bg);
-
-  margin-top: 1em;
-  position: relative;
-  border: 2px solid var(--cc-primary);
-}
-
-.form-container p {
-  font-family: var(--ff-serif);
-  font-style: italic;
-  max-width: 300px;
-  position: relative;
-  margin: auto;
-
-  width: 100%;
-  margin-bottom: 1em;
-  border: none;
-  outline: none;
+h1 {
+  width: fit-content;
 }

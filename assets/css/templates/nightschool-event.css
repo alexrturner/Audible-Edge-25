@@ -127,6 +127,11 @@ split column
     position: unset;
     /* margin-bottom: 0em; */
   }
+
+  /* ensure in line with other details */
+  .description span.prefix {
+    margin-right: 4rem;
+  }
 }
 
 .event-schedule {

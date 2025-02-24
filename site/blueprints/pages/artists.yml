@@ -12,12 +12,12 @@ listed:
 
 unlisted:
   extends: sections/artists
-  label: Past Artists
+  label: Unlisted Artists
   layout: cardlets
   limit: 50
 
 drafts:
   extends: sections/artists
-  label: Inactive Artists
+  label: Draft Artists
   layout: cardlets
   limit: 50

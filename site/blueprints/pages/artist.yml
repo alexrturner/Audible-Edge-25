@@ -5,7 +5,10 @@ icon: 🦑
 status:
   draft:
     label: Draft
-    text: The project is still in draft.
+    text: The artist is still in draft.
+  unlisted:
+    label: Unlisted
+    text: The artist is visible but not shared.
   listed:
     label: Published
     text: The artist is online.
@@ -95,24 +98,22 @@ columns:
           support:
             label: Supported By
             type: text
+
   sidebar:
     width: 1/3
     sections:
-      media:
-        type: fields
-        fields:
-          images:
-            label: Images
-            type: files
-            layout: cards
-            size: small
-            accepts:
-              - image/*
-            image:
-              ratio: 5/4
-              cover: true
-          sounds:
-            label: Sounds
-            type: files
-            template: audio
-            layout: list
+      images:
+        type: files
+        label: Images
+        layout: cards
+        size: small
+        accepts:
+          - image/*
+        image:
+          ratio: 5/4
+          cover: true
+      sounds:
+        type: files
+        label: Sounds
+        template: audio
+        layout: list

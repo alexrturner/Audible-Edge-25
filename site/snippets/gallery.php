@@ -12,9 +12,10 @@
         display: none;
         text-align: center;
         align-items: start;
+
+        justify-content: center;
         margin: 0 auto;
-        justify-content: start;
-        /* justify-content: center; */
+        /* justify-content: start; */
 
     }
 
@@ -50,10 +51,17 @@
 
         /* height: auto; */
 
-        width: 100%;
+        /* width: 100%; */
         max-height: calc(100vh - 14em);
         object-fit: cover;
-        max-height: 50vh;
+        /* max-height: 50vh; */
+        /* height: 100%; */
+        height: 50vh;
+    }
+
+    .gallery-images figure img {
+
+        height: auto;
     }
 
     @media screen and (max-width: 768px) {

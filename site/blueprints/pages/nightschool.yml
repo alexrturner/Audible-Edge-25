@@ -25,6 +25,10 @@ columns:
       content:
         type: fields
         fields:
+          description_title:
+            type: text
+            label: Description Title
+
           description:
             type: writer
             label: {{ page.title }} Description

@@ -60,8 +60,8 @@ return function ($kirby, $page) {
                     'content' => [
                         'date' => date('Y-m-d h:m'),
                         'promptNumber' => $promptNumber,
-                        'prompt' => $promptText
-
+                        'prompt' => $promptText,
+                        'approved' => 'false',
                     ]
                 ]);
                 // success mssg here ? 

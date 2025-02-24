@@ -2,12 +2,12 @@
 
 $parentPageSlug = $parentPageSlug ?? 'program';
 
-// Get all events and sort them by start date/time
+// get sorted events
 $events = page($parentPageSlug)->children()
     ->listed()
     ->sortBy('start_date', 'asc', 'start_time', 'asc');
 
-// Group events by date
+// group events by date
 $eventsByDate = [];
 foreach ($events as $event) {
     $date = $event->start_date()->toDate('l, F j');
@@ -16,6 +16,17 @@ foreach ($events as $event) {
 ?>
 
 <div class="program-item-container">
+    <?php if ($page->description()->isNotEmpty()) : ?>
+        <details>
+            <summary>
+                <span class="lighten"><?= $page->description_title() ?></span>
+            </summary>
+            <div class="lighten">
+                <?= kt($page->description()) ?>
+            </div>
+        </details>
+    <?php endif; ?>
+
     <?php
     $previousDate = null;
     foreach ($eventsByDate as $date => $dayEvents):
@@ -52,10 +63,14 @@ foreach ($events as $event) {
                                 <?php
                                 $prompts = $event->prompts()->toFiles();
                                 $index = 0;
-                                foreach ($prompts as $prompt): ?>
+
+                                foreach ($prompts as $prompt):
+                                    $promptNumber = substr($prompt->filename(), 0, 2);
+
+                                ?>
                                     <div
                                         class="descriptor"
-                                        data-sound="<?= $prompt->promptnumber() ?>"
+                                        data-sound="<?= $promptNumber ?>"
                                         data-tooltip="<?= $prompt->icon_label() ?>"
                                         aria-label="<?= $prompt->prompt() ?>">
                                         <?= svg($prompt) ?>
@@ -68,20 +83,21 @@ foreach ($events as $event) {
                         </div>
                     <?php endif ?>
                     <div class="venue lighten">
-                        <span class="prefix sml">at</span>
-                        <?php if ($event->venues()->isNotEmpty()): ?>
-                            <span><?= $event->venues()->toPages()->first()->title() ?></span>
+                        <span class="prefix sml">at</span><?php if ($event->venues()->isNotEmpty()): ?><span><?= $event->venues()->toPages()->first()->title() ?></span>
                         <?php else: ?>
                             <span><?= $event->location() ?></span>
                         <?php endif ?>
                     </div>
                 </div>
                 <div class="artists">
-                    <?php foreach ($event->artist_link()->toPages() as $artist): ?>
-                        <div class="artist lighten">
-                            <a href="<?= $artist->url() ?>"><?= $artist->title() ?></a>
-                        </div>
-                    <?php endforeach ?>
+                    <span class="prefix sml">with</span>
+                    <div class="artists-list">
+                        <?php foreach ($event->artist_link()->toPages() as $artist): ?>
+                            <div class="artist lighten">
+                                <a href="<?= $artist->url() ?>"><?= $artist->title() ?></a>
+                            </div>
+                        <?php endforeach ?>
+                    </div>
                 </div>
             </div>
     <?php

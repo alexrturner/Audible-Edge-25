@@ -43,6 +43,10 @@ h6 {
   flex-direction: column;
 }
 
+span.prefix {
+  margin-right: 2ch;
+}
+
 /* underline border */
 .artists span,
 .description,
@@ -53,7 +57,7 @@ h6 {
   display: inherit;
 }
 
-.artists > *,
+.artists .artist,
 .event-title,
 .time,
 .date,
@@ -131,5 +135,30 @@ h6 {
   .event > *:hover,
   .artists > *:hover {
     background-color: unset;
+  }
+}
+
+.artists span.prefix {
+  display: none;
+}
+
+/* mobile */
+@media screen and (max-width: 767px) {
+  .artists {
+    display: grid;
+    grid-template-columns: 2rem auto;
+  }
+  .artists span.prefix,
+  span.prefix {
+    height: 2rem;
+    display: inline-block;
+    align-content: end;
+    width: 2rem;
+  }
+  .description span.prefix {
+    margin-right: 0;
+  }
+  .venue {
+    padding-top: 0;
   }
 }

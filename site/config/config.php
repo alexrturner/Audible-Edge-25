@@ -31,7 +31,26 @@ return [
         [
             'pattern' => 'program',
             'action'  => function () {
-                return go('/program/program-launch');
+                $launchDate = new DateTime('2025-02-26');
+                $now = new DateTime();
+
+                if ($now < $launchDate) {
+                    // check user
+                    if (kirby()->user()) {
+                        return page('program');
+                    }
+                    // if no user, redirect
+                    return go('/program/program-launch');
+                }
+
+                return page('program');
+            }
+        ],
+        [
+            'pattern' => 'tickets',
+            'action'  => function () {
+
+                return go('https://events.humanitix.com/audible-edge-25/tickets');
             }
         ],
         [

@@ -7,7 +7,6 @@
 </div>
 
 <script>
-    // sound player
     class SoundPlayer {
         constructor() {
 
@@ -26,25 +25,107 @@
             this.soundMap = {};
             this.currentIndex = {};
 
-            for (let i = 0; i <= nPrompts; i++) {
-                const promptNumber = i.toString().padStart(2, '0');
-                this.soundMap[promptNumber] = this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
-                                                                    ->filterBy('promptnumber', "' + promptNumber + '")
-                                                                    ->pluck('url')) ?>);
-            }
+            this.soundMap = {
+                '00': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '00')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+                '01': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '01')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+                '02': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '02')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+                '03': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '03')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+                '04': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '04')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+                '05': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '05')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+                '06': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '06')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+                '07': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '07')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+                '08': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '08')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+                '09': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '09')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+                '10': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '10')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+                '11': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '11')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+                '12': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '12')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+                '13': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '13')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+                '14': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '14')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+                '15': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '15')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+                '16': this.shuffleArray(<?= json_encode(page('storage')->files()->filterBy('template', 'upload')
+                                            ->filterBy('promptnumber', '16')
+                                            ->filterBy('approved', 'true')
+                                            ->pluck('url')) ?>),
+            };
 
 
             // available sounds
             // console.log('sound map :', this.soundMap);
 
             this.currentIndex = {}
-            for (let i = 0; i <= nPrompts; i++) {
-                const promptNumber = i.toString().padStart(2, '0');
-                this.currentIndex[promptNumber] = 0;
-            }
+            // for (let i = 0; i <= nPrompts; i++) {
+            //     const promptNumber = i.toString().padStart(2, '0');
+            //     this.currentIndex[promptNumber] = 0;
+            // }
 
+            this.currentIndex = {
+                '00': 0,
+                '01': 0,
+                '02': 0,
+                '03': 0,
+                '04': 0,
+                '05': 0,
+                '06': 0,
+                '07': 0,
+                '08': 0,
+                '09': 0,
+                '10': 0,
+                '11': 0,
+                '12': 0,
+                '13': 0,
+                '14': 0,
+                '15': 0,
+                '16': 0,
+            };
 
-            // preload audio elements
             this.preloadAudio();
             this.initEventListeners();
         }
@@ -73,11 +154,9 @@
         }
 
         playSound(soundType) {
-            console.log(`Attempting to play sound type: ${soundType}`);
-
             const sounds = this.audioElements[soundType];
             if (!sounds || !sounds.length) {
-                console.error(`No sounds found for type: ${soundType}`);
+                console.error(`??? no sounds found for ${soundType}`);
                 return;
             }
 
@@ -108,19 +187,34 @@
 
         initEventListeners() {
             const icons = document.querySelectorAll('.descriptor');
-            // console.log(`Found ${icons.length} descriptor icons`);
+            // console.log(`${icons.length} descriptor icons`);
 
             icons.forEach(icon => {
-                icon.addEventListener('mouseover', (e) => {
-                    const soundType = e.target.dataset.sound;
-                    // console.log(`Icon sound type = ${soundType}`);
 
-                    if (this.soundMap[soundType]) {
-                        this.playSound(soundType);
-                    } else {
-                        console.error(`! Error: no sound map for type: ${soundType}`);
+
+
+                const playAudio = (e) => {
+                    // closest e handles event bubbling
+                    const descriptorElement = e.target.closest('.descriptor');
+                    if (!descriptorElement) {
+                        console.error('No descriptor element found');
+                        return;
                     }
-                });
+
+                    const soundType = descriptorElement.dataset.sound;
+                    if (!soundType || !this.soundMap[soundType]) {
+                        console.error('Invalid sound type:', soundType);
+                        return;
+                    }
+
+                    this.playSound(soundType);
+                };
+
+                // Always add click handler
+                icon.addEventListener('click', playAudio);
+                icon.addEventListener('mouseover', playAudio);
+
+
             });
         }
     }

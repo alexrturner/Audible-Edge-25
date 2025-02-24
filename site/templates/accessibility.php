@@ -4,7 +4,14 @@
     <?php snippet('nav') ?>
     <main class="content-container">
         <section class="column a min-height" id="col1">
-            <?= kt($page->intro()) ?>
+            <div class="content">
+                <?php if ($page->page_title()->isNotEmpty()) : ?>
+                    <h1 class="section-title lighten"><?= $page->page_title() ?></h1>
+                <?php else : ?>
+                    <h1 class="section-title lighten"><?= $page->title() ?></h1>
+                <?php endif ?>
+                <?= kt($page->intro()) ?>
+            </div>
         </section>
         <section id="col2" class="column b min-height">
             <div class="content lighten">
