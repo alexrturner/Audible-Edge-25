@@ -181,7 +181,7 @@ $expanded = $expanded ?? "true";
     </div>
 
 
-    <?php if ($page->uid() === "program") : ?>
+    <?php if ($page->uid() === "program" || $page->uid() === "nightschool") : ?>
         <div class="program-header sml">
             <div class="lighten">date</div>
             <div class="lighten">time</div>
