@@ -238,18 +238,11 @@ function changeMode(button) {
   const currentMode = modeElements[0].textContent;
 
   // only add extra height if the column isn't scrollable
-  // and it's
   if (currentMode === "high contrast") {
     const columns = document.querySelectorAll(".column");
     columns.forEach((column) => {
       const scrollHeight = column.scrollHeight;
       const clientHeight = column.clientHeight;
-
-      console.log("Column metrics:", {
-        scrollHeight,
-        clientHeight,
-        isScrollable: scrollHeight > clientHeight,
-      });
 
       if (scrollHeight <= clientHeight) {
         column.classList.remove("min-height");

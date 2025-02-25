@@ -118,7 +118,7 @@ $end_time = $page->end_time()->toDate('g' . (substr($page->end_time()->toDate('i
                 <div class="ticket__container">
                     <?php if ($ticket_link) : ?>
                         <?php if ($ticket_link->isNotEmpty()) : ?>
-                            <a href="<?= $ticket_link ?>" class="button__link lighten" aria-label="Visit to purchase tickets" aria-type="link">Tickets</a>
+                            <a href="<?= $ticket_link ?>" class="button__link lighten" aria-label="Visit to purchase tickets" aria-type="link">Bookings</a>
                         <?php endif; ?>
                     <?php endif; ?>
                     <div class="ticket__details">
@@ -181,6 +181,12 @@ $end_time = $page->end_time()->toDate('g' . (substr($page->end_time()->toDate('i
         <?= svg($swamps->filterBy('position', 'left')->first()) ?>
     </div>
 </section>
+
+<style>
+    .title {
+        scroll-margin-top: 10rem;
+    }
+</style>
 
 <!-- img, accessibility -->
 <section class="section column b" id="col2">

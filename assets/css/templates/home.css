@@ -35,6 +35,7 @@ h2.title {
   width: 100%;
   text-align: start;
 }
+
 h2.title {
   width: auto;
 }
@@ -255,9 +256,22 @@ span.lighten.year::before {
   height: 0;
 }
 
+/* small height screens - reduce fs and prompt icon height */
+@media (max-height: 768px) {
+  .prompt--input,
+  .actions button,
+  .actions .button,
+  h2.title {
+    font-size: var(--fs-med);
+  }
+  .prompt-icon {
+    min-height: 220px;
+  }
+}
+
 .action-buttons > * {
-  display: flex; /* Each grid cell becomes a flex container */
-  flex-direction: column; /* Stack contents vertically */
+  display: flex;
+  flex-direction: column;
   justify-content: flex-end;
 }
 
@@ -274,7 +288,7 @@ span.lighten.year::before {
   width: 100%;
 }
 .action-buttons {
-  grid-column: 1 / -1; /* spans both columns */
+  grid-column: 1 / -1; /* span both columns */
   display: grid;
   grid-template-columns: 1fr 1fr;
 
@@ -287,7 +301,6 @@ button.btn--info {
   height: var(--fs-subtitle);
   border-radius: 50%;
   vertical-align: top;
-  /* transition: background-color 0.2s ease; */
 }
 
 .column {

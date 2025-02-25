@@ -211,14 +211,14 @@ a {
 ul li {
   list-style: none;
 }
+.accessibility-info ul li {
+  list-style: disc;
+  margin-left: 2rem;
+}
 
 h1.section-title {
-  font-size: 5rem;
-  font-size: clamp(
-    3rem,
-    5vw + 1.5rem,
-    5rem
-  ); /* min: 3rem, preferred: 5vw + 2rem, max: 5rem */
+  /* min preferred max*/
+  font-size: clamp(3rem, 2vw + 1.5rem, 5rem);
 
   line-height: 0.9;
   font-weight: bold;
@@ -227,6 +227,9 @@ h2.title {
   font-size: var(--fs-responsive);
   display: inline-block;
   margin-bottom: 1rem;
+}
+h2.event-title {
+  font-weight: bold;
 }
 
 /* hover states */

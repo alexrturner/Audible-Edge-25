@@ -186,7 +186,7 @@ $expanded = $expanded ?? "true";
             <div class="lighten">date</div>
             <div class="lighten">time</div>
             <div class="lighten">show</div>
-            <div class="lighten">performer(s)</div>
+            <div class="lighten">presenter(s)</div>
         </div>
     <?php endif ?>
 </header>
