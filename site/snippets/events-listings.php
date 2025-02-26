@@ -9,13 +9,27 @@ $events = page($parentPageSlug)->children()
 
 // group events by date
 $eventsByDate = [];
+$swamps = $site->files()->filterBy('template', 'ae_swamp_svg');
+
 foreach ($events as $event) {
     $date = $event->start_date()->toDate('l, F j');
     $eventsByDate[$date][] = $event;
 }
+
 ?>
 
 <div class="program-item-container">
+    <div class="icons__swamp">
+        <div class="icon__swamp" id="icon-hue">
+            <?= svg($swamps->filterBy('position', 'left')->first()) ?>
+        </div>
+        <div class="icon__swamp" id="icon-saturation">
+            <?= svg($swamps->filterBy('position', 'middle')->first()) ?>
+        </div>
+        <div class="icon__swamp" id="icon-color">
+            <?= svg($swamps->filterBy('position', 'right')->first()) ?>
+        </div>
+    </div>
     <?php if ($page->description()->isNotEmpty()) : ?>
         <details>
             <summary>
@@ -104,4 +118,5 @@ foreach ($events as $event) {
         endforeach;
     endforeach
     ?>
+
 </div>

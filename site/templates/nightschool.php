@@ -6,6 +6,7 @@
     <?php snippet('events-listings', ['parentPageSlug' => 'nightschool']) ?>
 </div>
 
+
 <script>
     class SoundPlayer {
         constructor() {
@@ -133,7 +134,7 @@
         preloadAudio() {
             // foreachsoundtype
             Object.entries(this.soundMap).forEach(([soundType, urls]) => {
-                console.log(`Preloading ${urls.length} sounds for type ${soundType}`);
+                // console.log(`preloading ${urls.length} sounds for type ${soundType}`);
 
                 //  hold audio elements for this sound type
                 this.audioElements[soundType] = urls.map(url => {
@@ -145,7 +146,7 @@
         }
 
         shuffleArray(array) {
-            console.log('Shuffling array:', array);
+            // console.log('shuffling sounds', array);
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];

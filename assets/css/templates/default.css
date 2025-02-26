@@ -1,0 +1,7 @@
+#col2 {
+  grid-column: span 4;
+}
+.content {
+  max-width: 60ch;
+  height: fit-content;
+}

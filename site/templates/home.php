@@ -292,11 +292,11 @@ date_default_timezone_set('Australia/Perth');
       <h2 id="acknowledgements" class="title lighten"><a href="#acknowledgements">Acknowledgements</a></h2>
 
       <div class="content lighten">
-        <?= kirby()->page('supporters')->description()->kirbytext() ?>
+        <?= kirby()->page('acknowledgements')->description()->kirbytext() ?>
       </div>
       <div class="logos">
         <?php
-        $logos = kirby()->page('supporters')->smalllogos()->toFiles();
+        $logos = kirby()->page('acknowledgements')->smalllogos()->toFiles();
         if ($logos->count() > 0): ?>
           <?php foreach ($logos as $logo): ?>
             <div class="logo" role="img" aria-label="<?= $logo->alt() ?>">

@@ -1,4 +1,7 @@
 title: Default Page
+image:
+  back: "blue-200"
+  icon:
 
 columns:
   main:

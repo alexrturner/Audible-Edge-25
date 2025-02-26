@@ -162,3 +162,8 @@ span.prefix {
     padding-top: 0;
   }
 }
+
+.icon__swamp {
+  pointer-events: none;
+  transition: all 2s ease;
+}

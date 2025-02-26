@@ -46,13 +46,13 @@ return [
                 return page('program');
             }
         ],
-        [
-            'pattern' => 'tickets',
-            'action'  => function () {
+        // [
+        //     'pattern' => 'tickets',
+        //     'action'  => function () {
 
-                return go('https://events.humanitix.com/audible-edge-25/tickets');
-            }
-        ],
+        //         return go('https://events.humanitix.com/audible-edge-25/tickets');
+        //     }
+        // ],
         [
             'pattern' => '(:any)',
             'action'  => function ($uri) {

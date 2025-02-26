@@ -353,3 +353,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+function initSingleColumnScrollAnimation() {
+  const swampIcons = document.querySelectorAll(".icon__swamp");
+  if (swampIcons.length === 0) return;
+
+  // check if single column page (events listings)
+  const columns = document.querySelectorAll(".column");
+  if (columns.length > 0) return;
+
+  const pageHeight = document.documentElement.scrollHeight;
+  const maxHorizontalOffset = 400;
+
+  swampIcons.forEach((img) => {
+    const newPos = {
+      x: Math.random() * maxHorizontalOffset - maxHorizontalOffset / 2,
+      y: Math.random() * pageHeight * 0.9, // use 90% of page height
+    };
+    img.style.transform = `translate(${newPos.x}px, ${newPos.y}px)`;
+  });
+}
+
+// init on load
+document.addEventListener("DOMContentLoaded", initSingleColumnScrollAnimation);

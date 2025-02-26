@@ -276,6 +276,7 @@ button:focus {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 1fr;
+  width: 100%;
   /* height: var(--content-container-max-height); */
   /* width: auto;
   width: calc(100% - 1.5rem);
