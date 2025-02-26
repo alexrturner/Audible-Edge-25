@@ -31,8 +31,8 @@ return [
         [
             'pattern' => 'program',
             'action'  => function () {
-                $launchDate = new DateTime('2025-02-26');
-                $now = new DateTime();
+                $launchDate = new DateTime('2025-02-26 18:00:00', new DateTimeZone('Australia/Perth'));
+                $now = new DateTime('now', new DateTimeZone('Australia/Perth'));
 
                 if ($now < $launchDate) {
                     // check user

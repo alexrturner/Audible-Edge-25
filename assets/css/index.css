@@ -211,6 +211,8 @@ a {
 ul li {
   list-style: none;
 }
+#col2 .content ul li,
+#col3 .content ul li,
 .accessibility-info ul li {
   list-style: disc;
   margin-left: 2rem;
