@@ -19,17 +19,7 @@ foreach ($events as $event) {
 ?>
 
 <div class="program-item-container">
-    <div class="icons__swamp">
-        <div class="icon__swamp" id="icon-hue">
-            <?= svg($swamps->filterBy('position', 'left')->first()) ?>
-        </div>
-        <div class="icon__swamp" id="icon-saturation">
-            <?= svg($swamps->filterBy('position', 'middle')->first()) ?>
-        </div>
-        <div class="icon__swamp" id="icon-color">
-            <?= svg($swamps->filterBy('position', 'right')->first()) ?>
-        </div>
-    </div>
+
     <?php if ($page->description()->isNotEmpty()) : ?>
         <details>
             <summary>
@@ -39,6 +29,40 @@ foreach ($events as $event) {
                 <?= kt($page->description()) ?>
             </div>
         </details>
+    <?php endif; ?>
+    <style>
+        .button {
+            border: 1px solid var(--cc-highlight);
+            padding: 0.5rem 0rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+        }
+
+        .button svg {
+            width: 1em;
+            height: 1em;
+        }
+
+        @media (max-width: 768px) {
+            .button {
+                width: 100%;
+                display: inline-block;
+                margin: 1em 0;
+            }
+
+            .button svg {
+                height: auto;
+                width: auto;
+                position: absolute;
+            }
+        }
+    </style>
+
+    <?php if ($parentPageSlug === 'program'): ?>
+        <?php $program = $site->files()->filterBy('template', 'ae_program')->first(); ?>
+        <?php if ($program): ?>
+            <a href="<?= $program->url() ?>" class="button lighten"><?= $program->caption()->html() ?><?= svg('assets/img/download.svg') ?></a>
+        <?php endif; ?>
     <?php endif; ?>
 
     <?php
@@ -108,7 +132,25 @@ foreach ($events as $event) {
                     <div class="artists-list">
                         <?php foreach ($event->artist_link()->toPages() as $artist): ?>
                             <div class="artist lighten">
-                                <a href="<?= $artist->url() ?>"><?= $artist->title() ?></a>
+                                <a href="<?= $artist->url() ?>"><?= $artist->title() ?>
+                                    <?php
+                                    foreach ($artist->display_title()->toStructure() as $display):
+                                        $context = [];
+                                        if ($display->place()->isNotEmpty()) {
+                                            $context[] = $display->place();
+                                        }
+                                        if ($display->context()->isNotEmpty()) {
+                                            $context[] = $display->context();
+                                        }
+                                        if (!empty($context)):
+                                    ?>
+                                            <sub class="artist__context ancillary">
+                                                [<?= implode(', ', $context) ?>]
+                                            </sub>
+                                    <?php
+                                        endif;
+                                    endforeach; ?>
+                                </a>
                             </div>
                         <?php endforeach ?>
                     </div>

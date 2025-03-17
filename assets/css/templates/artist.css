@@ -2,10 +2,10 @@
   grid-template-rows: 50vh minmax(calc(100vh - 10.5em), auto);
 }
 #col2 {
-  grid-template-rows: minmax(calc(100vh - 12.5em), auto) minmax(
+  /* grid-template-rows: minmax(calc(100vh - 12.5em), auto) minmax(
       calc(100vh - 10.75rem),
       auto
-    );
+    ); */
 }
 #col3 {
   /* grid-template-rows: minmax(calc(100vh - 12em), auto); */

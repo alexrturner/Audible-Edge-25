@@ -354,7 +354,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-function initSingleColumnScrollAnimation() {
+function initSingleColumnScroll() {
   const swampIcons = document.querySelectorAll(".icon__swamp");
   if (swampIcons.length === 0) return;
 
@@ -362,17 +362,41 @@ function initSingleColumnScrollAnimation() {
   const columns = document.querySelectorAll(".column");
   if (columns.length > 0) return;
 
+  //get height
   const pageHeight = document.documentElement.scrollHeight;
   const maxHorizontalOffset = 400;
 
+  // init position
   swampIcons.forEach((img) => {
     const newPos = {
       x: Math.random() * maxHorizontalOffset - maxHorizontalOffset / 2,
-      y: Math.random() * pageHeight * 0.9, // use 90% of page height
+      y: Math.random() * pageHeight * 0.9 - 200,
     };
     img.style.transform = `translate(${newPos.x}px, ${newPos.y}px)`;
   });
+
+  let isAnimating = false;
+
+  const handleScrollSingle = () => {
+    if (!isAnimating) {
+      isAnimating = true;
+
+      swampIcons.forEach((img) => {
+        const newPos = {
+          x: Math.random() * maxHorizontalOffset - maxHorizontalOffset / 2,
+          y: Math.random() * pageHeight * 0.7 - 200,
+        };
+        img.style.transform = `translate(${newPos.x}px, ${newPos.y}px)`;
+      });
+
+      setTimeout(() => {
+        isAnimating = false;
+      }, 500);
+    }
+  };
+  const body = document.body;
+  body.addEventListener("scroll", handleScrollSingle);
 }
 
 // init on load
-document.addEventListener("DOMContentLoaded", initSingleColumnScrollAnimation);
+document.addEventListener("DOMContentLoaded", initSingleColumnScroll);

@@ -302,6 +302,10 @@ main .column {
 
 /* mobile */
 @media (max-width: 768px) {
+  .lighten.menu-item {
+    background-color: var(--cc-highlight-background);
+  }
+
   .container {
     flex-direction: column;
   }
@@ -658,4 +662,12 @@ section > div > p:first-child {
   pointer-events: none;
   z-index: 100;
   display: none;
+}
+
+.svg-fill {
+  fill: var(--cc-highlight-foreground);
+  transition: fill 0.2s ease;
+}
+.mode-high-contrast .svg-fill {
+  fill: black !important;
 }

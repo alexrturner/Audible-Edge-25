@@ -95,8 +95,12 @@ tabs:
         layout: table
         columns:
           title: false
-          prompt:
-            label: Prompt Text
+          # prompt:
+          #   label: Prompt Text
+          #   type: text
+          #   width: 1/2
+          icon_label:
+            label: Icon Label
             type: text
             width: 1/2
           is_prompt:

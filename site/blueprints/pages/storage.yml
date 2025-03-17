@@ -19,7 +19,9 @@ columns:
         layout: list
         info: "{{ file.date }}"
         text: |
+          Approved: {{ file.approved }}
           {{file.Promptnumber}}: {{ file.prompt }}
+
         sort:
           by: date
           direction: desc

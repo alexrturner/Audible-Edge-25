@@ -129,6 +129,73 @@
 
             this.preloadAudio();
             this.initEventListeners();
+
+            // autoplay
+            this.hasShownAutoplayWarning = localStorage.getItem('hasShownAutoplayWarning') === 'true';
+            this.autoplayAllowed = false;
+            this.checkAutoplayCapability();
+        }
+
+        async checkAutoplayCapability() {
+            try {
+                // create test audio e
+                const audio = new Audio();
+                audio.src = "data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjI5LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAADQABERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERERE//sQZAAP8AAAaQAAAAgAAA0gAAABAAABpAAAACAAADSAAAAETEFNRTMuMTAwVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//sQZB4P8AAAaQAAAAgAAA0gAAABAAABpAAAACAAADSAAAAEVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
+
+                await audio.play();
+                this.autoplayAllowed = true;
+                audio.remove();
+            } catch (err) {
+                this.autoplayAllowed = false;
+                if (!this.hasShownAutoplayWarning) {
+                    this.showAutoplayWarning();
+                }
+            }
+        }
+
+        showAutoplayWarning() {
+            localStorage.setItem('hasShownAutoplayWarning', 'false');
+            this.hasShownAutoplayWarning = false;
+
+            if (this.hasShownAutoplayWarning) return;
+
+            const popup = document.createElement('div');
+            popup.style.cssText = `
+                position: fixed;
+                top: 20%;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--cc-highlight-background);
+                color: var(--cc-highlight-foreground);
+                padding: 12px 24px;
+                border-radius: 4px;
+                font-size: 1.5rem;
+                z-index: 1000;
+                max-width: 50ch;
+                transition: opacity 0.3s ease-in-out;
+                opacity: 0;
+            `;
+
+            popup.innerHTML = `<p>This site contains audio elements.</p><p>Please enable autoplay in your browser settings.</p>`;
+
+
+            document.body.appendChild(popup);
+            // fade in after 2 seconds
+            setTimeout(() => {
+                popup.style.opacity = '1';
+            }, 1000);
+
+            localStorage.setItem('hasShownAutoplayWarning', 'true');
+            this.hasShownAutoplayWarning = true;
+
+
+            // fade oot
+            setTimeout(() => {
+                popup.style.opacity = '0';
+                setTimeout(() => {
+                    popup.remove();
+                }, 300);
+            }, 5000);
         }
 
         preloadAudio() {
@@ -224,5 +291,6 @@
         window.soundPlayer = new SoundPlayer();
     });
 </script>
+
 
 <?php snippet('footer') ?>

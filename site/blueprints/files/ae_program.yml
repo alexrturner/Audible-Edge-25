@@ -4,6 +4,6 @@ accept:
   maxsize: 20000000 # 20mb in bytes
 cover: true
 fields:
-  alt:
-    label: Alt Text
+  caption:
+    label: Caption
     type: text

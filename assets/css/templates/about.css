@@ -37,3 +37,32 @@ ul li p {
 .signup {
   padding-top: 1em;
 }
+
+li.team-member {
+  list-style: none;
+  margin-bottom: 0.5rem;
+}
+
+ul.reviews {
+  width: 80%;
+  float: right;
+  padding: 0;
+}
+.reviews ul {
+  padding: 0;
+}
+ul.reviews li:not(:first-of-type) {
+  margin: 1.5em 0;
+}
+ul.reviews li:last-child {
+  margin-bottom: 0;
+}
+ul.reviews p {
+  margin: 0;
+}
+@media (max-width: 768px) {
+  ul.reviews {
+    /* width: 100%; */
+    /* float: none; */
+  }
+}

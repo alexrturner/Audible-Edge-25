@@ -211,3 +211,8 @@ span.prefix {
     margin-top: 1rem;
   }
 }
+
+.icon__swamp {
+  pointer-events: none;
+  transition: all 2s ease;
+}
