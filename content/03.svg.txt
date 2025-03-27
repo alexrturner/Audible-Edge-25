@@ -1,4 +1,4 @@
-Prompt: Make the sound that your body is feeling right now.
+Prompt: Make a sound with an upward inflection.
 
 ----
 
@@ -10,14 +10,9 @@ Position: right
 
 ----
 
-Sort: 3
+Sort: 4
 
 ----
-
-Promptnumber: 02
-
-----
-
 
 Uuid: LzuHti9iUY5AdofK
 

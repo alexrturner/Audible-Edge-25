@@ -1,9 +1,9 @@
 {
     "currentVisitors": 1,
-    "totalVisitors": 539,
+    "totalVisitors": 738,
     "periods": {
-        "day": 0,
-        "dusk": 11,
+        "day": 1,
+        "dusk": 0,
         "night": 0,
         "dawn": 0
     }

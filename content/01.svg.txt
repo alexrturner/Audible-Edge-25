@@ -1,4 +1,4 @@
-Prompt: Make the sound of ears.
+Prompt: Record the sound of an abrupt interjection.
 
 ----
 
@@ -10,11 +10,7 @@ Position: left
 
 ----
 
-Sort: 1
-
-----
-
-Promptnumber: 00
+Sort: 2
 
 ----
 

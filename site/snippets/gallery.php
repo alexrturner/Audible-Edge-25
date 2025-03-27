@@ -16,7 +16,8 @@
         justify-content: center;
         margin: 0 auto;
         /* justify-content: start; */
-
+        position: relative;
+        flex-direction: column;
     }
 
     .gallery-images figure.active {
@@ -44,24 +45,20 @@
     }
 
     .gallery-images figure img {
-        max-height: var(--gallery-height);
-
-
-        max-height: calc(100vh - 13em);
-
-        /* height: auto; */
-
-        /* width: 100%; */
+        /* max-height: var(--gallery-height);
+        max-height: calc(100vh - 13em); */
         max-height: calc(100vh - 14em);
+        /* height: auto; */
+        /* width: 100%; */
+        height: auto;
         object-fit: cover;
-        /* max-height: 50vh; */
-        /* height: 100%; */
-        height: 50vh;
     }
 
-    .gallery-images figure img {
-
-        height: auto;
+    .gallery-images figure figcaption {
+        width: 100%;
+        text-align: start;
+        /* padding: 0.5em 0; */
+        margin-top: 0.5em;
     }
 
     @media screen and (max-width: 768px) {
@@ -88,6 +85,8 @@
         text-align: end;
         padding: 0.5em 1em;
         pointer-events: none;
+
+        margin-top: -1.75rem;
     }
 
     /* hhhhhhhmmmmmm */
@@ -106,7 +105,14 @@
             <?php foreach ($images as $index => $image) : ?>
                 <figure class="<?= $index === 0 ? 'active' : '' ?>">
                     <img style="max-width: 100%;" src="<?= $image->url() ?>" alt="<?= $image->alt()->or($page->title() . ' image') ?>" loading="lazy">
-                    <figcaption><?= $image->caption()->or('') ?></figcaption>
+
+                    <figcaption>
+                        <?php if ($image->photographer()->isNotEmpty()) : ?>
+                            Image by <?= $image->photographer() ?>
+                        <?php else : ?>
+                            &nbsp;
+                        <?php endif; ?>
+                    </figcaption>
                 </figure>
             <?php endforeach; ?>
         </div>

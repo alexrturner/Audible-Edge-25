@@ -18,10 +18,13 @@ Socials:
 
 - 
   text: Instagram
-  link: https://www.instagram.com
+  link: https://www.instagram.com/tone.list
 - 
   text: Newsletter
   link: http://eepurl.com/iwklBs
+- 
+  text: Signal Narrowcast
+  link: 'https://signal.group/#CjQKILqJ2hy_FIGlQ-RospDapvJG4dyLKnUb6bVhWYkSxMGOEhAoVVve8DZgVHpttVU-hi0-'
 
 ----
 
@@ -37,7 +40,7 @@ Metakeywords: <p>Audible Edge Festival Exploratory Music Sound Music Art Boorloo
 
 ----
 
-Prompt-info: <p>Statement about sound usage on main site.</p><p>You may contribute by [instructions].</p>
+Prompt-info: <p>Record yourself following the prompt on any device you have available. </p><p>Then hit upload. We will use these recordings for an interactive component of the final site.</p>
 
 ----
 

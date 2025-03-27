@@ -10,11 +10,7 @@ Position: middle
 
 ----
 
-Sort: 2
-
-----
-
-Promptnumber: 01
+Sort: 3
 
 ----
 
